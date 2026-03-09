@@ -1,6 +1,6 @@
 export default function Home() {
   return (
-    <main className="font-sans">
+    <main className="font-sans w-full overflow-x-hidden">
 
       {/* НАВІГАЦІЯ */}
       <nav className="fixed top-0 left-0 right-0 z-50 px-6 md:px-16 py-4 flex justify-between items-center bg-[rgba(253,251,248,0.94)] backdrop-blur-md border-b border-[rgba(196,180,154,0.2)]">
