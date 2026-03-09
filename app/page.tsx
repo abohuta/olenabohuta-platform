@@ -25,8 +25,14 @@ export default function Home() {
             <em className="italic text-[var(--accent)]">Богута</em>
           </h1>
           <p className="text-base leading-relaxed text-[var(--light-text)] max-w-md mb-10">
-            Допомагаю християнам будувати особистий бренд, який відображає їхнє покликання — з вірою, стратегією і сенсом.
+            Експерт з розвитку особистого бренду для християн. Допомагаю інфлюенсерам та фахівцям різних ніш запускати блог з нуля, монетизувати експертність і створювати власні унікальні продукти.
           </p>
+          <div className="border-l-2 border-[var(--accent)] pl-4 mb-10">
+  <p className="text-xs tracking-[0.2em] uppercase text-[var(--accent)] mb-2">Моя місія</p>
+  <p className="text-sm leading-relaxed text-[var(--light-text)]">
+    Формувати християнських експертів, які захоплюються Христом, впевнено проявляються в Instagram, будують особистий бренд і перетворюють свій блог на стабільний інструмент впливу та продаж.
+  </p>
+</div>
           <a href="/products" className="inline-block px-10 py-4 bg-[var(--dark)] text-[var(--cream)] no-underline text-xs tracking-widest uppercase self-start hover:bg-[var(--accent)] transition-colors">
             Переглянути продукти
           </a>
