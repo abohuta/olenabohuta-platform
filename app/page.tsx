@@ -58,7 +58,7 @@ export default function Home() {
   position: 'relative', overflow: 'hidden'
 }}>
   <img
-    src="/photo.JPG"
+    src="/photo.webp"
     alt="Олена Богута"
     style={{
       width: '100%',
