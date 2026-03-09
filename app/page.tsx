@@ -1,135 +1,91 @@
 export default function Home() {
   return (
-    <main style={{ fontFamily: 'var(--font-jost)' }}>
+    <main className="font-sans">
 
       {/* НАВІГАЦІЯ */}
-      <nav style={{
-        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
-        padding: '1rem 4rem', display: 'flex', justifyContent: 'space-between',
-        alignItems: 'center', background: 'rgba(253,251,248,0.94)',
-        backdropFilter: 'blur(12px)', borderBottom: '1px solid rgba(196,180,154,0.2)'
-      }}>
-        <span style={{
-          fontFamily: 'var(--font-cormorant)', fontSize: '1.1rem',
-          letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--dark)'
-        }}>
+      <nav className="fixed top-0 left-0 right-0 z-50 px-6 md:px-16 py-4 flex justify-between items-center bg-[rgba(253,251,248,0.94)] backdrop-blur-md border-b border-[rgba(196,180,154,0.2)]">
+        <span className="font-cormorant text-lg tracking-widest uppercase text-[var(--dark)]">
           Олена Богута
         </span>
-        <div style={{ display: 'flex', gap: '2rem' }}>
-          <a href="/products" style={{ fontSize: '0.75rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--text)', textDecoration: 'none' }}>Продукти</a>
-          <a href="/blog" style={{ fontSize: '0.75rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--text)', textDecoration: 'none' }}>Блог</a>
-          <a href="#contact" style={{ fontSize: '0.75rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--accent)', textDecoration: 'none', borderBottom: '1px solid var(--accent)' }}>Контакт</a>
+        <div className="flex gap-4 md:gap-8">
+          <a href="/products" className="text-xs tracking-widest uppercase text-[var(--text)] no-underline hidden md:block">Продукти</a>
+          <a href="/blog" className="text-xs tracking-widest uppercase text-[var(--text)] no-underline hidden md:block">Блог</a>
+          <a href="#contact" className="text-xs tracking-widest uppercase text-[var(--accent)] no-underline border-b border-[var(--accent)]">Контакт</a>
         </div>
       </nav>
 
       {/* HERO */}
-      <section style={{
-        minHeight: '100vh', display: 'grid', gridTemplateColumns: '1fr 1fr',
-        paddingTop: '70px'
-      }}>
-        <div style={{
-          padding: '8rem 3rem 6rem 5rem', display: 'flex',
-          flexDirection: 'column', justifyContent: 'center'
-        }}>
-          <p style={{ fontSize: '0.7rem', letterSpacing: '0.35em', textTransform: 'uppercase', color: 'var(--accent)', marginBottom: '1.5rem' }}>
+      <section className="min-h-screen grid grid-cols-1 md:grid-cols-2 pt-[70px]">
+        <div className="px-6 md:px-20 py-20 md:py-32 flex flex-col justify-center">
+          <p className="text-xs tracking-[0.35em] uppercase text-[var(--accent)] mb-6">
             Засновниця · Наставник · Архітектор брендів
           </p>
-          <h1 style={{
-            fontFamily: 'var(--font-cormorant)', fontSize: 'clamp(3rem, 5vw, 5rem)',
-            fontWeight: 300, lineHeight: 1.1, color: 'var(--dark)', marginBottom: '1.5rem'
-          }}>
-            Олена<br /><em style={{ fontStyle: 'italic', color: 'var(--accent)' }}>Богута</em>
+          <h1 className="font-cormorant text-5xl md:text-7xl font-light leading-tight text-[var(--dark)] mb-6">
+            Олена<br />
+            <em className="italic text-[var(--accent)]">Богута</em>
           </h1>
-          <p style={{ fontSize: '1rem', lineHeight: 1.8, color: 'var(--light-text)', maxWidth: '420px', marginBottom: '3rem' }}>
+          <p className="text-base leading-relaxed text-[var(--light-text)] max-w-md mb-10">
             Допомагаю християнам будувати особистий бренд, який відображає їхнє покликання — з вірою, стратегією і сенсом.
           </p>
-          <a href="/products" style={{
-            display: 'inline-block', padding: '1rem 2.5rem',
-            background: 'var(--dark)', color: 'var(--cream)',
-            textDecoration: 'none', fontSize: '0.75rem',
-            letterSpacing: '0.2em', textTransform: 'uppercase', alignSelf: 'flex-start'
-          }}>
+          <a href="/products" className="inline-block px-10 py-4 bg-[var(--dark)] text-[var(--cream)] no-underline text-xs tracking-widest uppercase self-start hover:bg-[var(--accent)] transition-colors">
             Переглянути продукти
           </a>
         </div>
-        <div style={{
-  background: 'var(--sand)', display: 'flex',
-  alignItems: 'center', justifyContent: 'center',
-  position: 'relative', overflow: 'hidden'
-}}>
-  <img
-    src="https://i.ibb.co/8LfTV0xM/photo.webp"
-    alt="Олена Богута"
-    style={{
-      width: '100%',
-      height: '100%',
-      objectFit: 'cover',
-      objectPosition: 'center top',
-      position: 'absolute',
-      top: 0, left: 0
-    }}
-  />
-</div>
+        <div className="relative min-h-[50vh] md:min-h-screen bg-[var(--sand)]">
+          <img
+            src="https://i.ibb.co/8LfTV0xM/photo.webp"
+            alt="Олена Богута"
+            className="absolute inset-0 w-full h-full object-cover object-top"
+          />
+        </div>
       </section>
 
-      {/* ПРОДУКТИ — АНОНС */}
-      <section style={{ padding: '8rem 5rem', background: 'var(--cream)' }}>
-        <p style={{ fontSize: '0.7rem', letterSpacing: '0.35em', textTransform: 'uppercase', color: 'var(--accent)', textAlign: 'center', marginBottom: '1rem' }}>
+      {/* ПРОДУКТИ */}
+      <section className="px-6 md:px-20 py-20 md:py-32 bg-[var(--cream)]">
+        <p className="text-xs tracking-[0.35em] uppercase text-[var(--accent)] text-center mb-4">
           Продукти
         </p>
-        <h2 style={{
-          fontFamily: 'var(--font-cormorant)', fontSize: 'clamp(2rem, 3.5vw, 3.2rem)',
-          fontWeight: 300, textAlign: 'center', color: 'var(--dark)', marginBottom: '4rem', lineHeight: 1.2
-        }}>
+        <h2 className="font-cormorant text-4xl md:text-5xl font-light text-center text-[var(--dark)] mb-16 leading-tight">
           Чим я можу тобі допомогти
         </h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2px', maxWidth: '1000px', margin: '0 auto' }}>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-[2px] max-w-5xl mx-auto">
           {[
             { icon: '🏛️', title: 'Кемп Архітектор Бренду', desc: 'Навчання для християн які хочуть розвивати особистий бренд', tag: 'Курс' },
             { icon: '📖', title: 'Книги', desc: 'Практичні матеріали для розвитку бренду та експертності', tag: 'Книги' },
             { icon: '💬', title: 'Консультації', desc: 'Особиста робота над твоїм брендом та стратегією', tag: 'Сесія' },
           ].map((item) => (
-            <div key={item.title} style={{ background: 'var(--warm-white)', padding: '3rem', transition: 'transform 0.3s' }}>
-              <span style={{ fontSize: '1.5rem', display: 'block', marginBottom: '1rem' }}>{item.icon}</span>
-              <p style={{ fontSize: '0.65rem', letterSpacing: '0.3em', textTransform: 'uppercase', color: 'var(--accent)', marginBottom: '0.8rem' }}>{item.tag}</p>
-              <h3 style={{ fontFamily: 'var(--font-cormorant)', fontSize: '1.3rem', fontWeight: 400, color: 'var(--dark)', marginBottom: '1rem' }}>{item.title}</h3>
-              <p style={{ fontSize: '0.9rem', lineHeight: 1.8, color: 'var(--light-text)' }}>{item.desc}</p>
+            <div key={item.title} className="bg-[var(--warm-white)] p-10 hover:-translate-y-1 transition-transform">
+              <span className="text-2xl block mb-4">{item.icon}</span>
+              <p className="text-xs tracking-[0.3em] uppercase text-[var(--accent)] mb-3">{item.tag}</p>
+              <h3 className="font-cormorant text-xl font-normal text-[var(--dark)] mb-4">{item.title}</h3>
+              <p className="text-sm leading-relaxed text-[var(--light-text)]">{item.desc}</p>
             </div>
           ))}
         </div>
-        <div style={{ textAlign: 'center', marginTop: '3rem' }}>
-          <a href="/products" style={{
-            display: 'inline-block', padding: '1rem 2.5rem',
-            border: '1px solid var(--dark)', color: 'var(--dark)',
-            textDecoration: 'none', fontSize: '0.75rem',
-            letterSpacing: '0.2em', textTransform: 'uppercase'
-          }}>
+        <div className="text-center mt-12">
+          <a href="/products" className="inline-block px-10 py-4 border border-[var(--dark)] text-[var(--dark)] no-underline text-xs tracking-widest uppercase hover:bg-[var(--dark)] hover:text-[var(--cream)] transition-colors">
             Всі продукти
           </a>
         </div>
       </section>
 
       {/* КОНТАКТ */}
-      <section id="contact" style={{ padding: '8rem 5rem', background: 'var(--dark)', textAlign: 'center' }}>
-        <p style={{ fontSize: '0.7rem', letterSpacing: '0.35em', textTransform: 'uppercase', color: 'var(--taupe)', marginBottom: '1rem' }}>
+      <section id="contact" className="px-6 md:px-20 py-20 md:py-32 bg-[var(--dark)] text-center">
+        <p className="text-xs tracking-[0.35em] uppercase text-[var(--taupe)] mb-4">
           Зв'язок
         </p>
-        <h2 style={{
-          fontFamily: 'var(--font-cormorant)', fontSize: 'clamp(2.5rem, 5vw, 5rem)',
-          fontWeight: 300, color: 'var(--cream)', lineHeight: 1.15,
-          marginBottom: '2rem'
-        }}>
-          Давай побудуємо<br /><em style={{ fontStyle: 'italic', color: 'var(--accent)' }}>твій бренд</em><br />разом
+        <h2 className="font-cormorant text-5xl md:text-7xl font-light text-[var(--cream)] leading-tight mb-8">
+          Давай побудуємо<br />
+          <em className="italic text-[var(--accent)]">твій бренд</em><br />
+          разом
         </h2>
-        <div style={{ display: 'flex', gap: '2rem', justifyContent: 'center' }}>
-          <a href="https://t.me/olenabohuta" target="_blank" style={{
-            padding: '1rem 2.5rem', background: 'var(--accent)', color: 'white',
-            textDecoration: 'none', fontSize: '0.75rem', letterSpacing: '0.2em', textTransform: 'uppercase'
-          }}>Telegram</a>
-          <a href="https://www.instagram.com/olenka.bohuta" target="_blank" style={{
-            padding: '1rem 2.5rem', border: '1px solid var(--taupe)', color: 'var(--taupe)',
-            textDecoration: 'none', fontSize: '0.75rem', letterSpacing: '0.2em', textTransform: 'uppercase'
-          }}>Instagram</a>
+        <div className="flex flex-col md:flex-row gap-4 justify-center">
+          <a href="https://t.me/olenabohuta" target="_blank" className="px-10 py-4 bg-[var(--accent)] text-white no-underline text-xs tracking-widest uppercase hover:bg-[var(--brown)] transition-colors">
+            Telegram
+          </a>
+          <a href="https://www.instagram.com/olenka.bohuta" target="_blank" className="px-10 py-4 border border-[var(--taupe)] text-[var(--taupe)] no-underline text-xs tracking-widest uppercase hover:border-[var(--cream)] hover:text-[var(--cream)] transition-colors">
+            Instagram
+          </a>
         </div>
       </section>
 

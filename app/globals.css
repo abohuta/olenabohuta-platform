@@ -12,9 +12,13 @@
   --light-text: #7A6555;
 }
 
+@theme inline {
+  --font-cormorant: var(--font-cormorant);
+  --font-sans: var(--font-jost);
+}
+
 body {
   background: var(--warm-white);
   color: var(--text);
-  font-family: 'Jost', sans-serif;
   font-weight: 300;
 }
