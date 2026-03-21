@@ -98,7 +98,7 @@ export default function Navchannya() {
       <nav className="fixed top-0 left-0 right-0 z-50 px-6 md:px-16 py-4 flex justify-between items-center bg-[rgba(253,251,248,0.94)] backdrop-blur-md border-b border-[rgba(196,180,154,0.2)]">
         <a href="/" className="text-lg tracking-widest uppercase text-[var(--dark)] no-underline">Олена Богута</a>
         <div className="flex gap-4 md:gap-8">
-          <a href="/pro-olenku" className="text-xs tracking-widest uppercase text-[var(--text)] no-underline hidden md:block hover:text-[var(--accent)] transition-colors">Про Оленку</a>
+          <a href="/pro-olenku" className="text-xs tracking-widest uppercase text-[var(--text)] no-underline hidden md:block hover:text-[var(--accent)] transition-colors">Про автора</a>
           <a href="/zakrytyi-klub" className="text-xs tracking-widest uppercase text-[var(--text)] no-underline hidden md:block hover:text-[var(--accent)] transition-colors">Закритий Клуб</a>
           <a href="/blog" className="text-xs tracking-widest uppercase text-[var(--text)] no-underline hidden md:block hover:text-[var(--accent)] transition-colors">Блог</a>
           <a href="https://t.me/olenabohuta" target="_blank" className="text-xs tracking-widest uppercase text-[var(--accent)] no-underline border-b border-[var(--accent)]">Контакт</a>

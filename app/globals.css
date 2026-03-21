@@ -13,9 +13,9 @@
 }
 
 @theme inline {
-  --font-sans: var(--font-jakarta);
-  --font-cormorant: var(--font-jakarta);
-  --font-jost: var(--font-jakarta);
+  --font-sans: var(--font-jost);
+  --font-cormorant: var(--font-cormorant);
+  --font-jost: var(--font-jost);
 }
 
 html, body {
@@ -30,6 +30,11 @@ html, body {
 body {
   background: var(--warm-white);
   color: var(--text);
-  font-family: var(--font-jakarta), sans-serif;
+  font-family: var(--font-jost), sans-serif;
   font-weight: 300;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-cormorant), serif;
+  letter-spacing: 0.02em;
 }

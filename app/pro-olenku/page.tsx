@@ -6,8 +6,8 @@ export default function ProOlenku() {
         <a href="/" className="text-xs tracking-widest uppercase text-[var(--accent)] no-underline border-b border-[var(--accent)]">← Головна</a>
       </nav>
       <section className="px-6 md:px-20 py-32 min-h-screen">
-        <p className="text-xs tracking-[0.35em] uppercase text-[var(--accent)] mb-4">Про мене</p>
-        <h1 className="text-5xl md:text-7xl font-light text-[var(--dark)] mb-8">Олена Богута</h1>
+        <p className="text-xs tracking-[0.35em] uppercase text-[var(--accent)] mb-4">Про автора</p>
+<h1 className="text-5xl md:text-7xl font-light text-[var(--dark)] mb-8">Олена Богута</h1>
         <p className="text-lg text-[var(--light-text)]">Скоро тут з'явиться більше інформації.</p>
       </section>
     </main>

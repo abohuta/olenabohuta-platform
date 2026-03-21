@@ -1,11 +1,17 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans } from "next/font/google";
+import { Cormorant_Garamond, Jost } from "next/font/google";
 import "./globals.css";
 
-const jakarta = Plus_Jakarta_Sans({
-  variable: "--font-jakarta",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
+const cormorant = Cormorant_Garamond({
+  variable: "--font-cormorant",
+  subsets: ["latin", "cyrillic"],
+  weight: ["300", "400", "600"],
+});
+
+const jost = Jost({
+  variable: "--font-jost",
+  subsets: ["latin", "cyrillic"],
+  weight: ["300", "400", "500"],
 });
 
 export const metadata: Metadata = {
@@ -20,7 +26,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="uk">
-      <body className={`${jakarta.variable} antialiased`}>
+      <body className={`${cormorant.variable} ${jost.variable} antialiased`} suppressHydrationWarning>
         {children}
       </body>
     </html>

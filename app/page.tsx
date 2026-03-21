@@ -1,10 +1,22 @@
 "use client";
 import React from "react";
+import Image from "next/image";
 function Carousel() {
   const [current, setCurrent] = React.useState(0);
   const total = 8;
   const touchStartX = React.useRef(0);
   const touchEndX = React.useRef(0);
+
+  const images = [
+    "https://i.ibb.co/MyJ12G3n/1.jpg",
+    "https://i.ibb.co/JRVyfysf/2.jpg",
+    "https://i.ibb.co/DfZZvYqs/3.png",
+    "https://i.ibb.co/xqLXksCZ/4.jpg",
+    "https://i.ibb.co/HDYKmzBc/5.jpg",
+    "https://i.ibb.co/tPkcvdzT/6.jpg",
+    "https://i.ibb.co/3y87zgWN/7.jpg",
+    "https://i.ibb.co/RTjp7ch0/8.png",
+  ];
 
   const prev = () => setCurrent((prev) => (prev - 1 + total) % total);
   const next = () => setCurrent((prev) => (prev + 1) % total);
@@ -35,14 +47,18 @@ function Carousel() {
           className="flex gap-4 transition-transform duration-500"
           style={{ transform: `translateX(calc(-${current * cardWidth}px))` }}
         >
-          {[...Array(total * 2)].map((_, i) => (
+          {[...images, ...images].map((src, i) => (
             <div
               key={i}
-              className="flex-none w-[280px] md:w-[320px] bg-[var(--sand)] rounded-sm aspect-[9/16] flex items-center justify-center"
+              className="flex-none w-[280px] md:w-[320px] rounded-sm overflow-hidden aspect-[9/16] relative"
             >
-              <p className="text-sm text-[var(--light-text)] text-center px-4">
-                Скріншот відгуку {(i % total) + 1}
-              </p>
+              <Image
+                src={src}
+                alt={`Відгук ${(i % total) + 1}`}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 280px, 320px"
+              />
             </div>
           ))}
         </div>
@@ -64,7 +80,7 @@ function Carousel() {
 
       {/* Крапки навігації */}
       <div className="flex justify-center gap-2 mt-6">
-        {[...Array(total)].map((_, i) => (
+        {images.map((_, i) => (
           <button
             key={i}
             onClick={() => setCurrent(i)}
@@ -91,7 +107,7 @@ export default function Home() {
         </span>
         <div className="flex gap-4 md:gap-8">
   <a href="/navchannya" className="text-xs tracking-widest uppercase text-[var(--text)] no-underline hidden md:block hover:text-[var(--accent)] transition-colors">Навчання</a>
-  <a href="/pro-olenku" className="text-xs tracking-widest uppercase text-[var(--text)] no-underline hidden md:block hover:text-[var(--accent)] transition-colors">Про Оленку</a>
+  <a href="/pro-olenku" className="text-xs tracking-widest uppercase text-[var(--text)] no-underline hidden md:block hover:text-[var(--accent)] transition-colors">Про автора</a>
   <a href="/zakrytyi-klub" className="text-xs tracking-widest uppercase text-[var(--text)] no-underline hidden md:block hover:text-[var(--accent)] transition-colors">Закритий Клуб</a>
   <a href="/blog" className="text-xs tracking-widest uppercase text-[var(--text)] no-underline hidden md:block hover:text-[var(--accent)] transition-colors">Блог</a>
   <a href="#contact" className="text-xs tracking-widest uppercase text-[var(--accent)] no-underline border-b border-[var(--accent)]">Контакти</a>
@@ -102,7 +118,7 @@ export default function Home() {
       <section className="min-h-screen grid grid-cols-1 md:grid-cols-2 pt-[70px]">
         <div className="px-6 md:px-20 py-20 md:py-32 flex flex-col justify-center">
           <p className="text-xs tracking-[0.35em] uppercase text-[var(--accent)] mb-6">
-            Засновниця · Наставник · Архітектор брендів
+            Засновниця · Наставник · Архітектор бренду
           </p>
           <h1 className="font-cormorant text-5xl md:text-7xl font-light leading-tight text-[var(--dark)] mb-6">
             Олена<br />
