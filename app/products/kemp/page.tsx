@@ -1,3 +1,8 @@
+"use client";
+import React from "react";
+import Image from "next/image";
+import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
 export default function Kemp() {
   return (
     <main className="w-full overflow-x-hidden kemp-page">
@@ -14,15 +19,7 @@ export default function Kemp() {
   `}</style>
 
       {/* НАВІГАЦІЯ */}
-      <nav className="fixed top-0 left-0 right-0 z-50 px-6 md:px-16 py-4 flex justify-between items-center bg-[rgba(253,251,248,0.94)] backdrop-blur-md border-b border-[rgba(196,180,154,0.2)]">
-        <a href="/" className="text-lg tracking-widest uppercase text-[var(--dark)] no-underline">
-          Олена Богута
-        </a>
-        <div className="flex gap-4 md:gap-8">
-          <a href="/products" className="text-xs tracking-widest uppercase text-[var(--text)] no-underline hidden md:block">Продукти</a>
-          <a href="/#contact" className="text-xs tracking-widest uppercase text-[var(--accent)] no-underline border-b border-[var(--accent)]">Контакт</a>
-        </div>
-      </nav>
+      <Navbar />
 
       {/* HERO */}
       <section className="min-h-screen grid grid-cols-1 md:grid-cols-2 pt-[70px] bg-[var(--dark)]">
@@ -179,6 +176,7 @@ export default function Kemp() {
           Заповнити анкету передзапису
         </a>
       </section>
+      <Footer />
 
     </main>
   );
