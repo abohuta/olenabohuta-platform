@@ -1,8 +1,46 @@
+"use client";
+import { useState } from "react";
+
+function EmailFooterForm() {
+  const [email, setEmail] = useState("");
+  const [sent, setSent] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (email) setSent(true);
+  };
+
+  if (sent) {
+    return <p className="text-xs text-[var(--accent)]">Дякуємо! Чекай на листа 💛</p>;
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="flex gap-2">
+      <input
+        type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="Твій email"
+        required
+        className="flex-1 px-3 py-2 bg-transparent border border-[rgba(196,180,154,0.2)] text-[var(--taupe)] placeholder-[var(--taupe)] text-xs focus:outline-none focus:border-[var(--accent)] transition-colors min-w-0"
+      />
+      <button
+        type="submit"
+        className="px-4 py-2 bg-[var(--accent)] text-white text-xs tracking-widest uppercase hover:bg-[var(--brown)] transition-colors whitespace-nowrap"
+      >
+        →
+      </button>
+    </form>
+  );
+}
+
 export default function Footer() {
   return (
     <footer className="bg-[#1A1109] px-6 md:px-20 py-12">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+
+          {/* Колонка 1 — Лого */}
           <div>
             <p className="text-lg tracking-widest uppercase text-[var(--taupe)] mb-1">Олена Богута</p>
             <p className="text-sm text-[var(--accent)] italic mb-3">«Не бійся, тільки вір»</p>
@@ -10,6 +48,8 @@ export default function Footer() {
               Платформа для християн які хочуть розвивати особистий бренд
             </p>
           </div>
+
+          {/* Колонка 2 — Навігація */}
           <div>
             <p className="text-xs tracking-widest uppercase text-[var(--taupe)] opacity-60 mb-4">Навігація</p>
             <ul className="list-none space-y-2">
@@ -27,6 +67,8 @@ export default function Footer() {
               ))}
             </ul>
           </div>
+
+          {/* Колонка 3 — Соціальні мережі */}
           <div>
             <p className="text-xs tracking-widest uppercase text-[var(--taupe)] opacity-60 mb-4">Соціальні мережі</p>
             <div className="flex gap-4">
@@ -44,14 +86,27 @@ export default function Footer() {
               </a>
             </div>
           </div>
+
+          {/* Колонка 4 — Розсилка */}
+          <div>
+            <p className="text-xs tracking-widest uppercase text-[var(--taupe)] opacity-60 mb-4">Підпишись</p>
+            <p className="text-xs text-[var(--taupe)] opacity-50 leading-relaxed mb-4">
+              Отримуй корисні матеріали
+            </p>
+            <EmailFooterForm />
+          </div>
+
         </div>
+
+        {/* Нижній рядок */}
         <div className="border-t border-[var(--taupe)] border-opacity-10 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-xs text-[var(--taupe)] opacity-40">© 2025 Олена Богута. Всі права захищені.</p>
+          <p className="text-xs text-[var(--taupe)] opacity-40">© {new Date().getFullYear()} Олена Богута. Всі права захищені.</p>
           <div className="flex gap-6">
             <a href="/oferta" className="text-xs text-[var(--taupe)] opacity-40 no-underline hover:opacity-80 transition-opacity">Договір оферти</a>
             <a href="/privacy" className="text-xs text-[var(--taupe)] opacity-40 no-underline hover:opacity-80 transition-opacity">Політика конфіденційності</a>
           </div>
         </div>
+
       </div>
     </footer>
   );

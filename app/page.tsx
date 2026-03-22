@@ -21,6 +21,45 @@ function useReveal() {
     return () => observer.disconnect();
   }, []);
 }
+function EmailForm() {
+  const [email, setEmail] = React.useState("");
+  const [sent, setSent] = React.useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (email) {
+      setSent(true);
+    }
+  };
+
+  if (sent) {
+    return (
+      <div className="text-center py-4">
+        <span className="text-[var(--accent)] text-2xl block mb-3">✦</span>
+        <p className="text-[var(--cream)] text-lg">Дякуємо! Чекай на листа 💛</p>
+      </div>
+    );
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+      <input
+        type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="Твій email"
+        required
+        className="flex-1 px-5 py-3 bg-transparent border border-[rgba(184,147,106,0.3)] text-[var(--cream)] placeholder-[var(--taupe)] text-sm focus:outline-none focus:border-[var(--accent)] transition-colors"
+      />
+      <button
+        type="submit"
+        className="px-8 py-3 bg-[var(--accent)] text-white text-xs tracking-widest uppercase hover:bg-[var(--brown)] transition-colors whitespace-nowrap"
+      >
+        Підписатись
+      </button>
+    </form>
+  );
+}
 function Carousel() {
   const [current, setCurrent] = React.useState(0);
   const total = 8;
@@ -145,9 +184,14 @@ export default function Home() {
     Експерт з розвитку особистого бренду для християн. Допомагаю інфлюенсерам та фахівцям різних ніш запускати блог з нуля, монетизувати експертність і створювати власні унікальні продукти.
   </p>
 </div>
-          <a href="/navchannya" className="inline-block px-10 py-4 bg-[var(--dark)] text-[var(--cream)] no-underline text-xs tracking-widest uppercase self-start hover:bg-[var(--accent)] transition-colors">
-            Переглянути продукти
-          </a>
+          <div className="flex flex-col sm:flex-row gap-3 mt-2">
+            <a href="/navchannya" className="inline-block px-10 py-4 bg-[var(--dark)] text-[var(--cream)] no-underline text-xs tracking-widest uppercase hover:bg-[var(--accent)] transition-colors text-center">
+              Переглянути продукти
+            </a>
+            <a href="https://docs.google.com/forms/d/1GTJ6oijlCOO7GfUMlhvGealas2Vo5GI7bh-uaAljfdQ/edit" target="_blank" className="inline-block px-10 py-4 border border-[var(--accent)] text-[var(--accent)] no-underline text-xs tracking-widest uppercase hover:bg-[var(--accent)] hover:text-white transition-colors text-center">
+              Хочу вчитися
+            </a>
+          </div>
         </div>
         <div className="relative min-h-[50vh] md:min-h-screen bg-[var(--sand)]">
           <img
@@ -252,15 +296,13 @@ export default function Home() {
 
       {/* КОНТАКТ */}
       <section id="contact" className="px-6 md:px-20 py-20 md:py-32 bg-[var(--dark)] text-center">
-        <p className="text-xs tracking-[0.35em] uppercase text-[var(--taupe)] mb-4">
-          Зв'язок
-        </p>
-        <h2 className="font-cormorant text-5xl md:text-7xl font-light text-[var(--cream)] leading-tight mb-8">
-          Давай створимо<br />
+        <p className="text-xs tracking-[0.35em] uppercase text-[var(--taupe)] mb-4 reveal">Зв'язок</p>
+        <h2 className="text-4xl md:text-6xl font-medium text-[var(--cream)] leading-tight mb-8 reveal reveal-delay-1">
+          Давай побудуємо<br />
           <em className="italic text-[var(--accent)]">твій бренд</em><br />
           разом
         </h2>
-        <div className="flex flex-col md:flex-row gap-4 justify-center">
+        <div className="flex flex-col md:flex-row gap-4 justify-center reveal reveal-delay-2">
           <a href="https://t.me/olenabohuta" target="_blank" className="px-10 py-4 bg-[var(--accent)] text-white no-underline text-xs tracking-widest uppercase hover:bg-[var(--brown)] transition-colors">
             Telegram
           </a>
