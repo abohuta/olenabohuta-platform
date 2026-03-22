@@ -16,8 +16,27 @@ const nunito = Nunito({
 });
 
 export const metadata: Metadata = {
-  title: "Олена Богута",
-  description: "Платформа для християн які хочуть розвивати особистий бренд",
+  title: "Олена Богута — особистий бренд для християн",
+  description: "Платформа для християн які хочуть розвивати особистий бренд, вести блог та продавати послуги з цінностями й сенсом.",
+  keywords: ["особистий бренд", "християни", "блог", "Instagram", "онлайн навчання", "Олена Богута"],
+  authors: [{ name: "Олена Богута" }],
+  openGraph: {
+    title: "Олена Богута — особистий бренд для християн",
+    description: "Платформа для християн які хочуть розвивати особистий бренд",
+    url: "https://olenabohuta.com",
+    siteName: "Олена Богута",
+    locale: "uk_UA",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Олена Богута — особистий бренд для християн",
+    description: "Платформа для християн які хочуть розвивати особистий бренд",
+  },
+  icons: {
+    icon: "/favicon.svg",
+    apple: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({
