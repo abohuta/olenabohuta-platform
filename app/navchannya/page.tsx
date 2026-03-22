@@ -3,6 +3,9 @@ import React from "react";
 import Image from "next/image";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import ProductCard from "../components/ProductCard";
+import FaqSection from "../components/FaqSection";
+import CtaButton from "../components/CtaButton";
 const products = [
   {
     id: 1,
@@ -137,9 +140,7 @@ export default function Navchannya() {
           ))}
         </div>
         <div className="text-center mt-12">
-          <a href="https://t.me/olenabohuta" target="_blank" className="inline-block px-10 py-4 bg-[var(--dark)] text-[var(--cream)] no-underline text-xs tracking-widest uppercase hover:bg-[var(--accent)] transition-colors">
-            Записатися на консультацію
-          </a>
+          <CtaButton text="Записатися на консультацію" href="https://t.me/olenabohuta" newTab={true} variant="secondary" />
         </div>
       </section>
 
@@ -189,20 +190,16 @@ export default function Navchannya() {
         {/* КАРТКИ */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-[2px] max-w-5xl mx-auto">
           {filtered.length > 0 ? filtered.map((product) => (
-            
-              <a key={product.id} href={product.href} className="bg-[var(--cream)] p-8 hover:-translate-y-1 transition-transform no-underline block">
-              <div className="flex justify-between items-start mb-4">
-                <p className="text-xs tracking-[0.3em] uppercase text-[var(--accent)]">{product.tag}</p>
-                <p className="text-xs tracking-widest uppercase text-[var(--taupe)]">{product.level}</p>
-              </div>
-              <h3 className="text-xl font-normal text-[var(--dark)] mb-3">{product.title}</h3>
-              <p className="text-sm leading-relaxed text-[var(--light-text)] mb-6 text-justify">{product.desc}</p>
-              <div className="flex justify-between items-center">
-                <p className="text-base font-normal text-[var(--dark)]">{product.price}</p>
-                <span className="text-xs tracking-widest uppercase text-[var(--accent)] border-b border-[var(--accent)]">Детальніше →</span>
-              </div>
-            </a>
-          )) : (
+          <ProductCard
+            key={product.id}
+            title={product.title}
+            desc={product.desc}
+            tag={product.tag}
+            level={product.level}
+            price={product.price}
+            href={product.href}
+          />
+        )) : (
             <div className="col-span-3 text-center py-16">
               <p className="text-lg text-[var(--light-text)]">За цими фільтрами нічого не знайдено.</p>
             </div>
@@ -247,34 +244,7 @@ export default function Navchannya() {
       </section>
 
       {/* FAQ */}
-      <section className="px-6 md:px-20 py-20 md:py-32 bg-[var(--warm-white)]">
-        <p className="text-xs tracking-[0.35em] uppercase text-[var(--accent)] text-center mb-4">FAQ</p>
-        <h2 className="text-4xl md:text-5xl font-light text-center text-[var(--dark)] mb-16 leading-tight">
-          Питання та відповіді
-        </h2>
-        <div className="max-w-3xl mx-auto">
-          {faq.map((item, i) => (
-            <div key={i} className="border-b border-[var(--sand)]">
-              <button
-                onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                className="w-full text-left py-6 flex justify-between items-center gap-4 bg-transparent border-none cursor-pointer"
-              >
-                <span className="text-base md:text-lg font-normal text-[var(--dark)]">{item.q}</span>
-                <span className="text-[var(--accent)] text-xl flex-none">{openFaq === i ? "−" : "+"}</span>
-              </button>
-              {openFaq === i && (
-                <p className="text-base leading-relaxed text-[var(--light-text)] pb-6 text-justify">{item.a}</p>
-              )}
-            </div>
-          ))}
-        </div>
-        <div className="text-center mt-12">
-          <p className="text-base text-[var(--light-text)] mb-6">Не знайшли відповідь на своє питання?</p>
-          <a href="https://t.me/olenabohuta" target="_blank" className="inline-block px-10 py-4 border border-[var(--dark)] text-[var(--dark)] no-underline text-xs tracking-widest uppercase hover:bg-[var(--dark)] hover:text-[var(--cream)] transition-colors">
-            Написати у Telegram
-          </a>
-        </div>
-      </section>
+      <FaqSection items={faq} />
 
       {/* ФУТЕР */}
       <Footer />

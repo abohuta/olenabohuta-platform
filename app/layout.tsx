@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { Tenor_Sans, Jost } from "next/font/google";
+import { Cormorant_Garamond, Jost } from "next/font/google";
 import "./globals.css";
 
-const tenor = Tenor_Sans({
+const cormorant = Cormorant_Garamond({
   variable: "--font-heading",
   subsets: ["latin", "cyrillic"],
-  weight: "400",
+  weight: ["400", "500", "600"],
 });
 
 const jost = Jost({
@@ -26,7 +26,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="uk">
-      <body className={`${tenor.variable} ${jost.variable} antialiased`} suppressHydrationWarning>
+      <body className={`${cormorant.variable} ${jost.variable} antialiased`} suppressHydrationWarning>
         {children}
       </body>
     </html>

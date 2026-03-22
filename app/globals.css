@@ -14,7 +14,7 @@
 
 @theme inline {
   --font-sans: var(--font-jost);
-  --font-cormorant: var(--font-cormorant);
+  --font-heading: var(--font-heading);
   --font-jost: var(--font-jost);
 }
 
@@ -27,6 +27,10 @@ html, body {
   box-sizing: border-box;
 }
 
+html {
+  font-size: 107%;
+}
+
 body {
   background: var(--warm-white);
   color: var(--text);
@@ -35,6 +39,8 @@ body {
 }
 
 h1, h2, h3, h4 {
-  font-family: var(--font-cormorant), serif;
+  font-family: var(--font-heading), serif;
+  font-weight: 500;
   letter-spacing: 0.02em;
+  line-height: 1.15;
 }
