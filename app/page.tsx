@@ -3,6 +3,7 @@ import React from "react";
 import Image from "next/image";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import Cross from "./components/Cross";
 function useReveal() {
   React.useEffect(() => {
     const els = document.querySelectorAll('.reveal');
@@ -239,7 +240,7 @@ export default function Home() {
         <div className="absolute bottom-6 right-6 w-8 h-8 border-r border-b border-[rgba(184,147,106,0.3)] hidden md:block"/>
 
         <div className="max-w-3xl mx-auto text-center relative z-10">
-          <span className="text-[var(--accent)] text-xl block mb-6">✝</span>
+          <span className="text-[var(--accent)] text-xl block mb-6"><Cross size={24} color="var(--accent)" /></span>
           <div className="w-8 h-px bg-[var(--accent)] mx-auto mb-6"/>
           <blockquote className="text-2xl md:text-4xl font-medium text-[var(--cream)] leading-snug mb-6 reveal">
             "Не бійся, тільки вір"

@@ -259,3 +259,16 @@ html {
   line-height: 1;
   white-space: nowrap;
 }
+/* ── FORCE TEXT RENDERING FOR SYMBOLS ── */
+.symbol {
+  font-style: normal;
+  font-variant-emoji: text;
+}
+
+.symbol::after {
+  content: '\FE0E';
+}
+/* Force text emoji rendering */
+.no-emoji {
+  font-variant-emoji: text;
+}

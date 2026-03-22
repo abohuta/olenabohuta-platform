@@ -3,6 +3,7 @@ import React from "react";
 import Image from "next/image";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
+import Cross from "../../components/Cross";
 export default function Kemp() {
   return (
     <main className="w-full overflow-x-hidden kemp-page">
@@ -44,7 +45,7 @@ export default function Kemp() {
         </div>
         <div className="hidden md:flex items-center justify-center p-20">
           <div className="text-center">
-            <span className="text-4xl text-[var(--taupe)] block mb-6">✝</span>
+            <span className="text-4xl text-[var(--taupe)] block mb-6"><Cross size={24} color="var(--accent)" /></span>
             <p className="text-2xl italic font-light leading-relaxed text-[var(--taupe)]">
               "Ти покликаний впливати.<br />Твій голос — частина<br />Його задуму."
             </p>

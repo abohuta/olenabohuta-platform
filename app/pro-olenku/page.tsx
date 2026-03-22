@@ -212,7 +212,7 @@ export default function ProOlenku() {
       <section className="px-6 md:px-20 py-20 md:py-32 bg-[var(--accent)] text-center">
         <p className="text-xs tracking-[0.35em] uppercase text-white opacity-70 mb-4 reveal">Починаємо</p>
         <h2 className="text-4xl md:text-6xl font-medium text-white leading-tight mb-8 reveal reveal-delay-1">
-          Готова розпочати<br />навчання?
+          Готові розпочати<br />навчання?
         </h2>
         <p className="text-lg text-white opacity-80 max-w-xl mx-auto mb-10 leading-relaxed reveal reveal-delay-2">
           Переглянь програми навчання і обери ту, що підходить саме тобі
