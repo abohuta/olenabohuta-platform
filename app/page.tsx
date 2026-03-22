@@ -3,6 +3,24 @@ import React from "react";
 import Image from "next/image";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+function useReveal() {
+  React.useEffect(() => {
+    const els = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    els.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+}
 function Carousel() {
   const [current, setCurrent] = React.useState(0);
   const total = 8;
@@ -99,6 +117,7 @@ function Carousel() {
   );
 }
 export default function Home() {
+  useReveal();
   return (
     <main className="font-sans w-full overflow-x-hidden">
 
@@ -106,8 +125,14 @@ export default function Home() {
       <Navbar />
 
       {/* HERO */}
-      <section className="min-h-screen grid grid-cols-1 md:grid-cols-2 pt-[70px]">
-        <div className="px-6 md:px-20 py-20 md:py-32 flex flex-col justify-center">
+      <section className="min-h-screen grid grid-cols-1 md:grid-cols-2 pt-[70px] mesh-bg relative">
+        {/* Декоративна вертикальна лінія */}
+        <div className="deco-line absolute left-1/2 top-0 bottom-0 hidden md:block" style={{height: '100%'}} />
+        
+        {/* Декоративний номер */}
+        <span className="absolute top-32 right-8 text-[120px] font-light text-[var(--sand)] opacity-40 leading-none hidden md:block select-none" style={{fontFamily: 'var(--font-heading)'}}>01</span>
+
+        <div className="px-6 md:px-20 py-20 md:py-32 flex flex-col justify-center relative z-10">
           <p className="text-xs tracking-[0.35em] uppercase text-[var(--accent)] mb-6">
             Засновниця · Наставник · Архітектор бренду
           </p>
@@ -120,7 +145,7 @@ export default function Home() {
     Експерт з розвитку особистого бренду для християн. Допомагаю інфлюенсерам та фахівцям різних ніш запускати блог з нуля, монетизувати експертність і створювати власні унікальні продукти.
   </p>
 </div>
-          <a href="/products" className="inline-block px-10 py-4 bg-[var(--dark)] text-[var(--cream)] no-underline text-xs tracking-widest uppercase self-start hover:bg-[var(--accent)] transition-colors">
+          <a href="/navchannya" className="inline-block px-10 py-4 bg-[var(--dark)] text-[var(--cream)] no-underline text-xs tracking-widest uppercase self-start hover:bg-[var(--accent)] transition-colors">
             Переглянути продукти
           </a>
         </div>
@@ -134,11 +159,9 @@ export default function Home() {
       </section>
 
       {/* ПРОДУКТИ */}
-      <section className="px-6 md:px-20 py-20 md:py-32 bg-[var(--cream)]">
-        <p className="text-xs tracking-[0.35em] uppercase text-[var(--accent)] text-center mb-4">
-  Навчання
-</p>
-<h2 className="text-4xl md:text-5xl font-light text-center text-[var(--dark)] mb-16 leading-tight">
+      <section className="px-6 md:px-20 py-20 md:py-32 bg-[var(--cream)] mesh-bg relative overflow-hidden">
+        
+<h2 className="text-4xl md:text-5xl font-light text-center text-[var(--dark)] mb-16 leading-tight reveal reveal-delay-1">
   Чим я можу тобі допомогти
 </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-[2px] max-w-7xl mx-auto">
@@ -149,7 +172,7 @@ export default function Home() {
   { title: 'Тиша', desc: 'Навчання по зупусках та автоворонках', tag: 'Курс', href: '/products/tysha' },
   { title: 'Консультації', desc: 'Особиста робота над твоїм брендом та стратегією', tag: 'Сесія', href: '/products/konsultatsii' },
 ].map((item) => (
-  <a href={item.href} key={item.title} className="bg-[var(--warm-white)] p-10 hover:-translate-y-1 transition-transform block no-underline">
+  <a href={item.href} key={item.title} className="bg-[var(--warm-white)] p-10 block no-underline reveal card-shine card-depth">
     <p className="text-xs tracking-[0.3em] uppercase text-[var(--accent)] mb-3">{item.tag}</p>
     <h3 className="font-cormorant text-xl font-normal text-[var(--dark)] mb-4">{item.title}</h3>
     <p className="text-sm leading-relaxed text-[var(--light-text)]">{item.desc}</p>
@@ -157,11 +180,33 @@ export default function Home() {
 ))}
         </div>
         <div className="text-center mt-12">
-          <a href="/products" className="inline-block px-10 py-4 border border-[var(--dark)] text-[var(--dark)] no-underline text-xs tracking-widest uppercase hover:bg-[var(--dark)] hover:text-[var(--cream)] transition-colors">
-            Дізнатися більше
+          <a href="/navchannya" className="inline-block px-10 py-4 border border-[var(--dark)] text-[var(--dark)] no-underline text-xs tracking-widest uppercase hover:bg-[var(--dark)] hover:text-[var(--cream)] transition-colors">
+          Дізнатися більше
           </a>
         </div>
       </section>
+
+      {/* QUOTE */}
+      <section className="px-6 md:px-20 py-16 bg-[var(--dark)] relative overflow-hidden">
+        {/* Кутові декоративні елементи */}
+        <div className="absolute top-6 left-6 w-8 h-8 border-l border-t border-[rgba(184,147,106,0.3)] hidden md:block"/>
+        <div className="absolute top-6 right-6 w-8 h-8 border-r border-t border-[rgba(184,147,106,0.3)] hidden md:block"/>
+        <div className="absolute bottom-6 left-6 w-8 h-8 border-l border-b border-[rgba(184,147,106,0.3)] hidden md:block"/>
+        <div className="absolute bottom-6 right-6 w-8 h-8 border-r border-b border-[rgba(184,147,106,0.3)] hidden md:block"/>
+
+        <div className="max-w-3xl mx-auto text-center relative z-10">
+          <span className="text-[var(--accent)] text-xl block mb-6">✝</span>
+          <div className="w-8 h-px bg-[var(--accent)] mx-auto mb-6"/>
+          <blockquote className="text-2xl md:text-4xl font-medium text-[var(--cream)] leading-snug mb-6 reveal">
+            "Не бійся, тільки вір"
+          </blockquote>
+          <p className="text-xs tracking-[0.3em] uppercase text-[var(--taupe)] reveal reveal-delay-1">
+            Марка 5:36
+          </p>
+          <div className="w-8 h-px bg-[var(--accent)] mx-auto mt-6"/>
+        </div>
+      </section>
+
       {/* ВІДГУКИ */}
       <section className="px-6 md:px-20 py-20 md:py-32 bg-[var(--warm-white)] overflow-hidden">
         <p className="text-xs tracking-[0.35em] uppercase text-[var(--accent)] text-center mb-4">Відгуки</p>

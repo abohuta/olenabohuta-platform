@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Jost } from "next/font/google";
 import "./globals.css";
+import ScrollToTop from "./components/ScrollToTop";
 
 const cormorant = Cormorant_Garamond({
   variable: "--font-heading",
@@ -28,6 +29,7 @@ export default function RootLayout({
     <html lang="uk">
       <body className={`${cormorant.variable} ${jost.variable} antialiased`} suppressHydrationWarning>
         {children}
+        <ScrollToTop />
       </body>
     </html>
   );
