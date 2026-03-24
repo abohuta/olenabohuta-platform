@@ -55,7 +55,7 @@ const products = [
     level: "Допомога",
     topic: "Бренд",
     price: "За запитом",
-    href: "https://t.me/olenabohuta",
+    href: "/products/konsultatsii",
   },
 ];
 
