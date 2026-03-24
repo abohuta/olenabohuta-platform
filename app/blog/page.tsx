@@ -2,7 +2,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { getPosts, urlFor, CATEGORIES } from "../../lib/sanity";
 
-export const revalidate = 60;
+export const revalidate = 0;
 
 export default async function Blog() {
   const posts = await getPosts();
@@ -39,47 +39,44 @@ export default async function Blog() {
         ) : (
           <div className="max-w-6xl mx-auto">
             {/* Головна стаття */}
-            {posts.filter((p: any) => p.featured)[0] && (
-              <a href={`/blog/${posts.filter((p: any) => p.featured)[0].slug.current}`} className="grid grid-cols-1 md:grid-cols-2 gap-0 mb-4 no-underline block group" style={{ background: 'var(--cream)' }}>
-                <div className="relative aspect-[4/3] overflow-hidden">
-                  {posts.filter((p: any) => p.featured)[0].coverImage ? (
-                    <img
-                      src={urlFor(posts.filter((p: any) => p.featured)[0].coverImage).width(800).url()}
-                      alt={posts.filter((p: any) => p.featured)[0].title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                    />
-                  ) : (
-                    <div className="w-full h-full bg-[var(--sand)] flex items-center justify-center">
-                      <span className="text-[var(--taupe)] text-4xl">✦</span>
+            {(() => {
+              const featured = posts.find((p: any) => p.featured === true);
+              if (!featured) return null;
+              return (
+                <a href={`/blog/${featured.slug.current}`} className="grid grid-cols-1 md:grid-cols-2 gap-0 mb-4 no-underline block group" style={{ background: 'var(--cream)' }}>
+                  <div className="relative aspect-[4/3] overflow-hidden">
+                    {featured.coverImage ? (
+                      <img src={urlFor(featured.coverImage).width(800).url()} alt={featured.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                    ) : (
+                      <div className="w-full h-full bg-[var(--sand)] flex items-center justify-center">
+                        <span className="text-[var(--taupe)] text-4xl">✦</span>
+                      </div>
+                    )}
+                  </div>
+                  <div className="p-10 md:p-16 flex flex-col justify-center">
+                    <div className="flex items-center gap-3 mb-4">
+                      <span className="text-xs tracking-widest uppercase px-3 py-1" style={{ background: 'var(--accent)', color: 'white' }}>Головна стаття</span>
+                      {featured.category && (
+                        <span className="text-xs tracking-widest uppercase" style={{ color: 'var(--accent)' }}>{CATEGORIES[featured.category]}</span>
+                      )}
                     </div>
-                  )}
-                </div>
-                <div className="p-10 md:p-16 flex flex-col justify-center">
-                  <div className="flex items-center gap-3 mb-4">
-                    <span className="text-xs tracking-widest uppercase px-3 py-1" style={{ background: 'var(--accent)', color: 'white' }}>Головна стаття</span>
-                    {posts.filter((p: any) => p.featured)[0].category && (
-                      <span className="text-xs tracking-widest uppercase" style={{ color: 'var(--accent)' }}>{CATEGORIES[posts.filter((p: any) => p.featured)[0].category]}</span>
-                    )}
+                    <h2 className="text-2xl md:text-3xl font-medium text-[var(--dark)] mb-4 leading-tight" style={{ fontFamily: 'var(--font-heading)' }}>{featured.title}</h2>
+                    <p className="text-sm leading-relaxed text-[var(--light-text)] mb-6 text-justify">{featured.excerpt}</p>
+                    <div className="flex items-center gap-4">
+                      <span className="text-xs tracking-widest uppercase text-[var(--accent)] border-b border-[var(--accent)] pb-1">Читати →</span>
+                      {featured.readTime && <span className="text-xs text-[var(--taupe)]">{featured.readTime} хв читання</span>}
+                    </div>
                   </div>
-                  <h2 className="text-2xl md:text-3xl font-medium text-[var(--dark)] mb-4 leading-tight" style={{ fontFamily: 'var(--font-heading)' }}>
-                    {posts.filter((p: any) => p.featured)[0].title}
-                  </h2>
-                  <p className="text-sm leading-relaxed text-[var(--light-text)] mb-6 text-justify">
-                    {posts.filter((p: any) => p.featured)[0].excerpt}
-                  </p>
-                  <div className="flex items-center gap-4">
-                    <span className="text-xs tracking-widest uppercase text-[var(--accent)] border-b border-[var(--accent)] pb-1">Читати →</span>
-                    {posts.filter((p: any) => p.featured)[0].readTime && (
-                      <span className="text-xs text-[var(--taupe)]">{posts.filter((p: any) => p.featured)[0].readTime} хв читання</span>
-                    )}
-                  </div>
-                </div>
-              </a>
-            )}
+                </a>
+              );
+            })()}
 
             {/* Сітка статей */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-[2px]">
-              {posts.filter((p: any) => !p.featured).map((post: any) => (
+              {posts.filter((p: any) => {
+  const featured = posts.find((p: any) => p.featured === true);
+  return p._id !== featured?._id;
+}).map((post: any) => (
                 <a key={post._id} href={`/blog/${post.slug.current}`} className="no-underline block group" style={{ background: 'var(--cream)' }}>
                   <div className="relative aspect-[16/10] overflow-hidden">
                     {post.coverImage ? (
