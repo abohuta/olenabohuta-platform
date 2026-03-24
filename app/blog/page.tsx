@@ -1,6 +1,7 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { getPosts, urlFor, CATEGORIES } from "../../lib/sanity";
+import EmailSubscribeForm from "../components/EmailSubscribeForm";
 
 export const revalidate = 0;
 
@@ -114,17 +115,16 @@ export default async function Blog() {
       </section>
 
       {/* CTA */}
-      <section className="px-6 md:px-20 py-20 bg-[var(--cream)] text-center">
-        <p className="text-xs tracking-[0.35em] uppercase text-[var(--accent)] mb-4">Розсилка</p>
-        <h2 className="text-3xl md:text-4xl font-medium text-[var(--dark)] mb-6" style={{ fontFamily: 'var(--font-heading)' }}>
-          Отримуй нові статті<br />на email
+      <section className="px-6 md:px-20 py-20 bg-[var(--dark)] text-center">
+        <p className="text-xs tracking-[0.35em] uppercase mb-4" style={{ color: 'var(--taupe)' }}>Розсилка</p>
+        <h2 className="text-3xl md:text-4xl font-medium mb-6 leading-tight" style={{ fontFamily: 'var(--font-heading)', color: 'var(--cream)' }}>
+          Отримуй нові статті<br />
+          <em className="italic" style={{ color: 'var(--accent)' }}>на email</em>
         </h2>
-        <p className="text-base text-[var(--light-text)] mb-8 max-w-md mx-auto leading-relaxed">
+        <p className="text-base mb-8 max-w-md mx-auto leading-relaxed" style={{ color: 'var(--taupe)' }}>
           Підпишись і отримуй корисні матеріали про бренд, віру та соцмережі прямо на пошту.
         </p>
-        <a href="/#contact" className="inline-block px-10 py-4 text-xs tracking-widest uppercase no-underline hover:opacity-80 transition-opacity" style={{ background: 'var(--dark)', color: 'var(--cream)' }}>
-          Підписатись на розсилку
-        </a>
+        <EmailSubscribeForm dark={true} />
       </section>
 
       <Footer />
