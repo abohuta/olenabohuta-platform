@@ -12,7 +12,6 @@ export default function Oferta() {
           <h1 className="text-4xl md:text-5xl font-medium mb-4 leading-tight" style={{ fontFamily: 'var(--font-heading)', color: 'var(--dark)' }}>
             Договір публічної оферти
           </h1>
-          <p className="text-sm mb-12" style={{ color: 'var(--light-text)' }}>Редакція від 2025 року</p>
 
           <div className="prose" style={{ color: 'var(--text)', lineHeight: 1.9 }}>
 
