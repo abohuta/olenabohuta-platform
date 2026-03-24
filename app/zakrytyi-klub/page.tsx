@@ -35,7 +35,7 @@ export default function ZakrytyiKlub() {
         {/* Фото з блюром */}
         <div className="absolute inset-0 z-0">
           <img
-            src="https://i.ibb.co/dJbHmqzh/comunity.webp"
+            src="https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto/v1774359896/comunity_pbopmh.webp"
             alt=""
             className="w-full h-full object-cover"
             style={{ filter: 'blur(8px) brightness(0.3)', transform: 'scale(1.1)' }}

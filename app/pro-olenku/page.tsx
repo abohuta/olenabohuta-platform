@@ -96,7 +96,7 @@ export default function ProOlenku() {
         </div>
         <div className="relative min-h-[60vh] md:min-h-screen bg-[var(--sand)]">
           <Image
-            src="https://i.ibb.co/1f3zJVhp/Olena-Bohuta.webp"
+            src="https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto/v1774359969/Olena_Bohuta_htaxhd.webp"
             alt="Олена Богута"
             fill
             className="object-cover object-top"

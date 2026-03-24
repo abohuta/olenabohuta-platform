@@ -41,14 +41,14 @@ const PLANS = [
 ] as const;
 
 const REVIEW_IMAGES = [
-  "https://i.ibb.co/YTDZP2nq/1.jpg",
-  "https://i.ibb.co/5XGzpzvf/2.jpg",
-  "https://i.ibb.co/PZTp7n8d/3.jpg",
-  "https://i.ibb.co/rG7rMZ3j/4.jpg",
-  "https://i.ibb.co/ns5t7F8s/5.jpg",
-  "https://i.ibb.co/JWGy7gPv/6.jpg",
-  "https://i.ibb.co/3ysvHCng/7.jpg",
-  "https://i.ibb.co/S7vnh35D/8.jpg",
+  "https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto,w_400/v1774360071/1_sqzdzx.jpg",
+  "https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto,w_400/v1774360076/2_fgkaqz.jpg",
+  "https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto,w_400/v1774360072/3_k0uscc.jpg",
+  "https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto,w_400/v1774360072/4_y34lkj.jpg",
+  "https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto,w_400/v1774360073/5_odf9r5.jpg",
+  "https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto,w_400/v1774360074/6_cmxrfg.jpg",
+  "https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto,w_400/v1774360074/7_kuyqjj.jpg",
+  "https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto,w_400/v1774360075/8_uuqd5v.jpg",
 ];
 
 const RESULTS = [
@@ -245,7 +245,7 @@ export default function Kemp() {
           <a href="/navchannya" className="text-xs tracking-widest uppercase no-underline mb-8 hover:opacity-60 transition-opacity" style={{ color: 'rgba(254,248,224,0.6)' }}>← Всі навчання</a>
           <p className="text-xs tracking-[0.35em] uppercase mb-6 kemp-reveal" style={{ color: '#F5D5A0' }}>Кемп · Навчання · Особистий бренд</p>
           <div className="flex justify-center mb-8">
-            <img src="https://i.ibb.co/5gnTQb2H/architect.png" alt="Кемп Архітектор Бренду" width={300} height={220} style={{ height: '220px', width: 'auto', filter: 'brightness(0) invert(1) sepia(1) saturate(0.5) hue-rotate(5deg)', opacity: 0.9 }} />
+            <img src="https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto/v1774359948/architect_zhdzma.png" alt="Кемп Архітектор Бренду" width={300} height={220} style={{ height: '220px', width: 'auto', filter: 'brightness(0) invert(1) sepia(1) saturate(0.5) hue-rotate(5deg)', opacity: 0.9 }} />
           </div>
           <p className="text-lg md:text-xl leading-relaxed max-w-md mb-10 text-justify kemp-reveal kemp-reveal-delay-2" style={{ color: 'rgba(254,248,224,0.85)' }}>
             Навчання для християн, які хочуть розвивати особистий бренд, вести блог та продавати свої послуги з цінностями й сенсом.
@@ -256,7 +256,7 @@ export default function Kemp() {
           </div>
         </div>
         <div className="relative overflow-hidden" style={{ minHeight: 'clamp(300px, 60vw, 100svh)' }}>
-          <img src="https://i.ibb.co/Ps8FK4PZ/hero-olenka.webp" alt="Олена Богута" className="absolute inset-0 w-full h-full object-cover" style={{ objectPosition: 'center 20%', animation: 'heroZoom 8s ease-in-out infinite alternate', transformOrigin: 'center top' }} />
+          <img src="https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto/v1774359840/hero_olenka_lmwbqv.webp" alt="Олена Богута" className="absolute inset-0 w-full h-full object-cover" style={{ objectPosition: 'center 20%', animation: 'heroZoom 8s ease-in-out infinite alternate', transformOrigin: 'center top' }} />
           <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, rgba(89,2,11,0.4), transparent)' }} />
         </div>
       </section>
@@ -280,7 +280,7 @@ export default function Kemp() {
       {/* РЕЗУЛЬТАТИ */}
       <section className="relative py-20 md:py-32 overflow-hidden" id="results-section">
         <div className="absolute inset-0 z-0" style={{ overflow: 'hidden' }}>
-          <img id="parallax-bg" src="https://i.ibb.co/p6L7LfyJ/results-olenka.webp" alt="" className="w-full object-cover" style={{ filter: 'brightness(0.25)', position: 'absolute', top: '-20%', left: 0, width: '100%', height: '140%', willChange: 'transform' }} />
+          <img id="parallax-bg" src="https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto/v1774359853/results_olenka_uhgo1i.webp" alt="" className="w-full object-cover" style={{ filter: 'brightness(0.25)', position: 'absolute', top: '-20%', left: 0, width: '100%', height: '140%', willChange: 'transform' }} />
         </div>
         <div className="relative z-10 px-6 md:px-20">
           <p className="text-xs tracking-[0.35em] uppercase text-center mb-4 kemp-reveal" style={{ color: '#B8936A' }}>Результати</p>
@@ -395,7 +395,7 @@ export default function Kemp() {
       <section className="px-6 md:px-20 py-20 md:py-32" style={{ background: CREAM }}>
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
           <div className="relative aspect-[3/4] rounded-sm overflow-hidden kemp-reveal">
-            <img src="https://i.ibb.co/v4chftpm/about-olenka.webp" alt="Олена Богута" className="w-full h-full object-cover object-top" loading="lazy" />
+            <img src="https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto/v1774359881/about_olenka_fq9fxo.webp" alt="Олена Богута" className="w-full h-full object-cover object-top" loading="lazy" />
             <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(254,248,224,0.3), transparent)' }} />
           </div>
           <div className="kemp-reveal">

@@ -68,14 +68,14 @@ function Carousel() {
   const touchEndX = React.useRef(0);
 
   const images = [
-    "https://i.ibb.co/YTDZP2nq/1.jpg",
-    "https://i.ibb.co/5XGzpzvf/2.jpg",
-    "https://i.ibb.co/PZTp7n8d/3.jpg",
-    "https://i.ibb.co/rG7rMZ3j/4.jpg",
-    "https://i.ibb.co/ns5t7F8s/5.jpg",
-    "https://i.ibb.co/JWGy7gPv/6.jpg",
-    "https://i.ibb.co/3ysvHCng/7.jpg",
-    "https://i.ibb.co/S7vnh35D/8.jpg",
+    "https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto,w_400/v1774360071/1_sqzdzx.jpg",
+    "https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto,w_400/v1774360076/2_fgkaqz.jpg",
+    "https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto,w_400/v1774360072/3_k0uscc.jpg",
+    "https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto,w_400/v1774360072/4_y34lkj.jpg",
+    "https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto,w_400/v1774360073/5_odf9r5.jpg",
+    "https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto,w_400/v1774360074/6_cmxrfg.jpg",
+    "https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto,w_400/v1774360074/7_kuyqjj.jpg",
+    "https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto,w_400/v1774360075/8_uuqd5v.jpg",
   ];
 
   const prev = () => setCurrent((prev) => (prev - 1 + total) % total);
@@ -196,7 +196,7 @@ export default function Home() {
         </div>
         <div className="relative min-h-[50vh] md:min-h-screen bg-[var(--sand)]">
           <img
-            src="https://i.ibb.co/8LfTV0xM/photo.webp"
+            src="https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto/v1774359969/Olena_Bohuta_htaxhd.webp"
             alt="Олена Богута"
             className="absolute inset-0 w-full h-full object-cover object-top"
           />
