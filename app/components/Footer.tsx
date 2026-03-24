@@ -1,5 +1,19 @@
 "use client";
 import { useState } from "react";
+import React from "react";
+
+const footerLinkStyle = {
+  color: '#C4A882',
+  textDecoration: 'none',
+  fontWeight: 400,
+  transition: 'color 0.3s ease, font-weight 0.3s ease',
+  display: 'inline-block',
+};
+
+const footerLinkHoverStyle = {
+  color: '#FFFFFF',
+  fontWeight: 500,
+};
 
 function EmailFooterForm() {
   const [email, setEmail] = useState("");
@@ -34,6 +48,26 @@ function EmailFooterForm() {
   );
 }
 
+function FooterLink({ href, children }: { href: string; children: React.ReactNode }) {
+  const [hovered, setHovered] = React.useState(false);
+  return (
+    
+      <a href={href}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        color: hovered ? '#FFFFFF' : '#C4A882',
+        textDecoration: 'none',
+        fontWeight: hovered ? 500 : 400,
+        transition: 'color 0.3s ease',
+        display: 'inline-block',
+      }}
+    >
+      {children}
+    </a>
+  );
+}
+
 export default function Footer() {
   return (
     <footer className="bg-[#1A1109] px-6 md:px-20 py-12">
@@ -42,7 +76,7 @@ export default function Footer() {
 
           {/* Колонка 1 — Лого */}
           <div>
-            <p className="text-lg tracking-widest uppercase text-[var(--taupe)] mb-1">Олена Богута</p>
+            <p className="text-lg tracking-widest uppercase mb-1" style={{ color: '#D4B896' }}>Олена Богута</p>
             <p className="text-sm text-[var(--accent)] italic mb-3">«Не бійся, тільки вір»</p>
             <p className="text-sm text-[var(--taupe)] opacity-60 leading-relaxed">
               Платформа для християн які хочуть розвивати особистий бренд
@@ -51,7 +85,7 @@ export default function Footer() {
 
           {/* Колонка 2 — Навігація */}
           <div>
-            <p className="text-xs tracking-widest uppercase text-[var(--taupe)] opacity-60 mb-4">Навігація</p>
+            <p className="text-xs tracking-widest uppercase mb-4" style={{ color: '#B89870' }}>Навігація</p>
             <ul className="list-none space-y-2">
               {[
                 { label: 'Навчання', href: '/navchannya' },
@@ -60,9 +94,7 @@ export default function Footer() {
                 { label: 'Блог', href: '/blog' },
               ].map((link) => (
                 <li key={link.href}>
-                  <a href={link.href} className="text-sm text-[var(--taupe)] opacity-60 no-underline hover:opacity-100 transition-opacity">
-                    {link.label}
-                  </a>
+                  <FooterLink href={link.href}>{link.label}</FooterLink>
                 </li>
               ))}
             </ul>
@@ -100,10 +132,10 @@ export default function Footer() {
 
         {/* Нижній рядок */}
         <div className="border-t border-[var(--taupe)] border-opacity-10 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-xs text-[var(--taupe)] opacity-40">© {new Date().getFullYear()} Олена Богута. Всі права захищені.</p>
+          <p className="text-xs" style={{ color: '#A08060' }}>© {new Date().getFullYear()} Олена Богута. Всі права захищені.</p>
           <div className="flex gap-6">
-            <a href="/oferta" className="text-xs text-[var(--taupe)] opacity-40 no-underline hover:opacity-80 transition-opacity">Договір оферти</a>
-            <a href="/privacy" className="text-xs text-[var(--taupe)] opacity-40 no-underline hover:opacity-80 transition-opacity">Політика конфіденційності</a>
+            <a href="/oferta" className="text-xs no-underline hover:text-white transition-colors" style={{ color: '#A08060' }}>Договір оферти</a>
+<a href="/privacy" className="text-xs no-underline hover:text-white transition-colors" style={{ color: '#A08060' }}>Політика конфіденційності</a>
           </div>
         </div>
 
