@@ -395,7 +395,7 @@ export default function Kemp() {
       <section className="px-6 md:px-20 py-20 md:py-32" style={{ background: CREAM }}>
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
           <div className="relative aspect-[3/4] rounded-sm overflow-hidden kemp-reveal">
-            <img src="https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto/v1774359881/about_olenka_fq9fxo.webp" loading="lazy" alt="Олена Богута" className="w-full h-full object-cover object-top" loading="lazy" />
+            <img src="https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto/v1774359881/about_olenka_fq9fxo.webp" loading="lazy" alt="Олена Богута" className="w-full h-full object-cover object-top" />
             <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(254,248,224,0.3), transparent)' }} />
           </div>
           <div className="kemp-reveal">
