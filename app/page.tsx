@@ -176,7 +176,7 @@ export default function Home() {
           <p className="text-xs tracking-[0.35em] uppercase text-[var(--accent)] mb-6">
             Засновниця · Наставник · Архітектор бренду
           </p>
-          <h1 className="font-cormorant text-5xl md:text-7xl font-light leading-tight text-[var(--dark)] mb-6">
+          <h1 className="text-6xl md:text-8xl lg:text-9xl font-light text-[var(--dark)] mb-6" style={{ lineHeight: 0.75, letterSpacing: '-0.02em' }}>
             Олена<br />
             <em className="italic text-[var(--accent)]">Богута</em>
           </h1>
