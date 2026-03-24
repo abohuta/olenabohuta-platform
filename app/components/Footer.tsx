@@ -18,32 +18,60 @@ const footerLinkHoverStyle = {
 function EmailFooterForm() {
   const [email, setEmail] = useState("");
   const [sent, setSent] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email) setSent(true);
+    setLoading(true);
+    setError("");
+
+    try {
+      const res = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+
+      if (res.ok) {
+        setSent(true);
+      } else {
+        const data = await res.json();
+        setError(data.error || 'Помилка. Спробуй ще раз.');
+      }
+    } catch {
+      setError('Помилка. Спробуй ще раз.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (sent) {
-    return <p className="text-xs text-[var(--accent)]">Дякуємо! Чекай на листа 💛</p>;
+    return <p className="text-xs" style={{ color: 'var(--accent)' }}>Дякуємо! Перевір пошту 💛</p>;
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex gap-2">
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="Твій email"
-        required
-        className="flex-1 px-3 py-2 bg-transparent border border-[rgba(196,180,154,0.2)] text-[var(--taupe)] placeholder-[var(--taupe)] text-xs focus:outline-none focus:border-[var(--accent)] transition-colors min-w-0"
-      />
-      <button
-        type="submit"
-        className="px-4 py-2 bg-[var(--accent)] text-white text-xs tracking-widest uppercase hover:bg-[var(--brown)] transition-colors whitespace-nowrap"
-      >
-        →
-      </button>
+    <form onSubmit={handleSubmit} className="flex flex-col gap-2">
+      <div className="flex gap-2">
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Твій email"
+          required
+          className="flex-1 px-3 py-2 bg-transparent border text-xs focus:outline-none transition-colors min-w-0"
+          style={{ borderColor: 'rgba(196,180,154,0.2)', color: 'var(--taupe)' }}
+        />
+        <button
+          type="submit"
+          disabled={loading}
+          className="px-4 py-2 text-white text-xs tracking-widest uppercase hover:opacity-80 transition-opacity whitespace-nowrap"
+          style={{ background: loading ? '#8B6F52' : 'var(--accent)' }}
+        >
+          {loading ? '...' : '→'}
+        </button>
+      </div>
+      {error && <p className="text-xs" style={{ color: '#ff6b6b' }}>{error}</p>}
     </form>
   );
 }
