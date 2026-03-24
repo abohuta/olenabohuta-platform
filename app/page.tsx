@@ -288,6 +288,7 @@ export default function Home() {
                 "Розбори стратегій та контенту",
               ].map((item) => (
                 <li key={item} className="flex items-start gap-3">
+                  <span className="text-white mt-1 flex-shrink-0" style={{opacity: 0.9}}>✓</span>
                   <span className="text-white text-base leading-relaxed" style={{opacity: 0.95}}>{item}</span>
                 </li>
               ))}
