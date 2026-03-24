@@ -424,6 +424,21 @@ export default function Kemp() {
         <p className="text-xs tracking-[0.35em] uppercase text-center mb-4 kemp-reveal" style={{ color: ACCENT }}>Відгуки</p>
         <h2 className="text-4xl md:text-5xl font-medium text-center mb-16 leading-tight kemp-reveal" style={{ color: DARK, fontFamily: 'var(--font-heading)' }}>Що кажуть учасники</h2>
         <Carousel />
+        <div className="text-center mt-10 kemp-reveal">
+          
+          <a href="https://www.instagram.com/olenabohuta_camp?igsh=dnZwaHA4c2ZsaG1s"
+            target="_blank"
+            className="inline-flex items-center gap-2 text-xs tracking-widest uppercase no-underline hover:opacity-70 transition-opacity pb-1"
+            style={{ color: ACCENT, borderBottom: `1px solid ${ACCENT}` }}
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+              <circle cx="12" cy="12" r="4"/>
+              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+            </svg>
+            Більше відгуків в Instagram
+          </a>
+        </div>
       </section>
 
       {/* Q&A */}
