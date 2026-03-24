@@ -36,6 +36,7 @@ export default function ZakrytyiKlub() {
         <div className="absolute inset-0 z-0">
           <img
             src="https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto/v1774359896/comunity_pbopmh.webp"
+            fetchPriority="high"
             alt=""
             className="w-full h-full object-cover"
             style={{ filter: 'blur(8px) brightness(0.3)', transform: 'scale(1.1)' }}

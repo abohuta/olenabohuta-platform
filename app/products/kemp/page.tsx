@@ -256,7 +256,7 @@ export default function Kemp() {
           </div>
         </div>
         <div className="relative overflow-hidden" style={{ minHeight: 'clamp(300px, 60vw, 100svh)' }}>
-          <img src="https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto/v1774359840/hero_olenka_lmwbqv.webp" alt="Олена Богута" className="absolute inset-0 w-full h-full object-cover" style={{ objectPosition: 'center 20%', animation: 'heroZoom 8s ease-in-out infinite alternate', transformOrigin: 'center top' }} />
+          <img src="https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto/v1774359840/hero_olenka_lmwbqv.webp" alt="Олена Богута" className="absolute inset-0 w-full h-full object-cover" fetchPriority="high" style={{ objectPosition: 'center 20%', animation: 'heroZoom 8s ease-in-out infinite alternate', transformOrigin: 'center top' }} />
           <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, rgba(89,2,11,0.4), transparent)' }} />
         </div>
       </section>
@@ -280,7 +280,7 @@ export default function Kemp() {
       {/* РЕЗУЛЬТАТИ */}
       <section className="relative py-20 md:py-32 overflow-hidden" id="results-section">
         <div className="absolute inset-0 z-0" style={{ overflow: 'hidden' }}>
-          <img id="parallax-bg" src="https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto/v1774359853/results_olenka_uhgo1i.webp" alt="" className="w-full object-cover" style={{ filter: 'brightness(0.25)', position: 'absolute', top: '-20%', left: 0, width: '100%', height: '140%', willChange: 'transform' }} />
+          <img id="parallax-bg" src="https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto/v1774359853/results_olenka_uhgo1i.webp" loading="lazy" alt="" className="w-full object-cover" style={{ filter: 'brightness(0.25)', position: 'absolute', top: '-20%', left: 0, width: '100%', height: '140%', willChange: 'transform' }} />
         </div>
         <div className="relative z-10 px-6 md:px-20">
           <p className="text-xs tracking-[0.35em] uppercase text-center mb-4 kemp-reveal" style={{ color: '#B8936A' }}>Результати</p>
@@ -395,7 +395,7 @@ export default function Kemp() {
       <section className="px-6 md:px-20 py-20 md:py-32" style={{ background: CREAM }}>
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
           <div className="relative aspect-[3/4] rounded-sm overflow-hidden kemp-reveal">
-            <img src="https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto/v1774359881/about_olenka_fq9fxo.webp" alt="Олена Богута" className="w-full h-full object-cover object-top" loading="lazy" />
+            <img src="https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto/v1774359881/about_olenka_fq9fxo.webp" loading="lazy" alt="Олена Богута" className="w-full h-full object-cover object-top" loading="lazy" />
             <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(254,248,224,0.3), transparent)' }} />
           </div>
           <div className="kemp-reveal">
