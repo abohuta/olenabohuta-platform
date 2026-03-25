@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Nunito } from "next/font/google";
+import { Cormorant_Garamond, Jost } from "next/font/google";
 import "./globals.css";
 import ScrollToTop from "./components/ScrollToTop";
+import Script from "next/script";
 
 const cormorant = Cormorant_Garamond({
   variable: "--font-heading",
@@ -9,10 +10,10 @@ const cormorant = Cormorant_Garamond({
   weight: ["400", "500", "600"],
 });
 
-const nunito = Nunito({
+const jost = Jost({
   variable: "--font-jost",
   subsets: ["latin", "cyrillic"],
-  weight: ["300", "400", "500", "600"],
+  weight: ["300", "400", "500"],
 });
 
 export const metadata: Metadata = {
@@ -46,7 +47,21 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="uk">
-      <body className={`${cormorant.variable} ${nunito.variable} antialiased`} suppressHydrationWarning>
+      <head>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-1SK0KTZ8NV"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-1SK0KTZ8NV');
+          `}
+        </Script>
+      </head>
+      <body className={`${cormorant.variable} ${jost.variable} antialiased`} suppressHydrationWarning>
         {children}
         <ScrollToTop />
       </body>
