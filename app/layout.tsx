@@ -3,6 +3,7 @@ import { Cormorant_Garamond, Nunito } from "next/font/google";
 import "./globals.css";
 import ScrollToTop from "./components/ScrollToTop";
 import Script from "next/script";
+import ProgressBar from "./components/ProgressBar";
 
 const cormorant = Cormorant_Garamond({
   variable: "--font-heading",
@@ -62,6 +63,7 @@ export default function RootLayout({
         </Script>
       </head>
       <body className={`${cormorant.variable} ${nunito.variable} antialiased`} suppressHydrationWarning>
+        <ProgressBar />
         {children}
         <ScrollToTop />
       </body>
