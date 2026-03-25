@@ -25,7 +25,7 @@ const products = [
     level: "Початківець",
     topic: "Духовність",
     price: "Скоро",
-    href: "#",
+    href: "/products/shlyakh",
   },
   {
     id: 3,
@@ -35,7 +35,7 @@ const products = [
     level: "Початківець",
     topic: "Блог",
     price: "Скоро",
-    href: "#",
+    href: "/products/pochatok",
   },
   {
     id: 4,
@@ -45,7 +45,7 @@ const products = [
     level: "Просунутий",
     topic: "Продажі",
     price: "Скоро",
-    href: "#",
+    href: "/products/tysha",
   },
   {
     id: 5,
