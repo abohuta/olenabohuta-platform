@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Jost } from "next/font/google";
+import { Cormorant_Garamond, Nunito } from "next/font/google";
 import "./globals.css";
 import ScrollToTop from "./components/ScrollToTop";
 import Script from "next/script";
@@ -10,10 +10,10 @@ const cormorant = Cormorant_Garamond({
   weight: ["400", "500", "600"],
 });
 
-const jost = Jost({
+const nunito = Nunito({
   variable: "--font-jost",
   subsets: ["latin", "cyrillic"],
-  weight: ["300", "400", "500"],
+  weight: ["300", "400", "500", "600"],
 });
 
 export const metadata: Metadata = {
@@ -61,7 +61,7 @@ export default function RootLayout({
           `}
         </Script>
       </head>
-      <body className={`${cormorant.variable} ${jost.variable} antialiased`} suppressHydrationWarning>
+      <body className={`${cormorant.variable} ${nunito.variable} antialiased`} suppressHydrationWarning>
         {children}
         <ScrollToTop />
       </body>
