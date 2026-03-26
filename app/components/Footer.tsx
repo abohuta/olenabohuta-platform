@@ -104,7 +104,22 @@ export default function Footer() {
 
           {/* Колонка 1 — Лого */}
           <div>
-            <p className="text-lg tracking-widest uppercase mb-1" style={{ color: '#D4B896' }}>Олена Богута</p>
+            <a href="/" className="no-underline inline-block mb-2">
+              <svg width="200" height="26" viewBox="0 0 220 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <text
+                  x="0"
+                  y="20"
+                  fontFamily="'Helvetica Neue', Helvetica, Arial, sans-serif"
+                  fontSize="14"
+                  fontWeight="200"
+                  fill="#D4B896"
+                  letterSpacing="8"
+                >
+                  ОЛЕНА БОГУТА
+                </text>
+                <line x1="0" y1="26" x2="200" y2="26" stroke="#D4B896" strokeWidth="0.4" opacity="0.4"/>
+              </svg>
+            </a>
             <p className="text-sm text-[var(--accent)] italic mb-3">«Не бійся, тільки вір»</p>
             <p className="text-sm text-[var(--taupe)] opacity-60 leading-relaxed">
               Платформа для християн які хочуть розвивати особистий бренд

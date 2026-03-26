@@ -459,7 +459,14 @@ export default function Tysha() {
 
       {/* NAVBAR */}
       <nav className="fixed top-0 left-0 right-0 z-50 px-6 md:px-16 py-4 flex justify-between items-center backdrop-blur-md" style={{ background: 'rgba(255,254,251,0.95)', borderBottom: `1px solid rgba(116,143,164,0.15)` }}>
-        <a href="/" className="text-lg tracking-widest uppercase no-underline" style={{ fontFamily: 'var(--font-heading)', color: DARK_ACC }}>Олена Богута</a>
+        <a href="/" className="no-underline" aria-label="Олена Богута — на головну">
+  <svg width="260" height="32" viewBox="0 0 220 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <text x="0" y="20" fontFamily="'Helvetica Neue', Helvetica, Arial, sans-serif" fontSize="14" fontWeight="200" fill={DARK_ACC} letterSpacing="8">
+      ОЛЕНА БОГУТА
+    </text>
+    <line x1="0" y1="26" x2="220" y2="26" stroke={DARK_ACC} strokeWidth="0.4" opacity="0.3"/>
+  </svg>
+</a>
         <div className="hidden md:flex gap-8 items-center">
           {[
             { href: '/navchannya', label: 'Навчання' },

@@ -13,9 +13,31 @@ export default function Navbar() {
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 px-6 md:px-16 flex justify-between items-center backdrop-blur-md border-b border-[rgba(196,180,154,0.2)] transition-all duration-500 ${scrolled ? 'py-3 bg-[rgba(253,251,248,0.98)] shadow-sm' : 'py-5 bg-[rgba(253,251,248,0.85)]'}`}>
-      <a href="/" className="text-lg tracking-widest uppercase text-[var(--dark)] no-underline">
-        Олена Богута
-      </a>
+      <a href="/" className="no-underline group" aria-label="Олена Богута — на головну">
+  <svg width="260" height="32" viewBox="0 0 220 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <text
+      x="110"
+      y="20"
+      textAnchor="middle"
+      fontFamily="'Helvetica Neue', Helvetica, Arial, sans-serif"
+      fontSize="14"
+      fontWeight="200"
+      fill="currentColor"
+      letterSpacing="8"
+      style={{ transition: 'fill 0.3s ease' }}
+    >
+      ОЛЕНА БОГУТА
+    </text>
+    <line
+      x1="0" y1="26"
+      x2="220" y2="26"
+      stroke="currentColor"
+      strokeWidth="0.4"
+      opacity="0.3"
+      style={{ transition: 'opacity 0.3s ease' }}
+    />
+  </svg>
+</a>
 
       {/* Десктоп меню */}
       <div className="hidden md:flex gap-8">

@@ -231,7 +231,14 @@ export default function Kemp() {
 
       {/* NAVBAR */}
       <nav className="fixed top-0 left-0 right-0 z-50 px-6 md:px-16 py-4 flex justify-between items-center backdrop-blur-md" style={{ background: 'rgba(254,248,224,0.95)', borderBottom: '1px solid rgba(89,2,11,0.1)' }}>
-        <a href="/" className="text-lg tracking-widest uppercase no-underline" style={{ fontFamily: 'var(--font-heading)', color: DARK }}>Олена Богута</a>
+        <a href="/" className="no-underline group" aria-label="Олена Богута — на головну">
+  <svg width="260" height="32" viewBox="0 0 220 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <text x="0" y="20" fontFamily="'Helvetica Neue', Helvetica, Arial, sans-serif" fontSize="14" fontWeight="200" fill="#2A1F14" letterSpacing="8">
+      ОЛЕНА БОГУТА
+    </text>
+    <line x1="0" y1="26" x2="220" y2="26" stroke="#2A1F14" strokeWidth="0.4" opacity="0.3"/>
+  </svg>
+</a>
         <div className="hidden md:flex gap-8">
           {[{ href: '/navchannya', label: 'Навчання' }, { href: '/pro-olenku', label: 'Про автора' }, { href: '/zakrytyi-klub', label: 'Закритий Клуб' }].map(({ href, label }) => (
             <a key={href} href={href} className="text-xs tracking-widest uppercase no-underline hover:opacity-60 transition-opacity kemp-link" style={{ color: DARK }}>{label}</a>
