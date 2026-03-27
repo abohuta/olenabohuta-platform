@@ -128,6 +128,199 @@ function useAnimations() {
   }, []);
 }
 
+function Quiz() {
+  const [step, setStep] = React.useState(0);
+  const [answers, setAnswers] = React.useState<number[]>([]);
+  const [result, setResult] = React.useState<string | null>(null);
+
+  const questions = [
+    {
+      q: "Який у тебе досвід у блогінгу?",
+      options: [
+        "Ніколи не вів блог",
+        "Є акаунт але не веду регулярно",
+        "Веду блог але без системи",
+        "Маю аудиторію 5k+ і хочу монетизувати",
+      ],
+      scores: [0, 2, 2, 3],
+    },
+    {
+      q: "Яка твоя головна мета?",
+      options: [
+        "Зрозуміти з чого почати",
+        "Упакувати себе як експерта",
+        "Запустити власний інфопродукт",
+        "Отримати стратегію особисто",
+      ],
+      scores: [0, 2, 3, 1],
+    },
+    {
+      q: "Чи є у тебе конкретна проблема яку потрібно вирішити швидко?",
+      options: [
+        "Не знаю як позиціонувати себе на ринку",
+        "Застрягла на одному рівні і не розумію чому",
+        "Хочу розібратись з конкретним інструментом (Reels, воронки, директ)",
+        "Ні — хочу системне навчання від А до Я",
+      ],
+      scores: [1, 1, 1, 2],
+    },
+    {
+      q: "Як ти себе ідентифікуєш?",
+      options: [
+        "Християнин який хоче впливати через контент",
+        "Підприємець який хоче продавати онлайн",
+        "Служитель який хоче розширити вплив",
+        "Вже продаю і хочу масштабуватись",
+      ],
+      scores: [2, 2, 2, 3],
+    },
+    {
+      q: "Скільки часу готовий інвестувати на тиждень?",
+      options: [
+        "До 2 годин на тиждень",
+        "3-5 годин на тиждень",
+        "Готовий повністю зануритись",
+        "Хочу швидкий результат 1:1",
+      ],
+      scores: [0, 2, 3, 1],
+    },
+    {
+      q: "Де ти зараз знаходишся?",
+      options: [
+        "Не знаю про що писати і як себе позиціонувати",
+        "Маю ідеї але не знаю як їх упакувати",
+        "Є аудиторія але не знаю як монетизувати",
+        "Хочу запустити курс або марафон",
+      ],
+      scores: [0, 2, 2, 3],
+    },
+  ];
+
+  const results: Record<string, { title: string; desc: string; cta: string; href: string }> = {
+    pochatok: {
+      title: "Твій старт — «Початок» 🌱",
+      desc: "Ти ще на початку шляху — і це чудово! Курс «Початок» допоможе збудувати фундамент перед тим як переходити до Архітектора бренду.",
+      cta: "Переглянути «Початок»",
+      href: "/products/pochatok",
+    },
+    kemp: {
+      title: "Кемп — саме для тебе! ✨",
+      desc: "Ти готовий до серйозної роботи над особистим брендом. Кемп «Архітектор Бренду» дасть тобі систему, стратегію і результат.",
+      cta: "Заповнити анкету",
+      href: "https://docs.google.com/forms/d/1GTJ6oijlCOO7GfUMlhvGealas2Vo5GI7bh-uaAljfdQ/edit",
+    },
+    tysha: {
+      title: "Ти готовий до ТИШІ! 🔥",
+      desc: "У тебе вже є база — час масштабуватись. Навчання ТИША допоможе запустити Premium-продукт і вийти на новий рівень доходу.",
+      cta: "Переглянути ТИШУ",
+      href: "/products/tysha",
+    },
+    konsultatsii: {
+      title: "Тобі потрібна особиста стратегія 🎯",
+      desc: "Твій запит унікальний. Запишись на консультацію з Оленою — разом визначимо найкращий шлях саме для тебе.",
+      cta: "Записатись на консультацію",
+      href: "/products/konsultatsii",
+    },
+  };
+
+  const handleAnswer = (score: number) => {
+    const newAnswers = [...answers, score];
+    if (step < questions.length - 1) {
+      setAnswers(newAnswers);
+      setStep(step + 1);
+    } else {
+      const total = newAnswers.reduce((a, b) => a + b, 0);
+      // Якщо людина обрала конкретну проблему (score=1 у питанні 5) — консультація
+      const hasSpecificProblem = newAnswers[4] === 1;
+      if (hasSpecificProblem) {
+        setResult('konsultatsii');
+      } else if (total <= 4) {
+        setResult('pochatok');
+      } else if (total <= 10) {
+        setResult('kemp');
+      } else {
+        setResult('tysha');
+      }
+    }
+  };
+
+  const reset = () => { setStep(0); setAnswers([]); setResult(null); };
+
+  return (
+    <section id="quiz" className="px-6 md:px-20 py-20 md:py-32" style={{ background: '#FDF5D5' }}>
+      <p className="text-xs tracking-[0.35em] uppercase text-center mb-4 kemp-reveal" style={{ color: ACCENT }}>Тест</p>
+      <h2 className="text-4xl md:text-5xl font-medium text-center mb-4 leading-tight kemp-reveal" style={{ fontFamily: 'var(--font-heading)', color: DARK }}>
+        Чи підходить тобі<br />
+        <em className="italic" style={{ color: ACCENT }}>Архітектор Бренду?</em>
+      </h2>
+      <p className="text-base text-center mb-12 kemp-reveal" style={{ color: '#8B6F52' }}>5 питань — і ти отримаєш чесну відповідь</p>
+
+      <div className="max-w-2xl mx-auto">
+        {result ? (
+          <div className="p-10 text-center" style={{ background: CREAM, border: `1px solid rgba(89,2,11,0.1)` }}>
+            <h3 className="text-2xl font-medium mb-4" style={{ fontFamily: 'var(--font-heading)', color: DARK }}>{results[result].title}</h3>
+            <p className="text-base leading-relaxed mb-8 text-justify" style={{ color: '#5A3A3A' }}>{results[result].desc}</p>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              
+               <a href={results[result].href}
+                target={results[result].href.startsWith('http') ? '_blank' : undefined}
+                className="inline-block px-10 py-4 text-xs tracking-widest uppercase no-underline hover:opacity-80 transition-opacity"
+                style={{ background: ACCENT, color: CREAM }}
+              >
+                {results[result].cta}
+              </a>
+              <button
+                onClick={reset}
+                className="inline-block px-10 py-4 text-xs tracking-widest uppercase cursor-pointer hover:opacity-60 transition-opacity bg-transparent"
+                style={{ color: ACCENT, border: `1px solid ${ACCENT}` }}
+              >
+                Пройти знову
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div className="p-8 md:p-12" style={{ background: CREAM, border: `1px solid rgba(89,2,11,0.1)` }}>
+            {/* Progress dots */}
+            <div className="flex justify-center gap-2 mb-8">
+              {questions.map((_, i) => (
+                <div key={i} className="w-2 h-2 rounded-full transition-colors duration-300" style={{ background: i <= step ? ACCENT : 'rgba(89,2,11,0.15)' }} />
+              ))}
+            </div>
+
+            <p className="text-xs tracking-widest uppercase mb-3" style={{ color: ACCENT }}>Питання {step + 1} з {questions.length}</p>
+            <h3 className="text-xl md:text-2xl font-medium mb-8" style={{ fontFamily: 'var(--font-heading)', color: DARK }}>
+              {questions[step].q}
+            </h3>
+
+            <div className="grid grid-cols-1 gap-3">
+              {questions[step].options.map((option, i) => (
+                <button
+                  key={i}
+                  onClick={() => handleAnswer(questions[step].scores[i])}
+                  className="text-left px-6 py-4 text-sm cursor-pointer transition-all bg-transparent"
+                  style={{ border: `1px solid rgba(89,2,11,0.15)`, color: '#5A3A3A' }}
+                  onMouseEnter={(e) => {
+                    (e.currentTarget as HTMLElement).style.background = ACCENT;
+                    (e.currentTarget as HTMLElement).style.color = CREAM;
+                    (e.currentTarget as HTMLElement).style.borderColor = ACCENT;
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLElement).style.background = 'transparent';
+                    (e.currentTarget as HTMLElement).style.color = '#5A3A3A';
+                    (e.currentTarget as HTMLElement).style.borderColor = 'rgba(89,2,11,0.15)';
+                  }}
+                >
+                  {option}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
 // ── Sub-components ─────────────────────────────────────────
 function FaqBlock() {
   const [open, setOpen] = React.useState<number | null>(null);
@@ -448,6 +641,8 @@ export default function Kemp() {
           </a>
         </div>
       </section>
+
+      <Quiz />
 
       {/* Q&A */}
       <section className="px-6 md:px-20 py-20 md:py-32" style={{ background: CREAM }}>
