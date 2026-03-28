@@ -103,18 +103,54 @@ export default function Navchannya() {
       <Navbar />
 
       {/* HERO */}
-      <section className="px-6 md:px-20 py-32 md:py-40 bg-[var(--dark)]">
-        <p className="text-xs tracking-[0.35em] uppercase text-[var(--accent)] mb-6">Навчання</p>
-        <h1 className="text-5xl md:text-7xl font-light text-[var(--cream)] leading-tight mb-6 max-w-3xl">
-          Навчання для тих,<br />
-          <em className="italic text-[var(--accent)]">хто будує з вірою</em>
-        </h1>
-        <p className="text-lg md:text-xl text-[var(--taupe)] max-w-xl leading-relaxed mb-10 text-justify">
-          Практичні програми для християн які хочуть розвивати особистий бренд, запускати блог та монетизувати експертність.
-        </p>
-        <Link href="#catalog" className="inline-block px-10 py-4 bg-[var(--accent)] text-white no-underline text-xs tracking-widest uppercase hover:bg-[var(--brown)] transition-colors">
-          Переглянути навчання
-        </Link>
+      <section className="bg-[var(--dark)] pt-[70px]">
+        <div className="px-6 md:px-20 grid grid-cols-1 md:grid-cols-2 gap-0 min-h-[90vh] items-stretch">
+
+          {/* Текст */}
+          <div className="flex flex-col justify-center py-20 md:py-32 md:pr-16">
+            <p className="text-xs tracking-[0.35em] uppercase text-[var(--accent)] mb-6">Навчання</p>
+            <h1 className="text-5xl md:text-7xl font-light text-[var(--cream)] leading-tight mb-6">
+              Навчання для тих,<br />
+              <em className="italic text-[var(--accent)]">хто будує з вірою</em>
+            </h1>
+            <p className="text-lg md:text-xl text-[var(--taupe)] max-w-xl leading-relaxed mb-10 text-justify">
+              Практичні програми для християн які хочуть розвивати особистий бренд, запускати блог та монетизувати експертність.
+            </p>
+            <div>
+              <Link href="#catalog" className="inline-block px-10 py-4 bg-[var(--accent)] text-white no-underline text-xs tracking-widest uppercase hover:bg-[var(--brown)] transition-colors">
+                Переглянути навчання
+              </Link>
+            </div>
+          </div>
+
+          {/* Превʼю продуктів */}
+          <div className="hidden md:flex flex-col justify-center border-l border-[rgba(196,180,154,0.1)] py-20">
+            <p className="text-xs tracking-[0.35em] uppercase text-[var(--taupe)] opacity-50 px-10 mb-6">Програми</p>
+            <div className="flex flex-col">
+              {products.map((p) => (
+                <Link
+                  key={p.id}
+                  href={p.href}
+                  className={`group flex items-center justify-between px-10 py-5 no-underline border-t border-[rgba(196,180,154,0.08)] transition-colors
+                    ${p.id === 1
+                      ? "border-l-2 border-l-[var(--accent)] bg-[rgba(184,147,106,0.08)] hover:bg-[rgba(184,147,106,0.14)]"
+                      : "hover:bg-[rgba(255,255,255,0.04)]"
+                    }`}
+                >
+                  <div>
+                    <p className="text-xs tracking-[0.25em] uppercase text-[var(--accent)] opacity-70 mb-1">{p.tag}</p>
+                    <h3 className="text-base font-medium text-[var(--cream)] group-hover:text-[var(--accent)] transition-colors">{p.title}</h3>
+                  </div>
+                  <div className="text-right flex-shrink-0 ml-4">
+                    <p className="text-sm text-[var(--taupe)]">{p.price}</p>
+                    <span className="block text-xs text-[var(--accent)] translate-x-0 group-hover:translate-x-1 transition-transform">→</span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+
+        </div>
       </section>
 
       {/* ЩО ОТРИМАЄШ */}
