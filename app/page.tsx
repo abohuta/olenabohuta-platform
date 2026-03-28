@@ -20,7 +20,12 @@ const CAROUSEL_IMAGES = [
 
 function Carousel() {
   const total = CAROUSEL_IMAGES.length;
-  const [current, setCurrent] = React.useState(0);
+  // Clone first and last slide for seamless infinite loop:
+  // [last, slide0, slide1, ..., slideN, first]
+  const slides = [CAROUSEL_IMAGES[total - 1], ...CAROUSEL_IMAGES, CAROUSEL_IMAGES[0]];
+
+  const [current, setCurrent] = React.useState(1); // start at real first (index 1)
+  const [animated, setAnimated] = React.useState(true);
   const [cardWidth, setCardWidth] = React.useState(336);
   const touchStartX = React.useRef(0);
 
@@ -31,17 +36,38 @@ function Carousel() {
     return () => window.removeEventListener('resize', update);
   }, []);
 
-  const prev = () => setCurrent((p) => (p - 1 + total) % total);
-  const next = () => setCurrent((p) => (p + 1) % total);
+  const next = () => { setAnimated(true); setCurrent((p) => p + 1); };
+  const prev = () => { setAnimated(true); setCurrent((p) => p - 1); };
+
+  // After transition: silently reset clone → real slide
+  const handleTransitionEnd = () => {
+    if (current === slides.length - 1) {
+      setAnimated(false);
+      setCurrent(1);
+    } else if (current === 0) {
+      setAnimated(false);
+      setCurrent(total);
+    }
+  };
+
+  // Re-enable animation after silent reset
+  React.useEffect(() => {
+    if (!animated) {
+      const t = setTimeout(() => setAnimated(true), 20);
+      return () => clearTimeout(t);
+    }
+  }, [animated]);
 
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
   };
-
   const handleTouchEnd = (e: React.TouchEvent) => {
     const diff = touchStartX.current - e.changedTouches[0].clientX;
     if (Math.abs(diff) > 50) { if (diff > 0) next(); else prev(); }
   };
+
+  // Map current index back to real dot index (0-based)
+  const dotIndex = (current - 1 + total) % total;
 
   return (
     <div className="relative">
@@ -51,17 +77,21 @@ function Carousel() {
         onTouchEnd={handleTouchEnd}
       >
         <div
-          className="flex gap-4 transition-transform duration-500"
-          style={{ transform: `translateX(-${current * cardWidth}px)` }}
+          className="flex gap-4"
+          style={{
+            transform: `translateX(-${current * cardWidth}px)`,
+            transition: animated ? 'transform 500ms ease' : 'none',
+          }}
+          onTransitionEnd={handleTransitionEnd}
         >
-          {CAROUSEL_IMAGES.map((src, i) => (
+          {slides.map((src, i) => (
             <div
               key={i}
               className="flex-none w-[280px] md:w-[320px] rounded-sm overflow-hidden aspect-[9/16] relative"
             >
               <Image
                 src={src}
-                alt={`Відгук ${i + 1}`}
+                alt={`Відгук ${((i - 1 + total) % total) + 1}`}
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 280px, 320px"
@@ -92,9 +122,9 @@ function Carousel() {
         {CAROUSEL_IMAGES.map((_, i) => (
           <button
             key={i}
-            onClick={() => setCurrent(i)}
+            onClick={() => { setAnimated(true); setCurrent(i + 1); }}
             aria-label={`Відгук ${i + 1}`}
-            className={`w-2 h-2 rounded-full transition-colors ${i === current ? 'bg-[var(--accent)]' : 'bg-[var(--taupe)]'}`}
+            className={`w-2 h-2 rounded-full transition-colors ${i === dotIndex ? 'bg-[var(--accent)]' : 'bg-[var(--taupe)]'}`}
           />
         ))}
       </div>
