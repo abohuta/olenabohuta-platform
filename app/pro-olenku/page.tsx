@@ -66,6 +66,7 @@ export default function ProOlenku() {
           <Image
             src="https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto/v1774359969/Olena_Bohuta_htaxhd.webp"
             fetchPriority="high"
+            loading="eager"
             alt="Олена Богута"
             fill
             className="object-cover object-top"
