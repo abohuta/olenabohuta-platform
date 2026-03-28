@@ -7,40 +7,41 @@ import Footer from "./components/Footer";
 import Cross from "./components/Cross";
 import { useReveal } from "./hooks/useReveal";
 
+const CAROUSEL_IMAGES = [
+  "https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto,w_400/v1774360071/1_sqzdzx.jpg",
+  "https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto,w_400/v1774360076/2_fgkaqz.jpg",
+  "https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto,w_400/v1774360072/3_k0uscc.jpg",
+  "https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto,w_400/v1774360072/4_y34lkj.jpg",
+  "https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto,w_400/v1774360073/5_odf9r5.jpg",
+  "https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto,w_400/v1774360074/6_cmxrfg.jpg",
+  "https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto,w_400/v1774360074/7_kuyqjj.jpg",
+  "https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto,w_400/v1774360075/8_uuqd5v.jpg",
+];
+
 function Carousel() {
+  const total = CAROUSEL_IMAGES.length;
   const [current, setCurrent] = React.useState(0);
-  const total = 8;
+  const [cardWidth, setCardWidth] = React.useState(336);
   const touchStartX = React.useRef(0);
-  const touchEndX = React.useRef(0);
 
-  const images = [
-    "https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto,w_400/v1774360071/1_sqzdzx.jpg",
-    "https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto,w_400/v1774360076/2_fgkaqz.jpg",
-    "https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto,w_400/v1774360072/3_k0uscc.jpg",
-    "https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto,w_400/v1774360072/4_y34lkj.jpg",
-    "https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto,w_400/v1774360073/5_odf9r5.jpg",
-    "https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto,w_400/v1774360074/6_cmxrfg.jpg",
-    "https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto,w_400/v1774360074/7_kuyqjj.jpg",
-    "https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto,w_400/v1774360075/8_uuqd5v.jpg",
-  ];
+  React.useEffect(() => {
+    const update = () => setCardWidth(window.innerWidth < 768 ? 296 : 336);
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, []);
 
-  const prev = () => setCurrent((prev) => (prev - 1 + total) % total);
-  const next = () => setCurrent((prev) => (prev + 1) % total);
+  const prev = () => setCurrent((p) => (p - 1 + total) % total);
+  const next = () => setCurrent((p) => (p + 1) % total);
 
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
   };
 
   const handleTouchEnd = (e: React.TouchEvent) => {
-    touchEndX.current = e.changedTouches[0].clientX;
-    const diff = touchStartX.current - touchEndX.current;
-    if (diff > 50) next();
-    if (diff < -50) prev();
+    const diff = touchStartX.current - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) { if (diff > 0) next(); else prev(); }
   };
-
-  const cardWidth = typeof window !== 'undefined'
-    ? window.innerWidth < 768 ? 296 : 336
-    : 336;
 
   return (
     <div className="relative">
@@ -51,16 +52,16 @@ function Carousel() {
       >
         <div
           className="flex gap-4 transition-transform duration-500"
-          style={{ transform: `translateX(calc(-${current * cardWidth}px))` }}
+          style={{ transform: `translateX(-${current * cardWidth}px)` }}
         >
-          {[...images, ...images].map((src, i) => (
+          {CAROUSEL_IMAGES.map((src, i) => (
             <div
               key={i}
               className="flex-none w-[280px] md:w-[320px] rounded-sm overflow-hidden aspect-[9/16] relative"
             >
               <Image
                 src={src}
-                alt={`Відгук ${(i % total) + 1}`}
+                alt={`Відгук ${i + 1}`}
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 280px, 320px"
@@ -88,7 +89,7 @@ function Carousel() {
 
       {/* Крапки навігації */}
       <div className="flex justify-center gap-2 mt-6">
-        {images.map((_, i) => (
+        {CAROUSEL_IMAGES.map((_, i) => (
           <button
             key={i}
             onClick={() => setCurrent(i)}
