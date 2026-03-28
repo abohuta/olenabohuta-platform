@@ -4,7 +4,8 @@ export async function POST(req: NextRequest) {
   try {
     const { email } = await req.json()
 
-    if (!email || !email.includes('@')) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!email || typeof email !== 'string' || !emailRegex.test(email) || email.length > 254) {
       return NextResponse.json({ error: 'Невірний email' }, { status: 400 })
     }
 
@@ -21,8 +22,7 @@ export async function POST(req: NextRequest) {
     })
 
     if (!response.ok) {
-      const error = await response.json()
-      return NextResponse.json({ error: error.message || 'Помилка' }, { status: 400 })
+      return NextResponse.json({ error: 'Помилка підписки' }, { status: 400 })
     }
 
     return NextResponse.json({ success: true })
