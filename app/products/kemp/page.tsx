@@ -347,8 +347,9 @@ function FaqBlock() {
 
 function Carousel() {
   const total = REVIEW_IMAGES.length;
-  const [current, setCurrent] = React.useState(0);
-  // Use ref for card width to avoid hydration mismatch
+  const slides = [REVIEW_IMAGES[total - 1], ...REVIEW_IMAGES, REVIEW_IMAGES[0]];
+  const [current, setCurrent] = React.useState(1);
+  const [animated, setAnimated] = React.useState(true);
   const [cardWidth, setCardWidth] = React.useState(336);
   const touchStartX = React.useRef(0);
 
@@ -359,37 +360,59 @@ function Carousel() {
     return () => window.removeEventListener('resize', update);
   }, []);
 
-  const prev = () => setCurrent((p) => (p - 1 + total) % total);
-  const next = () => setCurrent((p) => (p + 1) % total);
+  const prev = () => { setAnimated(true); setCurrent((p) => p - 1); };
+  const next = () => { setAnimated(true); setCurrent((p) => p + 1); };
+
+  const handleTransitionEnd = () => {
+    if (current === slides.length - 1) { setAnimated(false); setCurrent(1); }
+    else if (current === 0) { setAnimated(false); setCurrent(total); }
+  };
+
+  React.useEffect(() => {
+    if (!animated) {
+      const t = setTimeout(() => setAnimated(true), 20);
+      return () => clearTimeout(t);
+    }
+  }, [animated]);
 
   const handleTouchStart = (e: React.TouchEvent) => { touchStartX.current = e.touches[0].clientX; };
   const handleTouchEnd = (e: React.TouchEvent) => {
     const diff = touchStartX.current - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 50) diff > 0 ? next() : prev();
+    if (Math.abs(diff) > 50) { if (diff > 0) next(); else prev(); }
   };
+
+  const dotIndex = (current - 1 + total) % total;
 
   return (
     <div className="relative">
       <div className="overflow-hidden" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
         <div
-          className="flex gap-4 transition-transform duration-500"
-          style={{ transform: `translateX(-${current * cardWidth}px)` }}
+          className="flex gap-4"
+          style={{ transform: `translateX(-${current * cardWidth}px)`, transition: animated ? 'transform 500ms ease' : 'none' }}
+          onTransitionEnd={handleTransitionEnd}
         >
-          {[...REVIEW_IMAGES, ...REVIEW_IMAGES].map((src, i) => (
+          {slides.map((src, i) => (
             <div key={i} className="flex-none w-[280px] md:w-[320px] rounded-sm overflow-hidden aspect-[9/16]">
-              <img src={src} alt={`Відгук ${(i % total) + 1}`} className="w-full h-full object-cover" loading="lazy" />
+              <img src={src} alt={`Відгук ${((i - 1 + total) % total) + 1}`} className="w-full h-full object-cover" loading="lazy" />
             </div>
           ))}
         </div>
       </div>
-      <button onClick={prev} className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 w-10 h-10 hidden md:flex items-center justify-center hover:opacity-80 transition-opacity z-10" style={{ background: DARK, color: CREAM }}>←</button>
-      <button onClick={next} className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 w-10 h-10 hidden md:flex items-center justify-center hover:opacity-80 transition-opacity z-10" style={{ background: DARK, color: CREAM }}>→</button>
-      <div className="flex justify-center gap-2 mt-6">
+      <button onClick={prev} aria-label="Попередній відгук" className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 w-10 h-10 hidden md:flex items-center justify-center hover:opacity-80 transition-opacity z-10" style={{ background: DARK, color: CREAM }}>←</button>
+      <button onClick={next} aria-label="Наступний відгук" className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 w-10 h-10 hidden md:flex items-center justify-center hover:opacity-80 transition-opacity z-10" style={{ background: DARK, color: CREAM }}>→</button>
+      <div className="flex justify-center gap-0 mt-6">
         {REVIEW_IMAGES.map((_, i) => (
-          <button key={i} onClick={() => setCurrent(i)} className="w-2 h-2 rounded-full transition-colors" style={{ background: i === current ? ACCENT : '#C4B49A' }} />
+          <button
+            key={i}
+            onClick={() => { setAnimated(true); setCurrent(i + 1); }}
+            aria-label={`Відгук ${i + 1}`}
+            className="p-3 bg-transparent border-none cursor-pointer"
+          >
+            <span className="block w-2 h-2 rounded-full transition-colors" style={{ background: i === dotIndex ? ACCENT : '#C4B49A' }} />
+          </button>
         ))}
       </div>
-      <p className="text-xs text-center mt-4 md:hidden tracking-widest uppercase" style={{ color: '#C4B49A' }}>Гортай пальцем →</p>
+      <p className="text-xs text-center mt-2 md:hidden tracking-widest uppercase" style={{ color: '#C4B49A' }}>Гортай пальцем →</p>
     </div>
   );
 }
