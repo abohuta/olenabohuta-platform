@@ -6,18 +6,6 @@ import Footer from "../components/Footer";
 import ProductCard from "../components/ProductCard";
 import FaqSection from "../components/FaqSection";
 import CtaButton from "../components/CtaButton";
-import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Навчання — Олена Богута",
-  description: "Курси та навчання для Christian-блогерів і підприємців. Кемп Архітектор Бренду, ТИША, консультації та закритий клуб.",
-  openGraph: {
-    title: "Навчання — Олена Богута",
-    description: "Курси та навчання для Christian-блогерів і підприємців",
-    url: "https://olenabohuta.com/navchannya",
-    images: [{ url: "https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto,w_1200,h_630,c_fill/v1774359969/Olena_Bohuta_htaxhd.webp", width: 1200, height: 630 }],
-  },
-};
 
 const products = [
   {

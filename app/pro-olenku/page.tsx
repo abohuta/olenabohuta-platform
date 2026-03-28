@@ -3,18 +3,6 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Image from "next/image";
 import React from "react";
-import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Про Олену Богуту — наставник особистого бренду",
-  description: "Олена Богута — засновниця першого в Україні навчання для християн у соцмережах. Понад 400 клієнтів та учнів.",
-  openGraph: {
-    title: "Про Олену Богуту",
-    description: "Засновниця першого в Україні навчання для християн у соцмережах",
-    url: "https://olenabohuta.com/pro-olenku",
-    images: [{ url: "https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto,w_1200,h_630,c_fill/v1774359969/Olena_Bohuta_htaxhd.webp", width: 1200, height: 630 }],
-  },
-};
 
 function StatCard({ num, suffix, label }: { num: number; suffix: string; label: string }) {
   const { count, ref } = useCountUp(num);
