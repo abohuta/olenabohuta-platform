@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import Link from "next/link";
 import Footer from "../../components/Footer";
 import Cross from "../../components/Cross";
 
@@ -424,26 +425,26 @@ export default function Kemp() {
 
       {/* NAVBAR */}
       <nav className="fixed top-0 left-0 right-0 z-50 px-6 md:px-16 py-4 flex justify-between items-center backdrop-blur-md" style={{ background: 'rgba(254,248,224,0.95)', borderBottom: '1px solid rgba(89,2,11,0.1)' }}>
-        <a href="/" className="no-underline group" aria-label="Олена Богута — на головну">
+        <Link href="/" className="no-underline group" aria-label="Олена Богута — на головну">
   <svg width="260" height="32" viewBox="0 0 220 28" fill="none" xmlns="http://www.w3.org/2000/svg">
     <text x="0" y="20" fontFamily="'Helvetica Neue', Helvetica, Arial, sans-serif" fontSize="14" fontWeight="200" fill="#2A1F14" letterSpacing="8">
       ОЛЕНА БОГУТА
     </text>
     <line x1="0" y1="26" x2="220" y2="26" stroke="#2A1F14" strokeWidth="0.4" opacity="0.3"/>
   </svg>
-</a>
+</Link>
         <div className="hidden md:flex gap-8">
           {[{ href: '/navchannya', label: 'Навчання' }, { href: '/pro-olenku', label: 'Про автора' }, { href: '/zakrytyi-klub', label: 'Закритий Клуб' }].map(({ href, label }) => (
-            <a key={href} href={href} className="text-xs tracking-widest uppercase no-underline hover:opacity-60 transition-opacity kemp-link" style={{ color: DARK }}>{label}</a>
+            <Link key={href} href={href} className="text-xs tracking-widest uppercase no-underline hover:opacity-60 transition-opacity kemp-link" style={{ color: DARK }}>{label}</Link>
           ))}
-          <a href={FORM_URL} target="_blank" className="text-xs tracking-widest uppercase no-underline border-b" style={{ color: ACCENT, borderColor: ACCENT }}>Залишити заявку</a>
+          <a href={FORM_URL} target="_blank" rel="noopener noreferrer" className="text-xs tracking-widest uppercase no-underline border-b" style={{ color: ACCENT, borderColor: ACCENT }}>Залишити заявку</a>
         </div>
       </nav>
 
       {/* HERO */}
       <section className="grid grid-cols-1 md:grid-cols-2 pt-[70px]" style={{ background: '#59020B', minHeight: '100svh' }}>
         <div className="px-6 md:px-20 py-20 md:py-32 flex flex-col justify-center items-center text-center">
-          <a href="/navchannya" className="text-xs tracking-widest uppercase no-underline mb-8 hover:opacity-60 transition-opacity" style={{ color: 'rgba(254,248,224,0.6)' }}>← Всі навчання</a>
+          <Link href="/navchannya" className="text-xs tracking-widest uppercase no-underline mb-8 hover:opacity-60 transition-opacity" style={{ color: 'rgba(254,248,224,0.6)' }}>← Всі навчання</Link>
           <p className="text-xs tracking-[0.35em] uppercase mb-6 kemp-reveal" style={{ color: '#F5D5A0' }}>Кемп · Навчання · Особистий бренд</p>
           <div className="flex justify-center mb-8">
             <img src="https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto/v1774359948/architect_zhdzma.png" alt="Кемп Архітектор Бренду" width={300} height={220} style={{ height: '220px', width: 'auto', filter: 'brightness(0) invert(1) sepia(1) saturate(0.5) hue-rotate(5deg)', opacity: 0.9 }} />
@@ -452,7 +453,7 @@ export default function Kemp() {
             Навчання для християн, які хочуть розвивати особистий бренд, вести блог та продавати свої послуги з цінностями й сенсом.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 kemp-reveal kemp-reveal-delay-3 justify-center">
-            <a href={FORM_URL} target="_blank" className="inline-block px-10 py-4 text-xs tracking-widest uppercase no-underline text-center hover:opacity-80 transition-opacity" style={{ background: CREAM, color: '#59020B' }}>Заповнити анкету</a>
+            <a href={FORM_URL} target="_blank" rel="noopener noreferrer" className="inline-block px-10 py-4 text-xs tracking-widest uppercase no-underline text-center hover:opacity-80 transition-opacity" style={{ background: CREAM, color: '#59020B' }}>Заповнити анкету</a>
             <a href="#program" className="inline-block px-10 py-4 text-xs tracking-widest uppercase no-underline text-center hover:opacity-80 transition-opacity" style={{ border: `1px solid ${CREAM}`, color: CREAM }}>Програма</a>
           </div>
         </div>
@@ -577,7 +578,7 @@ export default function Kemp() {
                   </li>
                 ))}
               </ul>
-              <a href={FORM_URL} target="_blank" className="block text-center py-3.5 text-xs tracking-widest uppercase no-underline plan-btn-gold"
+              <a href={FORM_URL} target="_blank" rel="noopener noreferrer" className="block text-center py-3.5 text-xs tracking-widest uppercase no-underline plan-btn-gold"
                 style={{
                   background: plan.featured ? '#B8936A' : plan.vip ? '#59020B' : 'transparent',
                   color: plan.featured ? '#FEF8E0' : plan.vip ? CREAM : DARK,
@@ -628,7 +629,7 @@ export default function Kemp() {
         <div className="text-center mt-10 kemp-reveal">
           
           <a href="https://www.instagram.com/olenabohuta_camp?igsh=dnZwaHA4c2ZsaG1s"
-            target="_blank"
+            target="_blank" rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-xs tracking-widest uppercase no-underline hover:opacity-70 transition-opacity pb-1"
             style={{ color: ACCENT, borderBottom: `1px solid ${ACCENT}` }}
           >
@@ -651,7 +652,7 @@ export default function Kemp() {
         <FaqBlock />
         <div className="text-center mt-12 kemp-reveal">
           <p className="text-base mb-6" style={{ color: '#8B6F52' }}>Не знайшли відповідь?</p>
-          <a href="https://t.me/olenabohuta" target="_blank" className="inline-block px-10 py-4 text-xs tracking-widest uppercase no-underline hover:opacity-80 transition-opacity" style={{ border: `1px solid ${DARK}`, color: DARK }}>Написати в Telegram</a>
+          <a href="https://t.me/olenabohuta" target="_blank" rel="noopener noreferrer" className="inline-block px-10 py-4 text-xs tracking-widest uppercase no-underline hover:opacity-80 transition-opacity" style={{ border: `1px solid ${DARK}`, color: DARK }}>Написати в Telegram</a>
         </div>
       </section>
 
@@ -670,7 +671,7 @@ export default function Kemp() {
           <p className="text-lg mb-10 leading-relaxed kemp-reveal" style={{ color: '#C4B49A', maxWidth: '500px', margin: '0 auto 2.5rem' }}>
             Заповни анкету передзапису — і ми зв'яжемося з тобою з деталями про старт та умови участі.
           </p>
-          <a href={FORM_URL} target="_blank" className="inline-block px-12 py-4 text-xs tracking-widest uppercase no-underline hover:opacity-80 transition-opacity kemp-reveal" style={{ background: ACCENT, color: CREAM }}>
+          <a href={FORM_URL} target="_blank" rel="noopener noreferrer" className="inline-block px-12 py-4 text-xs tracking-widest uppercase no-underline hover:opacity-80 transition-opacity kemp-reveal" style={{ background: ACCENT, color: CREAM }}>
             Заповнити анкету передзапису
           </a>
         </div>

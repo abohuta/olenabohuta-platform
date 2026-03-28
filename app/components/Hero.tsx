@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 interface HeroProps {
   eyebrow?: string;
   title: string;
@@ -35,9 +37,9 @@ export default function Hero({
           </p>
         )}
         {btnText && (
-          <a href={btnHref} className="inline-block px-10 py-4 bg-[var(--accent)] text-white no-underline text-xs tracking-widest uppercase self-start hover:bg-[var(--brown)] transition-colors">
+          <Link href={btnHref} className="inline-block px-10 py-4 bg-[var(--accent)] text-white no-underline text-xs tracking-widest uppercase self-start hover:bg-[var(--brown)] transition-colors">
             {btnText}
-          </a>
+          </Link>
         )}
       </div>
       {rightContent && (

@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import Cross from "../../components/Cross";
@@ -38,7 +39,7 @@ export default function Pochatok() {
         <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-[2px]">
 
           {/* Консультації */}
-          <a href="/products/konsultatsii" className="p-10 no-underline block group" style={{ background: 'var(--warm-white)', transition: 'all 0.4s cubic-bezier(0.16,1,0.3,1)' }}
+          <Link href="/products/konsultatsii" className="p-10 no-underline block group" style={{ background: 'var(--warm-white)', transition: 'all 0.4s cubic-bezier(0.16,1,0.3,1)' }}
             onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.transform = 'translateY(-4px)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 20px 50px rgba(42,31,20,0.1)'; }}
             onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.transform = ''; (e.currentTarget as HTMLElement).style.boxShadow = ''; }}
           >
@@ -46,10 +47,10 @@ export default function Pochatok() {
             <h3 className="text-2xl font-medium mb-4 text-[var(--dark)]" style={{ fontFamily: 'var(--font-heading)' }}>Особиста консультація</h3>
             <p className="text-sm leading-relaxed text-[var(--light-text)] mb-6">Запишись на індивідуальну роботу з Оленою — отримай стратегію вже зараз без очікування.</p>
             <span className="text-xs tracking-widest uppercase text-[var(--accent)] border-b border-[var(--accent)] pb-1 group-hover:opacity-70 transition-opacity">Записатись →</span>
-          </a>
+          </Link>
 
           {/* Закритий клуб */}
-          <a href="/zakrytyi-klub" className="p-10 no-underline block group" style={{ background: 'var(--dark)', transition: 'all 0.4s cubic-bezier(0.16,1,0.3,1)' }}
+          <Link href="/zakrytyi-klub" className="p-10 no-underline block group" style={{ background: 'var(--dark)', transition: 'all 0.4s cubic-bezier(0.16,1,0.3,1)' }}
             onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.transform = 'translateY(-4px)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 20px 50px rgba(42,31,20,0.3)'; }}
             onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.transform = ''; (e.currentTarget as HTMLElement).style.boxShadow = ''; }}
           >
@@ -57,7 +58,7 @@ export default function Pochatok() {
             <h3 className="text-2xl font-medium mb-4" style={{ fontFamily: 'var(--font-heading)', color: 'var(--cream)' }}>Закритий Клуб</h3>
             <p className="text-sm leading-relaxed mb-6" style={{ color: 'var(--taupe)' }}>Доєднуйся до спільноти Christian-підприємців — розвивайся і зростай разом.</p>
             <span className="text-xs tracking-widest uppercase pb-1 group-hover:opacity-70 transition-opacity" style={{ color: 'var(--accent)', borderBottom: '1px solid var(--accent)' }}>Доєднатись →</span>
-          </a>
+          </Link>
 
           {/* Соцмережі */}
           <div className="p-10" style={{ background: 'var(--sand)' }}>
@@ -65,8 +66,8 @@ export default function Pochatok() {
             <h3 className="text-2xl font-medium mb-4 text-[var(--dark)]" style={{ fontFamily: 'var(--font-heading)' }}>Соцмережі</h3>
             <p className="text-sm leading-relaxed text-[var(--light-text)] mb-6">Дізнавайся першою про старт курсу та отримуй корисні матеріали щодня.</p>
             <div className="flex flex-col gap-3">
-              <a href="https://www.instagram.com/olenka.bohuta" target="_blank" className="text-xs tracking-widest uppercase no-underline border-b pb-1 hover:opacity-60 transition-opacity w-fit" style={{ color: 'var(--accent)', borderColor: 'var(--accent)' }}>Instagram →</a>
-              <a href="https://t.me/olenabohuta" target="_blank" className="text-xs tracking-widest uppercase no-underline border-b pb-1 hover:opacity-60 transition-opacity w-fit" style={{ color: 'var(--accent)', borderColor: 'var(--accent)' }}>Telegram →</a>
+              <a href="https://www.instagram.com/olenka.bohuta" target="_blank" rel="noopener noreferrer" className="text-xs tracking-widest uppercase no-underline border-b pb-1 hover:opacity-60 transition-opacity w-fit" style={{ color: 'var(--accent)', borderColor: 'var(--accent)' }}>Instagram →</a>
+              <a href="https://t.me/olenabohuta" target="_blank" rel="noopener noreferrer" className="text-xs tracking-widest uppercase no-underline border-b pb-1 hover:opacity-60 transition-opacity w-fit" style={{ color: 'var(--accent)', borderColor: 'var(--accent)' }}>Telegram →</a>
             </div>
           </div>
         </div>

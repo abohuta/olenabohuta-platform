@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import { getPost, urlFor, CATEGORIES } from "../../../lib/sanity";
@@ -46,7 +47,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
         <section className="px-6 md:px-20 py-32 min-h-screen flex items-center justify-center bg-[var(--warm-white)]">
           <div className="text-center">
             <h1 className="text-4xl font-medium text-[var(--dark)] mb-4" style={{ fontFamily: 'var(--font-heading)' }}>Статтю не знайдено</h1>
-            <a href="/blog" className="text-xs tracking-widest uppercase text-[var(--accent)] no-underline border-b border-[var(--accent)]">← Повернутись до блогу</a>
+            <Link href="/blog" className="text-xs tracking-widest uppercase text-[var(--accent)] no-underline border-b border-[var(--accent)]">← Повернутись до блогу</Link>
           </div>
         </section>
         <Footer />
@@ -74,7 +75,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
         )}
         <div className="px-6 md:px-20 py-12 md:py-16" style={{ background: post.coverImage ? 'var(--dark)' : 'var(--dark)', marginTop: post.coverImage ? '-6rem' : 0, position: 'relative', zIndex: 10 }}>
           <div className="max-w-3xl mx-auto">
-            <a href="/blog" className="text-xs tracking-widest uppercase no-underline hover:opacity-60 transition-opacity inline-block mb-6" style={{ color: 'rgba(196,180,154,0.6)' }}>← Блог</a>
+            <Link href="/blog" className="text-xs tracking-widest uppercase no-underline hover:opacity-60 transition-opacity inline-block mb-6" style={{ color: 'rgba(196,180,154,0.6)' }}>← Блог</Link>
             <div className="flex items-center gap-4 mb-4">
               {post.category && (
                 <span className="text-xs tracking-widest uppercase" style={{ color: 'var(--accent)' }}>{CATEGORIES[post.category]}</span>
@@ -106,9 +107,9 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
         <h2 className="text-3xl font-medium text-[var(--dark)] mb-6" style={{ fontFamily: 'var(--font-heading)' }}>
           Більше статей у блозі
         </h2>
-        <a href="/blog" className="inline-block px-10 py-4 text-xs tracking-widest uppercase no-underline hover:opacity-80 transition-opacity" style={{ background: 'var(--dark)', color: 'var(--cream)' }}>
+        <Link href="/blog" className="inline-block px-10 py-4 text-xs tracking-widest uppercase no-underline hover:opacity-80 transition-opacity" style={{ background: 'var(--dark)', color: 'var(--cream)' }}>
           Всі статті
-        </a>
+        </Link>
       </section>
 
       <Footer />

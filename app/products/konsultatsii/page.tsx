@@ -1,8 +1,10 @@
 "use client";
 import React from "react";
+import Link from "next/link";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import Cross from "../../components/Cross";
+import { useReveal } from "../../hooks/useReveal";
 
 function useCountUp(target: number, duration: number = 2000) {
   const [count, setCount] = React.useState(0);
@@ -44,23 +46,6 @@ function StatCard({ num, suffix, label }: { num: number; suffix: string; label: 
       <p className="text-xs tracking-widest uppercase" style={{ color: 'var(--taupe)', opacity: 0.6 }}>{label}</p>
     </div>
   );
-}
-
-function useReveal() {
-  React.useEffect(() => {
-    const els = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver(
-      (entries) => entries.forEach((e) => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          observer.unobserve(e.target);
-        }
-      }),
-      { threshold: 0.1 }
-    );
-    els.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
 }
 
 const TOPICS = [
@@ -126,7 +111,7 @@ export default function Konsultatsii() {
         <div className="deco-line absolute left-1/2 top-0 bottom-0 hidden md:block" style={{height:'100%'}}/>
 
         <div className="px-6 md:px-20 py-20 md:py-32 flex flex-col justify-center relative z-10">
-          <a href="/navchannya" className="text-xs tracking-widest uppercase no-underline mb-8 hover:opacity-60 transition-opacity inline-block" style={{ color: 'rgba(196,180,154,0.6)' }}>← Всі навчання</a>
+          <Link href="/navchannya" className="text-xs tracking-widest uppercase no-underline mb-8 hover:opacity-60 transition-opacity inline-block" style={{ color: 'rgba(196,180,154,0.6)' }}>← Всі навчання</Link>
           <p className="text-xs tracking-[0.35em] uppercase mb-6 reveal" style={{ color: 'var(--accent)' }}>Особиста робота · 1:1</p>
           <h1 className="font-medium leading-tight mb-6 reveal" style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(3rem, 6vw, 5.5rem)', color: 'var(--cream)', lineHeight: 0.95 }}>
             Консуль<br />
@@ -215,10 +200,10 @@ export default function Konsultatsii() {
             Після заповнення брифу ми зв'яжемось і запропонуємо оптимальний формат та вартість саме для твого запиту.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center reveal">
-            <a href="https://t.me/olenabohuta" target="_blank" className="inline-block px-10 py-4 text-xs tracking-widest uppercase no-underline hover:opacity-80 transition-opacity" style={{ background: 'var(--accent)', color: 'white' }}>
+            <a href="https://t.me/olenabohuta" target="_blank" rel="noopener noreferrer" className="inline-block px-10 py-4 text-xs tracking-widest uppercase no-underline hover:opacity-80 transition-opacity" style={{ background: 'var(--accent)', color: 'white' }}>
               Написати у Telegram
             </a>
-            <a href="https://www.instagram.com/olenka.bohuta" target="_blank" className="inline-block px-10 py-4 text-xs tracking-widest uppercase no-underline hover:opacity-80 transition-opacity" style={{ border: '1px solid rgba(196,180,154,0.3)', color: 'var(--taupe)' }}>
+            <a href="https://www.instagram.com/olenka.bohuta" target="_blank" rel="noopener noreferrer" className="inline-block px-10 py-4 text-xs tracking-widest uppercase no-underline hover:opacity-80 transition-opacity" style={{ border: '1px solid rgba(196,180,154,0.3)', color: 'var(--taupe)' }}>
               Instagram
             </a>
           </div>
@@ -263,7 +248,7 @@ export default function Konsultatsii() {
               Засновниця першого в Україні навчання для християн у соцмережах. 8 років досвіду у SMM та особистому брендингу.
             </p>
             <div className="flex gap-4">
-              <a href="/pro-olenku" className="text-xs tracking-widest uppercase no-underline border-b pb-1 hover:opacity-60 transition-opacity" style={{ color: 'var(--accent)', borderColor: 'var(--accent)' }}>Детальніше про автора →</a>
+              <Link href="/pro-olenku" className="text-xs tracking-widest uppercase no-underline border-b pb-1 hover:opacity-60 transition-opacity" style={{ color: 'var(--accent)', borderColor: 'var(--accent)' }}>Детальніше про автора →</Link>
             </div>
           </div>
           <div className="relative aspect-[3/4] rounded-sm overflow-hidden reveal">
@@ -297,7 +282,7 @@ export default function Konsultatsii() {
         <p className="text-lg mb-10 leading-relaxed reveal" style={{ color: 'rgba(255,255,255,0.8)', maxWidth: '500px', margin: '0 auto 2.5rem' }}>
           Напиши нам у Telegram — розкажи про свій запит і ми підберемо оптимальний формат консультації.
         </p>
-        <a href="https://t.me/olenabohuta" target="_blank" className="inline-block px-12 py-4 text-xs tracking-widest uppercase no-underline hover:opacity-80 transition-opacity reveal" style={{ background: 'white', color: 'var(--accent)' }}>
+        <a href="https://t.me/olenabohuta" target="_blank" rel="noopener noreferrer" className="inline-block px-12 py-4 text-xs tracking-widest uppercase no-underline hover:opacity-80 transition-opacity reveal" style={{ background: 'white', color: 'var(--accent)' }}>
           Написати у Telegram
         </a>
       </section>

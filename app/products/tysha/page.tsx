@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import Link from "next/link";
 import Footer from "../../components/Footer";
 
 // ── Constants ──────────────────────────────────────────────
@@ -459,23 +460,23 @@ export default function Tysha() {
 
       {/* NAVBAR */}
       <nav className="fixed top-0 left-0 right-0 z-50 px-6 md:px-16 py-4 flex justify-between items-center backdrop-blur-md" style={{ background: 'rgba(255,254,251,0.95)', borderBottom: `1px solid rgba(116,143,164,0.15)` }}>
-        <a href="/" className="no-underline" aria-label="Олена Богута — на головну">
+        <Link href="/" className="no-underline" aria-label="Олена Богута — на головну">
   <svg width="260" height="32" viewBox="0 0 220 28" fill="none" xmlns="http://www.w3.org/2000/svg">
     <text x="0" y="20" fontFamily="'Helvetica Neue', Helvetica, Arial, sans-serif" fontSize="14" fontWeight="200" fill={DARK_ACC} letterSpacing="8">
       ОЛЕНА БОГУТА
     </text>
     <line x1="0" y1="26" x2="220" y2="26" stroke={DARK_ACC} strokeWidth="0.4" opacity="0.3"/>
   </svg>
-</a>
+</Link>
         <div className="hidden md:flex gap-8 items-center">
           {[
             { href: '/navchannya', label: 'Навчання' },
             { href: '/pro-olenku', label: 'Про автора' },
             { href: '/zakrytyi-klub', label: 'Закритий Клуб' },
           ].map(({ href, label }) => (
-            <a key={href} href={href} className="text-xs tracking-widest uppercase no-underline hover:opacity-60 transition-opacity" style={{ color: PRIMARY }}>{label}</a>
+            <Link key={href} href={href} className="text-xs tracking-widest uppercase no-underline hover:opacity-60 transition-opacity" style={{ color: PRIMARY }}>{label}</Link>
           ))}
-          <a href={FORM_URL} target="_blank" className="text-xs tracking-widest uppercase no-underline px-6 py-2 hover:opacity-80 transition-opacity" style={{ background: PRIMARY, color: WHITE }}>
+          <a href={FORM_URL} target="_blank" rel="noopener noreferrer" className="text-xs tracking-widest uppercase no-underline px-6 py-2 hover:opacity-80 transition-opacity" style={{ background: PRIMARY, color: WHITE }}>
             Записатись
           </a>
         </div>
@@ -489,7 +490,7 @@ export default function Tysha() {
         <div className="absolute bottom-8 right-8 w-12 h-12 hidden md:block" style={{ borderRight: '1px solid rgba(255,255,255,0.2)', borderBottom: '1px solid rgba(255,255,255,0.2)' }}/>
 
         <div className="px-6 md:px-20 py-20 md:py-32 flex flex-col justify-center relative z-10">
-          <a href="/navchannya" className="text-xs tracking-widest uppercase no-underline mb-8 hover:opacity-60 transition-opacity inline-block" style={{ color: 'rgba(255,254,251,0.6)' }}>← Всі навчання</a>
+          <Link href="/navchannya" className="text-xs tracking-widest uppercase no-underline mb-8 hover:opacity-60 transition-opacity inline-block" style={{ color: 'rgba(255,254,251,0.6)' }}>← Всі навчання</Link>
           <p className="text-xs tracking-[0.35em] uppercase mb-6 tysha-reveal" style={{ color: 'rgba(255,254,251,0.7)' }}>Навчання · 8 тижнів · Premium</p>
           <AnimatedTitle />
           <p className="text-lg md:text-xl leading-relaxed max-w-md mb-4 tysha-reveal tysha-delay-1" style={{ color: 'rgba(255,254,251,0.9)', fontStyle: 'italic' }}>
@@ -499,7 +500,7 @@ export default function Tysha() {
             Навчання, яке змінить твоє ставлення до запусків. Тиша. Зріст. Результат.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 tysha-reveal tysha-delay-3">
-            <a href={FORM_URL} target="_blank" className="inline-block px-10 py-4 text-xs tracking-widest uppercase no-underline text-center hover:opacity-80 transition-opacity" style={{ background: WHITE, color: PRIMARY }}>
+            <a href={FORM_URL} target="_blank" rel="noopener noreferrer" className="inline-block px-10 py-4 text-xs tracking-widest uppercase no-underline text-center hover:opacity-80 transition-opacity" style={{ background: WHITE, color: PRIMARY }}>
               Заповнити анкету
             </a>
             <a href="#program" className="inline-block px-10 py-4 text-xs tracking-widest uppercase no-underline text-center hover:opacity-80 transition-opacity" style={{ border: `1px solid rgba(255,254,251,0.4)`, color: WHITE }}>
@@ -692,7 +693,7 @@ export default function Tysha() {
           <p className="text-base mb-10 leading-relaxed tysha-reveal" style={{ color: 'rgba(255,254,251,0.7)', maxWidth: '500px', margin: '0 auto 2.5rem' }}>
             Заповни анкету — і ми зв'яжемось з тобою та розкажемо деталі про старт навчання
           </p>
-          <a href={FORM_URL} target="_blank" className="inline-block px-12 py-4 text-xs tracking-widest uppercase no-underline hover:opacity-80 transition-opacity tysha-reveal" style={{ background: WHITE, color: PRIMARY }}>
+          <a href={FORM_URL} target="_blank" rel="noopener noreferrer" className="inline-block px-12 py-4 text-xs tracking-widest uppercase no-underline hover:opacity-80 transition-opacity tysha-reveal" style={{ background: WHITE, color: PRIMARY }}>
             Заповнити анкету
           </a>
         </div>

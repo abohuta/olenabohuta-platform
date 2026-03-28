@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Cross from "./components/Cross";
@@ -39,12 +40,12 @@ export default function NotFound() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="/" className="inline-block px-10 py-4 bg-[var(--accent)] text-white no-underline text-xs tracking-widest uppercase hover:bg-[var(--brown)] transition-colors">
+            <Link href="/" className="inline-block px-10 py-4 bg-[var(--accent)] text-white no-underline text-xs tracking-widest uppercase hover:bg-[var(--brown)] transition-colors">
               На головну
-            </a>
-            <a href="/navchannya" className="inline-block px-10 py-4 border border-[var(--taupe)] text-[var(--taupe)] no-underline text-xs tracking-widest uppercase hover:border-[var(--accent)] hover:text-[var(--accent)] transition-colors">
+            </Link>
+            <Link href="/navchannya" className="inline-block px-10 py-4 border border-[var(--taupe)] text-[var(--taupe)] no-underline text-xs tracking-widest uppercase hover:border-[var(--accent)] hover:text-[var(--accent)] transition-colors">
               Переглянути навчання
-            </a>
+            </Link>
           </div>
 
           <div className="w-8 h-px bg-[var(--accent)] mx-auto mt-10"/>

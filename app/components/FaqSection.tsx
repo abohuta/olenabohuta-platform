@@ -38,7 +38,7 @@ export default function FaqSection({ items, title = "Питання та від�
       </div>
       <div className="text-center mt-12">
         <p className="text-base text-[var(--light-text)] mb-6">Не знайшли відповідь на своє питання?</p>
-        <a href="https://t.me/olenabohuta" target="_blank" className="inline-block px-10 py-4 border border-[var(--dark)] text-[var(--dark)] no-underline text-xs tracking-widest uppercase hover:bg-[var(--dark)] hover:text-[var(--cream)] transition-colors">
+        <a href="https://t.me/olenabohuta" target="_blank" rel="noopener noreferrer" className="inline-block px-10 py-4 border border-[var(--dark)] text-[var(--dark)] no-underline text-xs tracking-widest uppercase hover:bg-[var(--dark)] hover:text-[var(--cream)] transition-colors">
           Написати у Telegram
         </a>
       </div>
