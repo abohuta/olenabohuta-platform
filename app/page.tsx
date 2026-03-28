@@ -124,10 +124,9 @@ function Carousel() {
             key={i}
             onClick={() => { setAnimated(true); setCurrent(i + 1); }}
             aria-label={`Відгук ${i + 1}`}
-            className={`w-3 h-3 rounded-full transition-colors p-0 border-none cursor-pointer ${i === dotIndex ? 'bg-[var(--accent)]' : 'bg-[var(--taupe)]'}`}
-            style={{ minWidth: '44px', minHeight: '44px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'transparent' }}
+            className="p-3 bg-transparent border-none cursor-pointer"
           >
-            <span className={`block w-3 h-3 rounded-full transition-colors ${i === dotIndex ? 'bg-[var(--accent)]' : 'bg-[var(--taupe)]'}`} />
+            <span className={`block w-2 h-2 rounded-full transition-colors ${i === dotIndex ? 'bg-[var(--accent)]' : 'bg-[var(--taupe)]'}`} />
           </button>
         ))}
       </div>
