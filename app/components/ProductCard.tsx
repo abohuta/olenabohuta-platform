@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 interface ProductCardProps {
   title: string;
   desc: string;
@@ -16,7 +18,7 @@ export default function ProductCard({
   href = "#",
 }: ProductCardProps) {
   return (
-    <a href={href} className="bg-[var(--cream)] p-8 hover:-translate-y-1 transition-transform no-underline block">
+    <Link href={href} className="bg-[var(--cream)] p-8 hover:-translate-y-1 transition-transform no-underline block">
       <div className="flex justify-between items-start mb-4">
         <p className="text-xs tracking-[0.3em] uppercase text-[var(--accent)]">{tag}</p>
         {level && <p className="text-xs tracking-widest uppercase text-[var(--taupe)]">{level}</p>}
@@ -29,6 +31,6 @@ export default function ProductCard({
           <span className="text-xs tracking-widest uppercase text-[var(--accent)] border-b border-[var(--accent)]">Детальніше →</span>
         </div>
       )}
-    </a>
+    </Link>
   );
 }

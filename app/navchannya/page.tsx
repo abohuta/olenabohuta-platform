@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import Image from "next/image";
+import Link from "next/link";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import ProductCard from "../components/ProductCard";
@@ -89,7 +89,6 @@ const faq = [
 export default function Navchannya() {
   const [activeLevel, setActiveLevel] = React.useState("Всі");
   const [activeTopic, setActiveTopic] = React.useState("Всі");
-  const [openFaq, setOpenFaq] = React.useState<number | null>(null);
 
   const filtered = products.filter((p) => {
     const levelMatch = activeLevel === "Всі" || p.level === activeLevel;
@@ -113,9 +112,9 @@ export default function Navchannya() {
         <p className="text-lg md:text-xl text-[var(--taupe)] max-w-xl leading-relaxed mb-10 text-justify">
           Практичні програми для християн які хочуть розвивати особистий бренд, запускати блог та монетизувати експертність.
         </p>
-        <a href="#catalog" className="inline-block px-10 py-4 bg-[var(--accent)] text-white no-underline text-xs tracking-widest uppercase hover:bg-[var(--brown)] transition-colors">
+        <Link href="#catalog" className="inline-block px-10 py-4 bg-[var(--accent)] text-white no-underline text-xs tracking-widest uppercase hover:bg-[var(--brown)] transition-colors">
           Переглянути навчання
-        </a>
+        </Link>
       </section>
 
       {/* ЩО ОТРИМАЄШ */}
@@ -191,16 +190,16 @@ export default function Navchannya() {
         {/* КАРТКИ */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-[2px] max-w-5xl mx-auto">
           {filtered.length > 0 ? filtered.map((product) => (
-          <ProductCard
-            key={product.id}
-            title={product.title}
-            desc={product.desc}
-            tag={product.tag}
-            level={product.level}
-            price={product.price}
-            href={product.href}
-          />
-        )) : (
+            <ProductCard
+              key={product.id}
+              title={product.title}
+              desc={product.desc}
+              tag={product.tag}
+              level={product.level}
+              price={product.price}
+              href={product.href}
+            />
+          )) : (
             <div className="col-span-3 text-center py-16">
               <p className="text-lg text-[var(--light-text)]">За цими фільтрами нічого не знайдено.</p>
             </div>
@@ -221,7 +220,7 @@ export default function Navchannya() {
             <p className="text-lg leading-relaxed text-[var(--light-text)] mb-8 text-justify">
               Якщо ти Christian-експерт у своїй ніші і хочеш ділитися знаннями — долучайся до платформи як викладач або ментор. Разом ми будуємо найсильніше Christian-освітнє ком'юніті в Україні.
             </p>
-            <a href="https://t.me/olenabohuta" target="_blank" className="inline-block px-10 py-4 bg-[var(--dark)] text-[var(--cream)] no-underline text-xs tracking-widest uppercase hover:bg-[var(--accent)] transition-colors">
+            <a href="https://t.me/olenabohuta" target="_blank" rel="noopener noreferrer" className="inline-block px-10 py-4 bg-[var(--dark)] text-[var(--cream)] no-underline text-xs tracking-widest uppercase hover:bg-[var(--accent)] transition-colors">
               Написати Олені
             </a>
           </div>

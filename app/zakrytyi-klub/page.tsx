@@ -1,28 +1,10 @@
 "use client";
 import React from "react";
+import Link from "next/link";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Cross from "../components/Cross";
-
-
-function useReveal() {
-  React.useEffect(() => {
-    const els = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-    els.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
-}
+import { useReveal } from "../hooks/useReveal";
 
 export default function ZakrytyiKlub() {
   useReveal();
@@ -66,12 +48,6 @@ export default function ZakrytyiKlub() {
         <div className="absolute bottom-6 right-6 w-10 h-10 border-r border-b border-[rgba(184,147,106,0.2)] hidden md:block"/>
         <div className="deco-line absolute left-16 top-0 bottom-0 hidden md:block" style={{height:'100%'}}/>
         <div className="deco-line absolute right-16 top-0 bottom-0 hidden md:block" style={{height:'100%'}}/>
-        <div className="absolute top-6 left-6 w-10 h-10 border-l border-t border-[rgba(184,147,106,0.2)] hidden md:block"/>
-        <div className="absolute top-6 right-6 w-10 h-10 border-r border-t border-[rgba(184,147,106,0.2)] hidden md:block"/>
-        <div className="absolute bottom-6 left-6 w-10 h-10 border-l border-b border-[rgba(184,147,106,0.2)] hidden md:block"/>
-        <div className="absolute bottom-6 right-6 w-10 h-10 border-r border-b border-[rgba(184,147,106,0.2)] hidden md:block"/>
-        <div className="deco-line absolute left-16 top-0 bottom-0 hidden md:block" style={{height:'100%'}}/>
-        <div className="deco-line absolute right-16 top-0 bottom-0 hidden md:block" style={{height:'100%'}}/>
 
         <div className="max-w-4xl mx-auto text-center relative z-10 py-20">
           <div className="flex justify-center mb-6 reveal">
@@ -86,12 +62,12 @@ export default function ZakrytyiKlub() {
             Простір для християнських експертів які ростуть разом — з вірою, стратегією і підтримкою спільноти.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center reveal reveal-delay-3">
-            <a href="#pricing" className="inline-block px-10 py-4 bg-[var(--accent)] text-white no-underline text-xs tracking-widest uppercase hover:bg-[var(--brown)] transition-colors">
+            <Link href="#pricing" className="inline-block px-10 py-4 bg-[var(--accent)] text-white no-underline text-xs tracking-widest uppercase hover:bg-[var(--brown)] transition-colors">
               Долучитися до клубу
-            </a>
-            <a href="#benefits" className="inline-block px-10 py-4 border border-[var(--taupe)] text-[var(--taupe)] no-underline text-xs tracking-widest uppercase hover:border-[var(--accent)] hover:text-[var(--accent)] transition-colors">
+            </Link>
+            <Link href="#benefits" className="inline-block px-10 py-4 border border-[var(--taupe)] text-[var(--taupe)] no-underline text-xs tracking-widest uppercase hover:border-[var(--accent)] hover:text-[var(--accent)] transition-colors">
               Дізнатися більше
-            </a>
+            </Link>
           </div>
         </div>
       </section>
@@ -173,7 +149,7 @@ export default function ZakrytyiKlub() {
                 </li>
               ))}
             </ul>
-            <a href="https://t.me/olenabohuta" target="_blank" className="block text-center px-6 py-3 bg-[var(--accent)] text-white no-underline text-xs tracking-widest uppercase hover:bg-[var(--brown)] transition-colors">
+            <a href="https://t.me/olenabohuta" target="_blank" rel="noopener noreferrer" className="block text-center px-6 py-3 bg-[var(--accent)] text-white no-underline text-xs tracking-widest uppercase hover:bg-[var(--brown)] transition-colors">
               Долучитися
             </a>
           </div>
@@ -197,17 +173,16 @@ export default function ZakrytyiKlub() {
                 </li>
               ))}
             </ul>
-            <a href="https://t.me/olenabohuta" target="_blank" className="block text-center px-6 py-3 border border-[var(--dark)] text-[var(--dark)] no-underline text-xs tracking-widest uppercase hover:bg-[var(--dark)] hover:text-[var(--cream)] transition-colors">
+            <a href="https://t.me/olenabohuta" target="_blank" rel="noopener noreferrer" className="block text-center px-6 py-3 border border-[var(--dark)] text-[var(--dark)] no-underline text-xs tracking-widest uppercase hover:bg-[var(--dark)] hover:text-[var(--cream)] transition-colors">
               Долучитися
             </a>
           </div>
 
         </div>
-
       </section>
 
       {/* QUOTE */}
-      <section className="px-6 md:px-20 py-16 bg-[var(--dark)] abstract-dark abstract-dark relative overflow-hidden">
+      <section className="px-6 md:px-20 py-16 bg-[var(--dark)] relative overflow-hidden">
         <div className="absolute top-6 left-6 w-8 h-8 border-l border-t border-[rgba(184,147,106,0.3)] hidden md:block"/>
         <div className="absolute top-6 right-6 w-8 h-8 border-r border-t border-[rgba(184,147,106,0.3)] hidden md:block"/>
         <div className="absolute bottom-6 left-6 w-8 h-8 border-l border-b border-[rgba(184,147,106,0.3)] hidden md:block"/>
@@ -237,10 +212,10 @@ export default function ZakrytyiKlub() {
           Долучайся до закритого клубу і стань частиною спільноти християнських експертів
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center reveal reveal-delay-3">
-          <a href="#pricing" className="inline-block px-10 py-4 bg-white text-[var(--accent)] no-underline text-xs tracking-widest uppercase hover:bg-[var(--cream)] transition-colors">
+          <Link href="#pricing" className="inline-block px-10 py-4 bg-white text-[var(--accent)] no-underline text-xs tracking-widest uppercase hover:bg-[var(--cream)] transition-colors">
             Обрати тариф
-          </a>
-          <a href="https://t.me/olenabohuta" target="_blank" className="inline-block px-10 py-4 border border-white text-white no-underline text-xs tracking-widest uppercase hover:bg-white hover:text-[var(--accent)] transition-colors">
+          </Link>
+          <a href="https://t.me/olenabohuta" target="_blank" rel="noopener noreferrer" className="inline-block px-10 py-4 border border-white text-white no-underline text-xs tracking-widest uppercase hover:bg-white hover:text-[var(--accent)] transition-colors">
             Написати в Telegram
           </a>
         </div>

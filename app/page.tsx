@@ -1,67 +1,12 @@
 "use client";
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Cross from "./components/Cross";
+import { useReveal } from "./hooks/useReveal";
 
-function useReveal() {
-  React.useEffect(() => {
-    const els = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-    els.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
-}
-function EmailForm() {
-  const [email, setEmail] = React.useState("");
-  const [sent, setSent] = React.useState(false);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (email) {
-      setSent(true);
-    }
-  };
-
-  if (sent) {
-    return (
-      <div className="text-center py-4">
-        <span className="text-[var(--accent)] text-2xl block mb-3">✦</span>
-        <p className="text-[var(--cream)] text-lg">Дякуємо! Чекай на листа 💛</p>
-      </div>
-    );
-  }
-
-  return (
-    <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="Твій email"
-        required
-        className="flex-1 px-5 py-3 bg-transparent border border-[rgba(184,147,106,0.3)] text-[var(--cream)] placeholder-[var(--taupe)] text-sm focus:outline-none focus:border-[var(--accent)] transition-colors"
-      />
-      <button
-        type="submit"
-        className="px-8 py-3 bg-[var(--accent)] text-white text-xs tracking-widest uppercase hover:bg-[var(--brown)] transition-colors whitespace-nowrap"
-      >
-        Підписатись
-      </button>
-    </form>
-  );
-}
 function Carousel() {
   const [current, setCurrent] = React.useState(0);
   const total = 8;
@@ -128,12 +73,14 @@ function Carousel() {
       {/* Кнопки — тільки на десктопі */}
       <button
         onClick={prev}
+        aria-label="Попередній відгук"
         className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 w-10 h-10 bg-[var(--dark)] text-[var(--cream)] hidden md:flex items-center justify-center hover:bg-[var(--accent)] transition-colors z-10"
       >
         ←
       </button>
       <button
         onClick={next}
+        aria-label="Наступний відгук"
         className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 w-10 h-10 bg-[var(--dark)] text-[var(--cream)] hidden md:flex items-center justify-center hover:bg-[var(--accent)] transition-colors z-10"
       >
         →
@@ -145,6 +92,7 @@ function Carousel() {
           <button
             key={i}
             onClick={() => setCurrent(i)}
+            aria-label={`Відгук ${i + 1}`}
             className={`w-2 h-2 rounded-full transition-colors ${i === current ? 'bg-[var(--accent)]' : 'bg-[var(--taupe)]'}`}
           />
         ))}
@@ -157,6 +105,7 @@ function Carousel() {
     </div>
   );
 }
+
 export default function Home() {
   useReveal();
   return (
@@ -169,7 +118,7 @@ export default function Home() {
       <section className="min-h-screen grid grid-cols-1 md:grid-cols-2 pt-[70px] mesh-bg relative">
         {/* Декоративна вертикальна лінія */}
         <div className="deco-line absolute left-1/2 top-0 bottom-0 hidden md:block" style={{height: '100%'}} />
-        
+
         {/* Декоративний номер */}
         <span className="absolute top-32 right-8 text-[120px] font-light text-[var(--sand)] opacity-40 leading-none hidden md:block select-none" style={{fontFamily: 'var(--font-heading)'}}>01</span>
 
@@ -182,15 +131,15 @@ export default function Home() {
             <em className="italic text-[var(--accent)]">Богута</em>
           </h1>
           <div className="max-w-md mb-10 flex flex-col gap-6">
-  <p className="text-lg md:text-xl leading-relaxed text-[var(--light-text)] text-justify">
-    Експерт з розвитку особистого бренду для християн. Допомагаю інфлюенсерам та фахівцям різних ніш запускати блог з нуля, монетизувати експертність і створювати власні унікальні продукти.
-  </p>
-</div>
+            <p className="text-lg md:text-xl leading-relaxed text-[var(--light-text)] text-justify">
+              Експерт з розвитку особистого бренду для християн. Допомагаю інфлюенсерам та фахівцям різних ніш запускати блог з нуля, монетизувати експертність і створювати власні унікальні продукти.
+            </p>
+          </div>
           <div className="flex flex-col sm:flex-row gap-3 mt-2">
-            <a href="/navchannya" className="inline-block px-10 py-4 bg-[var(--dark)] text-[var(--cream)] no-underline text-xs tracking-widest uppercase hover:bg-[var(--accent)] transition-colors text-center">
+            <Link href="/navchannya" className="inline-block px-10 py-4 bg-[var(--dark)] text-[var(--cream)] no-underline text-xs tracking-widest uppercase hover:bg-[var(--accent)] transition-colors text-center">
               Переглянути продукти
-            </a>
-            <a href="https://docs.google.com/forms/d/1GTJ6oijlCOO7GfUMlhvGealas2Vo5GI7bh-uaAljfdQ/edit" target="_blank" className="inline-block px-10 py-4 border border-[var(--accent)] text-[var(--accent)] no-underline text-xs tracking-widest uppercase hover:bg-[var(--accent)] hover:text-white transition-colors text-center">
+            </Link>
+            <a href="https://docs.google.com/forms/d/1GTJ6oijlCOO7GfUMlhvGealas2Vo5GI7bh-uaAljfdQ/edit" target="_blank" rel="noopener noreferrer" className="inline-block px-10 py-4 border border-[var(--accent)] text-[var(--accent)] no-underline text-xs tracking-widest uppercase hover:bg-[var(--accent)] hover:text-white transition-colors text-center">
               Хочу вчитися
             </a>
           </div>
@@ -207,29 +156,28 @@ export default function Home() {
 
       {/* ПРОДУКТИ */}
       <section className="px-6 md:px-20 py-20 md:py-32 bg-[var(--cream)] mesh-bg relative overflow-hidden">
-        
-<h2 className="text-4xl md:text-5xl font-light text-center text-[var(--dark)] mb-16 leading-tight reveal reveal-delay-1">
-  Чим я можу тобі допомогти
-</h2>
+        <h2 className="text-4xl md:text-5xl font-light text-center text-[var(--dark)] mb-16 leading-tight reveal reveal-delay-1">
+          Чим я можу тобі допомогти
+        </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-[2px] max-w-7xl mx-auto">
           {[
-  { title: 'Шлях', desc: 'Марафон дисципліни за біблійними принципами тиші', tag: 'Марафон', href: '/products/shlyakh' },
-  { title: 'Початок', desc: 'Тренінг для християн, що прагнуть запустити блог', tag: 'Тренінг', href: '/products/pochatok' },
-  { title: 'Кемп Архітектор Бренду', desc: 'Навчання для християн які хочуть розвивати особистий бренд', tag: 'Кемп', href: '/products/kemp' },
-  { title: 'Тиша', desc: 'Навчання по зупусках та автоворонках', tag: 'Курс', href: '/products/tysha' },
-  { title: 'Консультації', desc: 'Особиста робота над твоїм брендом та стратегією', tag: 'Сесія', href: '/products/konsultatsii' },
-].map((item) => (
-  <a href={item.href} key={item.title} className="bg-[var(--warm-white)] p-10 block no-underline reveal card-shine card-depth">
-    <p className="text-xs tracking-[0.3em] uppercase text-[var(--accent)] mb-3">{item.tag}</p>
-    <h3 className="font-cormorant text-xl font-normal text-[var(--dark)] mb-4">{item.title}</h3>
-    <p className="text-sm leading-relaxed text-[var(--light-text)]">{item.desc}</p>
-  </a>
-))}
+            { title: 'Шлях', desc: 'Марафон дисципліни за біблійними принципами тиші', tag: 'Марафон', href: '/products/shlyakh' },
+            { title: 'Початок', desc: 'Тренінг для християн, що прагнуть запустити блог', tag: 'Тренінг', href: '/products/pochatok' },
+            { title: 'Кемп Архітектор Бренду', desc: 'Навчання для християн які хочуть розвивати особистий бренд', tag: 'Кемп', href: '/products/kemp' },
+            { title: 'Тиша', desc: 'Навчання по зупусках та автоворонках', tag: 'Курс', href: '/products/tysha' },
+            { title: 'Консультації', desc: 'Особиста робота над твоїм брендом та стратегією', tag: 'Сесія', href: '/products/konsultatsii' },
+          ].map((item) => (
+            <Link href={item.href} key={item.title} className="bg-[var(--warm-white)] p-10 block no-underline reveal card-shine card-depth">
+              <p className="text-xs tracking-[0.3em] uppercase text-[var(--accent)] mb-3">{item.tag}</p>
+              <h3 className="font-cormorant text-xl font-normal text-[var(--dark)] mb-4">{item.title}</h3>
+              <p className="text-sm leading-relaxed text-[var(--light-text)]">{item.desc}</p>
+            </Link>
+          ))}
         </div>
         <div className="text-center mt-12">
-          <a href="/navchannya" className="inline-block px-10 py-4 border border-[var(--dark)] text-[var(--dark)] no-underline text-xs tracking-widest uppercase hover:bg-[var(--dark)] hover:text-[var(--cream)] transition-colors">
-          Дізнатися більше
-          </a>
+          <Link href="/navchannya" className="inline-block px-10 py-4 border border-[var(--dark)] text-[var(--dark)] no-underline text-xs tracking-widest uppercase hover:bg-[var(--dark)] hover:text-[var(--cream)] transition-colors">
+            Дізнатися більше
+          </Link>
         </div>
       </section>
 
@@ -275,9 +223,9 @@ export default function Home() {
             <p className="text-lg leading-relaxed text-white mb-8 text-justify" style={{opacity: 0.85}}>
               Простір для християнських експертів, які ростуть разом. Підтримка, натхнення, живе ком'юніті однодумців.
             </p>
-            <a href="/zakrytyi-klub" className="inline-block px-10 py-4 bg-white text-[var(--accent)] no-underline text-xs tracking-widest uppercase hover:bg-[var(--cream)] transition-colors">
+            <Link href="/zakrytyi-klub" className="inline-block px-10 py-4 bg-white text-[var(--accent)] no-underline text-xs tracking-widest uppercase hover:bg-[var(--cream)] transition-colors">
               Долучитися до клубу
-            </a>
+            </Link>
           </div>
           <div style={{background: 'rgba(255,255,255,0.15)', border: '1px solid rgba(255,255,255,0.25)'}} className="p-10 rounded-sm">
             <ul className="list-none space-y-4">
@@ -307,10 +255,10 @@ export default function Home() {
           разом
         </h2>
         <div className="flex flex-col md:flex-row gap-4 justify-center reveal reveal-delay-2">
-          <a href="https://t.me/olenabohuta" target="_blank" className="px-10 py-4 bg-[var(--accent)] text-white no-underline text-xs tracking-widest uppercase hover:bg-[var(--brown)] transition-colors">
+          <a href="https://t.me/olenabohuta" target="_blank" rel="noopener noreferrer" className="px-10 py-4 bg-[var(--accent)] text-white no-underline text-xs tracking-widest uppercase hover:bg-[var(--brown)] transition-colors">
             Telegram
           </a>
-          <a href="https://www.instagram.com/olenka.bohuta" target="_blank" className="px-10 py-4 border border-[var(--taupe)] text-[var(--taupe)] no-underline text-xs tracking-widest uppercase hover:border-[var(--cream)] hover:text-[var(--cream)] transition-colors">
+          <a href="https://www.instagram.com/olenka.bohuta" target="_blank" rel="noopener noreferrer" className="px-10 py-4 border border-[var(--taupe)] text-[var(--taupe)] no-underline text-xs tracking-widest uppercase hover:border-[var(--cream)] hover:text-[var(--cream)] transition-colors">
             Instagram
           </a>
         </div>
