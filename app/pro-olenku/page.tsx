@@ -58,37 +58,71 @@ export default function ProOlenku() {
     <main className="w-full overflow-x-hidden">
       <Navbar />
 
-      {/* HERO */}
-      <section className="min-h-screen grid grid-cols-1 md:grid-cols-2 pt-[70px]">
-        <div className="px-6 md:px-20 py-20 md:py-32 flex flex-col justify-center mesh-bg">
-          <p className="text-xs tracking-[0.35em] uppercase text-[var(--accent-text)] mb-6 reveal">Про автора</p>
-          <h1 className="text-5xl md:text-7xl font-medium text-[var(--dark)] leading-tight mb-6 reveal reveal-delay-1">
-            Олена<br />
-            <em className="italic text-[var(--accent)]">Богута</em>
-          </h1>
-          <p className="text-lg md:text-xl text-[var(--light-text)] leading-relaxed max-w-md mb-4 reveal reveal-delay-2">
-            Експерт з розвитку особистого бренду для християн. Засновниця першого в Україні навчання для християн у соцмережах.
-          </p>
-          <div className="flex items-center gap-3 reveal reveal-delay-3">
-            <div className="w-8 h-px bg-[var(--accent)]"/>
-            <p className="text-sm italic text-[var(--accent)]">«Не бійся, тільки вір»</p>
-          </div>
-          <div className="mt-8 reveal reveal-delay-4">
-            <Link href="/navchannya" className="inline-block px-10 py-4 bg-[var(--dark)] text-[var(--cream)] no-underline text-xs tracking-widest uppercase hover:bg-[var(--accent)] transition-colors">
-              Обрати навчання
-            </Link>
-          </div>
-        </div>
-        <div className="relative min-h-[60vh] md:min-h-screen bg-[var(--sand)]">
+      {/* HERO — Magazine Split */}
+      <section className="min-h-screen grid grid-cols-1 md:grid-cols-[55%_45%]">
+
+        {/* Фото — full bleed зліва */}
+        <div className="relative min-h-[70vh] md:min-h-screen order-1 md:order-none">
           <Image
             src="https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto/v1774359969/Olena_Bohuta_htaxhd.webp"
             fetchPriority="high"
             alt="Олена Богута"
             fill
             className="object-cover object-top"
-            sizes="(max-width: 768px) 100vw, 50vw"
+            sizes="(max-width: 768px) 100vw, 55vw"
           />
+          {/* Затемнення знизу на мобільному */}
+          <div className="absolute inset-0 md:hidden" style={{ background: 'linear-gradient(to top, rgba(42,31,20,0.5), transparent 50%)' }} />
         </div>
+
+        {/* Текст — темний фон справа */}
+        <div className="bg-[var(--dark)] flex flex-col px-8 md:px-14 py-10 md:py-0 md:min-h-screen order-2 md:order-none">
+
+          {/* Відступ під navbar */}
+          <div className="flex-none pt-4 md:pt-[88px]" />
+
+          {/* Цитата — по центру */}
+          <div className="flex-1 flex items-center justify-center">
+            <blockquote className="reveal reveal-delay-1 text-center">
+              <span
+                className="block text-7xl font-medium text-[var(--accent)] leading-none mb-1"
+                style={{ fontFamily: 'var(--font-heading)' }}
+                aria-hidden="true"
+              >"</span>
+              <p
+                className="text-2xl md:text-3xl font-medium text-[var(--cream)] leading-snug"
+                style={{ fontFamily: 'var(--font-heading)', fontStyle: 'italic' }}
+              >
+                Не бійся, <em className="text-[var(--accent)]">тільки вір</em>
+              </p>
+            </blockquote>
+          </div>
+
+          {/* Ім'я + CTA — внизу по центру */}
+          <div className="flex-none pb-10 md:pb-16 flex flex-col items-center text-center">
+            <div className="w-8 h-px bg-[var(--accent)] mb-6 reveal reveal-delay-2" />
+            <p className="text-xs tracking-[0.35em] uppercase text-[var(--accent)] mb-3 reveal reveal-delay-2">Про автора</p>
+            <h1
+              className="text-5xl md:text-7xl font-medium text-[var(--cream)] leading-tight mb-3 reveal reveal-delay-2"
+              style={{ fontFamily: 'var(--font-heading)' }}
+            >
+              Олена <em className="italic text-[var(--accent)]">Богута</em>
+            </h1>
+            <p className="text-sm md:text-base text-[var(--taupe)] leading-relaxed max-w-sm mb-8 reveal reveal-delay-3">
+              Експерт з розвитку особистого бренду для християн. Засновниця першого в Україні навчання для християн у соцмережах.
+            </p>
+            <div className="reveal reveal-delay-4">
+              <Link
+                href="/navchannya"
+                className="inline-block px-10 py-4 border border-[var(--accent)] text-[var(--accent)] no-underline text-xs tracking-widest uppercase hover:bg-[var(--accent)] hover:text-white transition-colors"
+              >
+                Обрати навчання
+              </Link>
+            </div>
+          </div>
+
+        </div>
+
       </section>
 
       {/* ЦИФРИ */}
