@@ -63,6 +63,30 @@ export default function RootLayout({
             gtag('config', 'G-1SK0KTZ8NV');
           `}
         </Script>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              "name": "Олена Богута",
+              "url": "https://olenabohuta.com",
+              "image": "https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto/v1774359969/Olena_Bohuta_htaxhd.webp",
+              "sameAs": [
+                "https://www.instagram.com/olenka.bohuta",
+                "https://t.me/olenabohuta"
+              ],
+              "jobTitle": "Наставник особистого бренду",
+              "description": "Засновниця першого в Україні навчання для християн у соцмережах. Понад 400 клієнтів та учнів.",
+              "knowsAbout": ["Особистий бренд", "Instagram", "Блогінг", "Онлайн навчання", "Christian бізнес"],
+              "worksFor": {
+                "@type": "Organization",
+                "name": "Олена Богута — особистий бренд",
+                "url": "https://olenabohuta.com"
+              }
+            })
+          }}
+        />
       </head>
       <body className={`${cormorant.variable} ${nunito.variable} antialiased`} suppressHydrationWarning>
         <ProgressBar />
