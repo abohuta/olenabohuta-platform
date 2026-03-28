@@ -29,13 +29,13 @@ export const metadata: Metadata = {
     siteName: "Олена Богута",
     locale: "uk_UA",
     type: "website",
-    images: [{ url: "https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto,w_1200,h_630,c_fill/v1774359969/Olena_Bohuta_htaxhd.webp", width: 1200, height: 630, alt: "Олена Богута" }],
+    images: [{ url: "https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto,w_1200,h_630,c_fill,g_face/v1774359969/Olena_Bohuta_htaxhd.webp", width: 1200, height: 630, alt: "Олена Богута" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Олена Богута — особистий бренд для християн",
     description: "Платформа для християн які хочуть розвивати особистий бренд",
-    images: ["https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto,w_1200,h_630,c_fill/v1774359969/Olena_Bohuta_htaxhd.webp"],
+    images: ["https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto,w_1200,h_630,c_fill,g_face/v1774359969/Olena_Bohuta_htaxhd.webp"],
   },
   icons: {
     icon: "/favicon.svg",
