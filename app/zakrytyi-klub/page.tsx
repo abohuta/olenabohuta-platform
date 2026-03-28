@@ -1,5 +1,4 @@
 "use client";
-import React from "react";
 import Link from "next/link";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -48,6 +47,26 @@ export default function ZakrytyiKlub() {
         <div className="absolute bottom-6 right-6 w-10 h-10 border-r border-b border-[rgba(184,147,106,0.2)] hidden md:block"/>
         <div className="deco-line absolute left-16 top-0 bottom-0 hidden md:block" style={{height:'100%'}}/>
         <div className="deco-line absolute right-16 top-0 bottom-0 hidden md:block" style={{height:'100%'}}/>
+
+        {/* Typographic watermark */}
+        <div
+          className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none select-none"
+          aria-hidden="true"
+        >
+          <span
+            className="font-medium text-[var(--cream)] leading-none"
+            style={{
+              fontSize: 'clamp(160px, 30vw, 420px)',
+              opacity: 0.18,
+              letterSpacing: '-0.04em',
+              fontFamily: 'var(--font-heading)',
+              color: 'transparent',
+              WebkitTextStroke: '2px rgba(196,180,154,0.6)',
+            }}
+          >
+            КЛУБ
+          </span>
+        </div>
 
         <div className="max-w-4xl mx-auto text-center relative z-10 py-20">
           <div className="flex justify-center mb-6 reveal">
