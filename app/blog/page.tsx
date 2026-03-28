@@ -4,6 +4,16 @@ import { getPosts, urlFor, CATEGORIES } from "../../lib/sanity";
 import EmailSubscribeForm from "../components/EmailSubscribeForm";
 
 export const revalidate = 0;
+export const metadata: Metadata = {
+  title: "Блог — Олена Богута",
+  description: "Статті про особистий бренд, віру, соцмережі та розвиток для Christian-підприємців і блогерів.",
+  openGraph: {
+    title: "Блог — Олена Богута",
+    description: "Статті про особистий бренд, віру та соцмережі",
+    url: "https://olenabohuta.com/blog",
+    images: [{ url: "https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto,w_1200,h_630,c_fill/v1774359969/Olena_Bohuta_htaxhd.webp", width: 1200, height: 630 }],
+  },
+};
 
 export default async function Blog() {
   const posts = await getPosts();
