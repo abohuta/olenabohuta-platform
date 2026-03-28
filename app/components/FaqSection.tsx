@@ -16,7 +16,7 @@ export default function FaqSection({ items, title = "Питання та від�
 
   return (
     <section className="px-6 md:px-20 py-20 md:py-32 bg-[var(--warm-white)]">
-      <p className="text-xs tracking-[0.35em] uppercase text-[var(--accent)] text-center mb-4">FAQ</p>
+      <p className="text-xs tracking-[0.35em] uppercase text-[var(--accent-text)] text-center mb-4">FAQ</p>
       <h2 className="text-4xl md:text-5xl font-medium text-center text-[var(--dark)] mb-16 leading-tight">
         {title}
       </h2>

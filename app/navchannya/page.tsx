@@ -119,7 +119,7 @@ export default function Navchannya() {
 
       {/* ЩО ОТРИМАЄШ */}
       <section className="px-6 md:px-20 py-20 md:py-32 bg-[var(--cream)]">
-        <p className="text-xs tracking-[0.35em] uppercase text-[var(--accent)] text-center mb-4">Результати</p>
+        <p className="text-xs tracking-[0.35em] uppercase text-[var(--accent-text)] text-center mb-4">Результати</p>
         <h2 className="text-4xl md:text-5xl font-light text-center text-[var(--dark)] mb-16 leading-tight">
           Що ти отримаєш від навчання
         </h2>
@@ -146,7 +146,7 @@ export default function Navchannya() {
 
       {/* КАТАЛОГ */}
       <section id="catalog" className="px-6 md:px-20 py-20 md:py-32 bg-[var(--warm-white)]">
-        <p className="text-xs tracking-[0.35em] uppercase text-[var(--accent)] text-center mb-4">Каталог</p>
+        <p className="text-xs tracking-[0.35em] uppercase text-[var(--accent-text)] text-center mb-4">Каталог</p>
         <h2 className="text-4xl md:text-5xl font-light text-center text-[var(--dark)] mb-12 leading-tight">
           Всі програми навчання
         </h2>
@@ -211,7 +211,7 @@ export default function Navchannya() {
       <section className="px-6 md:px-20 py-20 md:py-32 bg-[var(--sand)]">
         <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div>
-            <p className="text-xs tracking-[0.35em] uppercase text-[var(--accent)] mb-4">Партнерство</p>
+            <p className="text-xs tracking-[0.35em] uppercase text-[var(--accent-text)] mb-4">Партнерство</p>
             <h2 className="text-4xl md:text-5xl font-light text-[var(--dark)] leading-tight mb-6">
               Запрошую<br />
               <em className="italic text-[var(--accent)]">менторів</em><br />

@@ -103,7 +103,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
       {/* CTA */}
       <section className="px-6 md:px-20 py-16 bg-[var(--cream)] text-center">
-        <p className="text-xs tracking-[0.35em] uppercase text-[var(--accent)] mb-4">Читати далі</p>
+        <p className="text-xs tracking-[0.35em] uppercase text-[var(--accent-text)] mb-4">Читати далі</p>
         <h2 className="text-3xl font-medium text-[var(--dark)] mb-6" style={{ fontFamily: 'var(--font-heading)' }}>
           Більше статей у блозі
         </h2>

@@ -61,7 +61,7 @@ export default function ProOlenku() {
       {/* HERO */}
       <section className="min-h-screen grid grid-cols-1 md:grid-cols-2 pt-[70px]">
         <div className="px-6 md:px-20 py-20 md:py-32 flex flex-col justify-center mesh-bg">
-          <p className="text-xs tracking-[0.35em] uppercase text-[var(--accent)] mb-6 reveal">Про автора</p>
+          <p className="text-xs tracking-[0.35em] uppercase text-[var(--accent-text)] mb-6 reveal">Про автора</p>
           <h1 className="text-5xl md:text-7xl font-medium text-[var(--dark)] leading-tight mb-6 reveal reveal-delay-1">
             Олена<br />
             <em className="italic text-[var(--accent)]">Богута</em>
@@ -105,7 +105,7 @@ export default function ProOlenku() {
       <section className="px-6 md:px-20 py-20 md:py-32 bg-[var(--cream)]">
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
           <div>
-            <p className="text-xs tracking-[0.35em] uppercase text-[var(--accent)] mb-4 reveal">Моя історія</p>
+            <p className="text-xs tracking-[0.35em] uppercase text-[var(--accent-text)] mb-4 reveal">Моя історія</p>
             <h2 className="text-4xl md:text-5xl font-medium text-[var(--dark)] leading-tight mb-8 reveal reveal-delay-1">
               Від простої дівчини<br />
               <em className="italic text-[var(--accent)]">до експерта</em>
@@ -148,7 +148,7 @@ export default function ProOlenku() {
 
       {/* ЦІННОСТІ */}
       <section className="px-6 md:px-20 py-20 md:py-32 bg-[var(--warm-white)]">
-        <p className="text-xs tracking-[0.35em] uppercase text-[var(--accent)] text-center mb-4 reveal">Цінності</p>
+        <p className="text-xs tracking-[0.35em] uppercase text-[var(--accent-text)] text-center mb-4 reveal">Цінності</p>
         <h2 className="text-4xl md:text-5xl font-medium text-center text-[var(--dark)] leading-tight mb-16 reveal reveal-delay-1">
           Що лежить в основі
         </h2>

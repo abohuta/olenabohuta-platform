@@ -25,7 +25,7 @@ export default function Hero({
     <section className={`min-h-screen grid grid-cols-1 md:grid-cols-2 pt-[70px] ${dark ? 'bg-[var(--dark)]' : 'bg-[var(--warm-white)]'}`}>
       <div className="px-6 md:px-20 py-20 md:py-32 flex flex-col justify-center">
         {eyebrow && (
-          <p className="text-xs tracking-[0.35em] uppercase text-[var(--accent)] mb-6">{eyebrow}</p>
+          <p className={`text-xs tracking-[0.35em] uppercase mb-6 ${dark ? 'text-[var(--accent)]' : 'text-[var(--accent-text)]'}`}>{eyebrow}</p>
         )}
         <h1 className={`text-5xl md:text-7xl font-medium leading-tight mb-6 ${dark ? 'text-[var(--cream)]' : 'text-[var(--dark)]'}`}>
           {title}<br />

@@ -124,8 +124,11 @@ function Carousel() {
             key={i}
             onClick={() => { setAnimated(true); setCurrent(i + 1); }}
             aria-label={`Відгук ${i + 1}`}
-            className={`w-2 h-2 rounded-full transition-colors ${i === dotIndex ? 'bg-[var(--accent)]' : 'bg-[var(--taupe)]'}`}
-          />
+            className={`w-3 h-3 rounded-full transition-colors p-0 border-none cursor-pointer ${i === dotIndex ? 'bg-[var(--accent)]' : 'bg-[var(--taupe)]'}`}
+            style={{ minWidth: '44px', minHeight: '44px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'transparent' }}
+          >
+            <span className={`block w-3 h-3 rounded-full transition-colors ${i === dotIndex ? 'bg-[var(--accent)]' : 'bg-[var(--taupe)]'}`} />
+          </button>
         ))}
       </div>
 
@@ -154,7 +157,7 @@ export default function Home() {
         <span className="absolute top-32 right-8 text-[120px] font-light text-[var(--sand)] opacity-40 leading-none hidden md:block select-none" style={{fontFamily: 'var(--font-heading)'}}>01</span>
 
         <div className="px-6 md:px-20 py-20 md:py-32 flex flex-col justify-center relative z-10">
-          <p className="text-xs tracking-[0.35em] uppercase text-[var(--accent)] mb-6">
+          <p className="text-xs tracking-[0.35em] uppercase text-[var(--accent-text)] mb-6">
             Засновниця · Наставник · Архітектор бренду
           </p>
           <h1 className="text-6xl md:text-8xl lg:text-9xl font-light text-[var(--dark)] mb-6" style={{ lineHeight: 0.75, letterSpacing: '-0.02em' }}>
@@ -235,7 +238,7 @@ export default function Home() {
 
       {/* ВІДГУКИ */}
       <section className="px-6 md:px-20 py-20 md:py-32 bg-[var(--warm-white)] overflow-hidden">
-        <p className="text-xs tracking-[0.35em] uppercase text-[var(--accent)] text-center mb-4">Відгуки</p>
+        <p className="text-xs tracking-[0.35em] uppercase text-[var(--accent-text)] text-center mb-4">Відгуки</p>
         <h2 className="text-4xl md:text-5xl font-light text-center text-[var(--dark)] mb-16 leading-tight">
           Що кажуть учасники
         </h2>

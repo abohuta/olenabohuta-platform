@@ -62,12 +62,12 @@ export default function Navbar() {
 
       {/* Мобільне меню */}
       {menuOpen && (
-        <div className="absolute top-full left-0 right-0 bg-[var(--warm-white)] border-b border-[rgba(196,180,154,0.2)] flex flex-col px-6 py-6 gap-4 md:hidden shadow-lg">
-          <Link href="/navchannya" onClick={() => setMenuOpen(false)} className="text-xs tracking-widest uppercase text-[var(--text)] no-underline hover:text-[var(--accent)] transition-colors">Навчання</Link>
-          <Link href="/pro-olenku" onClick={() => setMenuOpen(false)} className="text-xs tracking-widests uppercase text-[var(--text)] no-underline hover:text-[var(--accent)] transition-colors">Про автора</Link>
-          <Link href="/zakrytyi-klub" onClick={() => setMenuOpen(false)} className="text-xs tracking-widest uppercase text-[var(--text)] no-underline hover:text-[var(--accent)] transition-colors">Закритий Клуб</Link>
-          <Link href="/blog" onClick={() => setMenuOpen(false)} className="text-xs tracking-widest uppercase text-[var(--text)] no-underline hover:text-[var(--accent)] transition-colors">Блог</Link>
-          <Link href="/#contact" onClick={() => setMenuOpen(false)} className="text-xs tracking-widest uppercase text-[var(--accent)] no-underline border-b border-[var(--accent)] self-start">Контакти</Link>
+        <div className="mobile-menu-enter absolute top-full left-0 right-0 bg-[var(--warm-white)] border-b border-[rgba(196,180,154,0.2)] flex flex-col px-6 py-4 md:hidden shadow-lg">
+          <Link href="/navchannya" onClick={() => setMenuOpen(false)} className="text-sm tracking-widest uppercase text-[var(--text)] no-underline hover:text-[var(--accent)] transition-colors py-3 border-b border-[rgba(196,180,154,0.15)]">Навчання</Link>
+          <Link href="/pro-olenku" onClick={() => setMenuOpen(false)} className="text-sm tracking-widest uppercase text-[var(--text)] no-underline hover:text-[var(--accent)] transition-colors py-3 border-b border-[rgba(196,180,154,0.15)]">Про автора</Link>
+          <Link href="/zakrytyi-klub" onClick={() => setMenuOpen(false)} className="text-sm tracking-widest uppercase text-[var(--text)] no-underline hover:text-[var(--accent)] transition-colors py-3 border-b border-[rgba(196,180,154,0.15)]">Закритий Клуб</Link>
+          <Link href="/blog" onClick={() => setMenuOpen(false)} className="text-sm tracking-widest uppercase text-[var(--text)] no-underline hover:text-[var(--accent)] transition-colors py-3 border-b border-[rgba(196,180,154,0.15)]">Блог</Link>
+          <Link href="/#contact" onClick={() => setMenuOpen(false)} className="text-sm tracking-widest uppercase text-[var(--accent-text)] no-underline py-3 self-start">Контакти</Link>
         </div>
       )}
     </nav>
