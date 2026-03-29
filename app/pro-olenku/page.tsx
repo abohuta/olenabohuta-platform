@@ -65,8 +65,7 @@ export default function ProOlenku() {
         <div className="relative min-h-[70vh] md:min-h-screen order-1 md:order-none">
           <Image
             src="https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto/v1774359969/Olena_Bohuta_htaxhd.webp"
-            fetchPriority="high"
-            loading="eager"
+            priority
             alt="Олена Богута"
             fill
             className="object-cover object-top"

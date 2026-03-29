@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import Link from "next/link";
+import NextImage from "next/image";
 import Footer from "../../components/Footer";
 
 // ── Constants ──────────────────────────────────────────────
@@ -511,12 +512,14 @@ export default function Tysha() {
 
         {/* Фото з зум-ефектом */}
         <div className="relative overflow-hidden" style={{ minHeight: 'clamp(300px, 60vw, 100svh)' }}>
-          <img
+          <NextImage
             src="https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto/v1774448751/photo_2026-03-25_15.17.06_sw70mx.jpg"
             alt="ТИША — навчання Олени Богути"
-            className="absolute inset-0 w-full h-full object-cover"
+            fill
+            priority
+            className="object-cover"
             style={{ objectPosition: 'center center', animation: 'tysha-zoom 8s ease-in-out infinite alternate', transformOrigin: 'center center' }}
-            fetchPriority="high"
+            sizes="100vw"
           />
           <div className="absolute inset-0" style={{ background: `linear-gradient(to right, ${PRIMARY}, transparent 60%)` }}/>
         </div>

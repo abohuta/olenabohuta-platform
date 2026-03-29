@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { getPosts, urlFor, CATEGORIES } from "../../lib/sanity";
@@ -47,7 +48,7 @@ export default async function Blog() {
                 <a href={`/blog/${featured.slug.current}`} className="grid grid-cols-1 md:grid-cols-2 gap-0 mb-4 no-underline block group" style={{ background: 'var(--cream)' }}>
                   <div className="relative aspect-[4/3] overflow-hidden">
                     {featured.coverImage ? (
-                      <img src={urlFor(featured.coverImage).width(800).url()} alt={featured.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                      <Image src={urlFor(featured.coverImage).width(800).url()} alt={featured.title} fill priority className="object-cover group-hover:scale-105 transition-transform duration-700" sizes="(max-width: 768px) 100vw, 50vw" />
                     ) : (
                       <div className="w-full h-full bg-[var(--sand)] flex items-center justify-center">
                         <span className="text-[var(--taupe)] text-4xl">✦</span>

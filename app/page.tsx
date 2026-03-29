@@ -178,11 +178,13 @@ export default function Home() {
           </div>
         </div>
         <div className="relative min-h-[50vh] md:min-h-screen bg-[var(--sand)]">
-          <img
+          <Image
             src="https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto/v1774359969/Olena_Bohuta_htaxhd.webp"
-            fetchPriority="high"
             alt="Олена Богута"
-            className="absolute inset-0 w-full h-full object-cover object-top"
+            fill
+            priority
+            className="object-cover object-top"
+            sizes="(max-width: 768px) 100vw, 50vw"
           />
         </div>
       </section>

@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import Link from "next/link";
+import NextImage from "next/image";
 import Footer from "../../components/Footer";
 import Cross from "../../components/Cross";
 
@@ -486,7 +487,7 @@ export default function Kemp() {
           </div>
         </div>
         <div className="relative overflow-hidden" style={{ minHeight: 'clamp(300px, 60vw, 100svh)' }}>
-          <img src="https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto/v1774359840/hero_olenka_lmwbqv.webp" alt="Олена Богута" className="absolute inset-0 w-full h-full object-cover" fetchPriority="high" style={{ objectPosition: 'center 20%', animation: 'heroZoom 8s ease-in-out infinite alternate', transformOrigin: 'center top' }} />
+          <NextImage src="https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto/v1774359840/hero_olenka_lmwbqv.webp" alt="Олена Богута" fill priority className="object-cover" style={{ objectPosition: 'center 20%', animation: 'heroZoom 8s ease-in-out infinite alternate', transformOrigin: 'center top' }} sizes="(max-width: 768px) 100vw, 50vw" />
           <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, rgba(89,2,11,0.4), transparent)' }} />
         </div>
       </section>

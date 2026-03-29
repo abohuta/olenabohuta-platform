@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Cross from "../components/Cross";
@@ -16,12 +17,14 @@ export default function ZakrytyiKlub() {
       <section className="min-h-[80vh] flex items-center justify-center px-6 md:px-20 pt-[70px] relative overflow-hidden">
         {/* Фото з блюром */}
         <div className="absolute inset-0 z-0">
-          <img
+          <Image
             src="https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto/v1774359896/comunity_pbopmh.webp"
-            fetchPriority="high"
             alt=""
-            className="w-full h-full object-cover"
+            fill
+            priority
+            className="object-cover"
             style={{ filter: 'blur(8px) brightness(0.3)', transform: 'scale(1.1)' }}
+            sizes="100vw"
           />
         </div>
 
