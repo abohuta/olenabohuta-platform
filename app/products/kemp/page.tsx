@@ -254,7 +254,7 @@ function Quiz() {
         Чи підходить тобі<br />
         <em className="italic" style={{ color: ACCENT }}>Архітектор Бренду?</em>
       </h2>
-      <p className="text-base text-center mb-12 kemp-reveal" style={{ color: '#8B6F52' }}>5 питань — і ти отримаєш чесну відповідь</p>
+      <p className="text-base text-center mb-12 kemp-reveal" style={{ color: '#8B6F52' }}>6 питань — і ти отримаєш чесну відповідь</p>
 
       <div className="max-w-2xl mx-auto">
         {result ? (
@@ -296,7 +296,7 @@ function Quiz() {
             <div className="grid grid-cols-1 gap-3">
               {questions[step].options.map((option, i) => (
                 <button
-                  key={i}
+                  key={`${step}-${i}`}
                   onClick={() => handleAnswer(questions[step].scores[i])}
                   className="text-left px-6 py-4 text-sm cursor-pointer transition-all bg-transparent"
                   style={{ border: `1px solid rgba(89,2,11,0.15)`, color: '#5A3A3A' }}
@@ -309,6 +309,11 @@ function Quiz() {
                     (e.currentTarget as HTMLElement).style.background = 'transparent';
                     (e.currentTarget as HTMLElement).style.color = '#5A3A3A';
                     (e.currentTarget as HTMLElement).style.borderColor = 'rgba(89,2,11,0.15)';
+                  }}
+                  onTouchStart={(e) => {
+                    (e.currentTarget as HTMLElement).style.background = ACCENT;
+                    (e.currentTarget as HTMLElement).style.color = CREAM;
+                    (e.currentTarget as HTMLElement).style.borderColor = ACCENT;
                   }}
                 >
                   {option}
