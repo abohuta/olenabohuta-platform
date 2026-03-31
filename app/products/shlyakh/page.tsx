@@ -74,9 +74,9 @@ export default function Shlyakh() {
         <div className="absolute bottom-6 left-6 w-10 h-10 border-l border-b hidden md:block" style={{ borderColor: 'rgba(173,182,207,0.18)' }}/>
         <div className="absolute bottom-6 right-6 w-10 h-10 border-r border-b hidden md:block" style={{ borderColor: 'rgba(173,182,207,0.18)' }}/>
 
-        {/* Ліва частина — контент */}
-        <div className="px-6 md:px-20 py-16 md:py-32 flex flex-col justify-center relative z-10">
-          <Link href="/navchannya" className="text-xs tracking-widest uppercase no-underline mb-10 hover:opacity-60 transition-opacity inline-block" style={{ color: 'rgba(173,182,207,0.45)' }}>
+        {/* Ліва частина — контент, вирівняно по центру */}
+        <div className="px-6 md:px-20 py-16 md:py-32 flex flex-col justify-center items-center text-center relative z-10">
+          <Link href="/navchannya" className="text-xs tracking-widest uppercase no-underline mb-10 hover:opacity-60 transition-opacity" style={{ color: 'rgba(173,182,207,0.45)' }}>
             ← Всі навчання
           </Link>
 
@@ -99,20 +99,23 @@ export default function Shlyakh() {
             />
           </div>
 
-          <p className="text-base md:text-lg leading-relaxed max-w-md mb-10 reveal" style={{ color: 'var(--taupe)' }}>
+          <p className="text-base md:text-lg leading-relaxed max-w-sm mb-10 reveal" style={{ color: 'var(--taupe)' }}>
             Навчання з розвитку дисципліни та особистого зростання. Через приклад Христа і біблійних героїв — до себе справжньої.
           </p>
 
-          <div className="flex items-center gap-4 mb-8 reveal">
-            <span className="font-medium" style={{ fontFamily: 'var(--font-heading)', fontSize: '2.2rem', color: 'var(--cream)', lineHeight: 1 }}>550 грн</span>
-            <span className="text-xs tracking-[0.2em] uppercase px-3 py-1.5" style={{ background: 'rgba(173,182,207,0.1)', color: ACCENT, border: '1px solid rgba(173,182,207,0.25)' }}>10 модулів</span>
+          {/* Ціна і бейдж — один під одним, по центру */}
+          <div className="flex flex-col items-center gap-2 mb-10 reveal">
+            <span className="font-medium" style={{ fontFamily: 'var(--font-heading)', fontSize: '2.8rem', color: 'var(--cream)', lineHeight: 1 }}>550 грн</span>
+            <span className="text-xs tracking-[0.2em] uppercase px-4 py-1.5" style={{ background: 'rgba(173,182,207,0.1)', color: ACCENT, border: '1px solid rgba(173,182,207,0.25)' }}>
+              10 модулів
+            </span>
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3 reveal">
             <a href={PAYMENT_URL} target="_blank" rel="noopener noreferrer" className="inline-block px-10 py-4 text-xs tracking-widest uppercase no-underline text-center hover:opacity-80 transition-opacity" style={{ background: ACCENT, color: 'var(--dark)' }}>
               Придбати курс
             </a>
-            <a href="#modules" className="inline-block px-10 py-4 text-xs tracking-widest uppercase no-underline text-center hover:opacity-80 transition-opacity" style={{ border: '1px solid rgba(173,182,207,0.25)', color: 'var(--taupe)' }}>
+            <a href="#about" className="inline-block px-10 py-4 text-xs tracking-widest uppercase no-underline text-center hover:opacity-80 transition-opacity" style={{ border: '1px solid rgba(173,182,207,0.25)', color: 'var(--taupe)' }}>
               Дізнатись більше
             </a>
           </div>
@@ -143,37 +146,17 @@ export default function Shlyakh() {
         </div>
       </section>
 
-      {/* ПРО КУРС + ДЛЯ КОГО — об'єднаний блок */}
-      <section className="px-6 md:px-20 py-20 md:py-28 bg-[var(--cream)]">
+      {/* ДЛЯ КОГО (фільтр) + ПРО КУРС */}
+      <section id="about" className="px-6 md:px-20 py-20 md:py-28 bg-[var(--cream)]">
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
 
-          {/* Ліво: про курс + цитата */}
-          <div>
-            <p className="text-xs tracking-[0.35em] uppercase mb-4 reveal" style={{ color: ACCENT }}>Про курс</p>
-            <h2 className="text-3xl md:text-4xl font-medium mb-6 leading-tight reveal" style={{ fontFamily: 'var(--font-heading)', color: 'var(--dark)' }}>
-              Дисципліна — це не обмеження.<br />
-              <em className="italic" style={{ color: ACCENT }}>Це свобода.</em>
-            </h2>
-            <p className="text-base leading-relaxed mb-8 text-justify reveal" style={{ color: 'var(--light-text)' }}>
-              Курс «Шлях» — це не черговий тренінг з мотивації. Це глибоке занурення в систему, яка поєднує нейронауку, біблійну мудрість і практичні інструменти для сучасної жінки.
-            </p>
-
-            {/* Цитата */}
-            <div className="reveal" style={{ borderLeft: `3px solid ${ACCENT}`, paddingLeft: '1.5rem' }}>
-              <p className="text-lg font-medium leading-snug mb-3" style={{ fontFamily: 'var(--font-heading)', color: 'var(--dark)', fontStyle: 'italic' }}>
-                «Христос — найвеличніший есенціаліст в історії»
-              </p>
-              <p className="text-xs tracking-widest uppercase" style={{ color: ACCENT }}>Олена Богута</p>
-            </div>
-          </div>
-
-          {/* Право: для кого */}
+          {/* Ліво: для кого — головний фільтр */}
           <div>
             <p className="text-xs tracking-[0.35em] uppercase mb-4 reveal" style={{ color: ACCENT }}>Для кого</p>
-            <h3 className="text-2xl md:text-3xl font-medium mb-8 leading-tight reveal" style={{ fontFamily: 'var(--font-heading)', color: 'var(--dark)' }}>
+            <h2 className="text-3xl md:text-4xl font-medium mb-8 leading-tight reveal" style={{ fontFamily: 'var(--font-heading)', color: 'var(--dark)' }}>
               Цей курс — для тебе,<br />
               <em className="italic" style={{ color: ACCENT }}>якщо...</em>
-            </h3>
+            </h2>
             <div className="space-y-3">
               {FOR_WHOM.map((item, i) => (
                 <div key={i} className="flex items-start gap-4 p-4 reveal" style={{ background: 'var(--warm-white)', transitionDelay: `${i * 0.08}s` }}>
@@ -186,31 +169,24 @@ export default function Shlyakh() {
             </div>
           </div>
 
-        </div>
-      </section>
+          {/* Право: про курс + цитата */}
+          <div>
+            <p className="text-xs tracking-[0.35em] uppercase mb-4 reveal" style={{ color: ACCENT }}>Про курс</p>
+            <h3 className="text-2xl md:text-3xl font-medium mb-6 leading-tight reveal" style={{ fontFamily: 'var(--font-heading)', color: 'var(--dark)' }}>
+              Дисципліна — це не обмеження.<br />
+              <em className="italic" style={{ color: ACCENT }}>Це свобода.</em>
+            </h3>
+            <p className="text-base leading-relaxed mb-8 text-justify reveal" style={{ color: 'var(--light-text)' }}>
+              Курс «Шлях» — це не черговий тренінг з мотивації. Це глибоке занурення в систему, яка поєднує нейронауку, біблійну мудрість і практичні інструменти для сучасної жінки.
+            </p>
+            <div className="reveal" style={{ borderLeft: `3px solid ${ACCENT}`, paddingLeft: '1.5rem' }}>
+              <p className="text-lg font-medium leading-snug mb-3" style={{ fontFamily: 'var(--font-heading)', color: 'var(--dark)', fontStyle: 'italic' }}>
+                «Христос — найвеличніший есенціаліст в історії»
+              </p>
+              <p className="text-xs tracking-widest uppercase" style={{ color: ACCENT }}>Олена Богута</p>
+            </div>
+          </div>
 
-      {/* СОЦІАЛЬНИЙ ДОКАЗ */}
-      <section className="px-6 md:px-20 py-20 md:py-28 bg-[var(--dark)]">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-14">
-            <p className="text-xs tracking-[0.35em] uppercase mb-4 reveal" style={{ color: ACCENT }}>Відгуки</p>
-            <h2 className="text-3xl md:text-5xl font-medium leading-tight reveal" style={{ fontFamily: 'var(--font-heading)', color: 'var(--cream)' }}>
-              Понад <em className="italic" style={{ color: ACCENT }}>100 учасників</em><br />
-              вже пройшли шлях
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {REVIEWS.map((src, i) => (
-              <div key={i} className="overflow-hidden reveal" style={{ transitionDelay: `${i * 0.15}s` }}>
-                <img
-                  src={src}
-                  alt={`Відгук учасниці курсу Шлях ${i + 1}`}
-                  className="w-full h-auto"
-                  loading="lazy"
-                />
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -305,7 +281,45 @@ export default function Shlyakh() {
         </div>
       </section>
 
-      {/* ЦІНА / CTA — темний фон */}
+      {/* СОЦІАЛЬНИЙ ДОКАЗ */}
+      <section className="px-6 md:px-20 py-20 md:py-28 bg-[var(--warm-white)]">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-14">
+            <p className="text-xs tracking-[0.35em] uppercase mb-4 reveal" style={{ color: ACCENT }}>Відгуки</p>
+            <h2 className="text-3xl md:text-5xl font-medium leading-tight reveal" style={{ fontFamily: 'var(--font-heading)', color: 'var(--dark)' }}>
+              Понад <em className="italic" style={{ color: ACCENT }}>100 учасників</em><br />
+              вже пройшли шлях
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {REVIEWS.map((src, i) => (
+              <div
+                key={i}
+                className="overflow-hidden reveal"
+                style={{
+                  transitionDelay: `${i * 0.15}s`,
+                  boxShadow: '0 4px 24px rgba(42,31,20,0.08)',
+                  transition: 'transform 0.4s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s ease',
+                }}
+                onMouseEnter={(e) => {
+                  const el = e.currentTarget as HTMLElement;
+                  el.style.transform = 'translateY(-4px)';
+                  el.style.boxShadow = '0 20px 50px rgba(42,31,20,0.14)';
+                }}
+                onMouseLeave={(e) => {
+                  const el = e.currentTarget as HTMLElement;
+                  el.style.transform = '';
+                  el.style.boxShadow = '0 4px 24px rgba(42,31,20,0.08)';
+                }}
+              >
+                <img src={src} alt={`Відгук учасниці курсу Шлях ${i + 1}`} className="w-full h-auto" loading="lazy" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ЦІНА / CTA */}
       <section className="px-6 md:px-20 py-20 md:py-32 bg-[var(--dark)] relative overflow-hidden">
         <div className="absolute top-6 left-6 w-8 h-8 border-l border-t hidden md:block" style={{ borderColor: 'rgba(173,182,207,0.15)' }}/>
         <div className="absolute top-6 right-6 w-8 h-8 border-r border-t hidden md:block" style={{ borderColor: 'rgba(173,182,207,0.15)' }}/>
@@ -321,12 +335,33 @@ export default function Shlyakh() {
             <em className="italic" style={{ color: ACCENT }}>шлях</em>
           </h2>
 
-          <div className="inline-flex flex-col items-center gap-3 py-10 px-14 mb-10 reveal" style={{ border: '1px solid rgba(173,182,207,0.3)', background: 'rgba(173,182,207,0.05)' }}>
+          {/* Цінова картка з анімацією */}
+          <div
+            className="inline-flex flex-col items-center gap-4 py-12 px-14 mb-10 reveal"
+            style={{
+              border: '1px solid rgba(173,182,207,0.3)',
+              background: 'rgba(173,182,207,0.05)',
+              boxShadow: '0 8px 48px rgba(173,182,207,0.1), inset 0 0 0 1px rgba(173,182,207,0.08)',
+              transition: 'transform 0.45s cubic-bezier(0.16,1,0.3,1), box-shadow 0.45s ease',
+              cursor: 'default',
+            }}
+            onMouseEnter={(e) => {
+              const el = e.currentTarget as HTMLElement;
+              el.style.transform = 'translateY(-10px)';
+              el.style.boxShadow = '0 36px 80px rgba(173,182,207,0.22), inset 0 0 0 1px rgba(173,182,207,0.22)';
+            }}
+            onMouseLeave={(e) => {
+              const el = e.currentTarget as HTMLElement;
+              el.style.transform = '';
+              el.style.boxShadow = '0 8px 48px rgba(173,182,207,0.1), inset 0 0 0 1px rgba(173,182,207,0.08)';
+            }}
+          >
             <span className="text-xs tracking-[0.3em] uppercase" style={{ color: ACCENT }}>Повний доступ до курсу</span>
             <div className="flex items-end gap-2">
-              <span className="font-medium" style={{ fontFamily: 'var(--font-heading)', fontSize: '4.5rem', color: 'var(--cream)', lineHeight: 1 }}>550</span>
+              <span className="font-medium" style={{ fontFamily: 'var(--font-heading)', fontSize: '5rem', color: 'var(--cream)', lineHeight: 1 }}>550</span>
               <span className="text-2xl font-medium mb-2" style={{ fontFamily: 'var(--font-heading)', color: 'var(--cream)' }}>грн</span>
             </div>
+            <div className="w-10 h-px" style={{ background: `rgba(173,182,207,0.3)` }} />
             <div className="flex items-center gap-4 text-xs" style={{ color: 'rgba(196,180,154,0.6)' }}>
               <span>10 модулів</span>
               <span style={{ color: ACCENT }}>·</span>
@@ -337,10 +372,22 @@ export default function Shlyakh() {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center reveal">
-            <a href={PAYMENT_URL} target="_blank" rel="noopener noreferrer" className="inline-block px-12 py-4 text-xs tracking-widest uppercase no-underline hover:opacity-80 transition-opacity" style={{ background: ACCENT, color: 'var(--dark)' }}>
+            <a
+              href={PAYMENT_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block px-12 py-4 text-xs tracking-widest uppercase no-underline hover:opacity-80 transition-opacity"
+              style={{ background: ACCENT, color: 'var(--dark)' }}
+            >
               Придбати за 550 грн
             </a>
-            <a href="https://t.me/olenabohuta" target="_blank" rel="noopener noreferrer" className="inline-block px-12 py-4 text-xs tracking-widest uppercase no-underline hover:opacity-80 transition-opacity" style={{ border: '1px solid rgba(173,182,207,0.3)', color: 'var(--taupe)' }}>
+            <a
+              href="https://t.me/olenabohuta"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block px-12 py-4 text-xs tracking-widest uppercase no-underline hover:opacity-80 transition-opacity"
+              style={{ border: '1px solid rgba(173,182,207,0.3)', color: 'var(--taupe)' }}
+            >
               Написати питання
             </a>
           </div>
