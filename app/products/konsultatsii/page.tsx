@@ -59,15 +59,47 @@ const TOPICS = [
   { num: "08", title: "SMM-консалтинг для бізнесу", desc: "Стратегія присутності бізнесу в соцмережах — контент-план, тональність, зростання аудиторії." },
 ];
 
+const BOOKING_URL = "https://docs.google.com/forms/d/e/1FAIpQLSdueHegCm2zqt8JqdFqR1PhQLSciV21ARAxy0YhkyuA0_azTw/viewform?usp=header";
+
 const FORMATS = [
   { title: "Разова консультація", duration: "60–90 хв", desc: "Одна зустріч у Zoom або Telegram. Ідеально для конкретного запиту — розбір, аудит, стратегія.", icon: "◇" },
   { title: "Міні-консультація", duration: "30 хв", desc: "Швидка відповідь на конкретне питання. Підходить якщо потрібна порада без глибокого занурення.", icon: "◈" },
   { title: "Пакет сесій", duration: "3–5 зустрічей", desc: "Серія консультацій з домашніми завданнями між сесіями. Для системних змін і запуску продукту.", icon: "◉" },
 ];
 
+const PRICING = [
+  {
+    title: "Міні-консультація",
+    duration: "30 хв",
+    price: "45",
+    oldPrice: null,
+    savings: null,
+    features: ["Відповідь на одне конкретне питання", "Zoom або Telegram", "Короткі рекомендації"],
+    featured: false,
+  },
+  {
+    title: "Разова консультація",
+    duration: "60–90 хв",
+    price: "70–90",
+    oldPrice: null,
+    savings: null,
+    features: ["Глибокий розбір запиту", "Zoom або Telegram", "Зворотний зв'язок після зустрічі", "Запис консультації"],
+    featured: true,
+  },
+  {
+    title: "Пакет сесій",
+    duration: "3–5 зустрічей",
+    price: "200",
+    oldPrice: "270",
+    savings: "26",
+    features: ["Серія зустрічей", "Домашні завдання між сесіями", "Запис кожної сесії", "Підтримка у чаті", "Особистий супровід"],
+    featured: false,
+  },
+];
+
 const FAQ_ITEMS = [
   { q: "Як проходить консультація?", a: "Онлайн у Zoom або Telegram. Після запису ти отримаєш бриф для заповнення — це допоможе підготуватись і провести зустріч максимально ефективно." },
-  { q: "Як дізнатися ціну?", a: "Ціна формується індивідуально після заповнення брифу — залежно від формату, теми і обсягу роботи. Напиши нам і ми все розрахуємо." },
+  { q: "Яка вартість консультації?", a: "Міні-консультація (30 хв) — $45. Разова консультація (60–90 хв) — $70–90. Пакет сесій (3–5 зустрічей) — $200 (замість $270)." },
   { q: "Чи буде запис консультації?", a: "Так, за бажанням консультація записується і надсилається тобі після зустрічі." },
   { q: "Скільки людей вже консультувалось?", a: "Понад 400 клієнтів та учнів пройшли через консультації і навчання Олени." },
   { q: "Чи можна отримати консультацію письмово?", a: "Так, є формат письмової консультації у Telegram — надсилаєш запитання, отримуєш детальну відповідь з рекомендаціями." },
@@ -186,27 +218,57 @@ export default function Konsultatsii() {
         <div className="absolute top-6 right-6 w-8 h-8 border-r border-t border-[rgba(184,147,106,0.2)] hidden md:block"/>
         <div className="absolute bottom-6 left-6 w-8 h-8 border-l border-b border-[rgba(184,147,106,0.2)] hidden md:block"/>
         <div className="absolute bottom-6 right-6 w-8 h-8 border-r border-b border-[rgba(184,147,106,0.2)] hidden md:block"/>
-        <div className="max-w-3xl mx-auto text-center relative z-10">
-          <div className="flex justify-center mb-6 reveal">
-            <Cross size={28} color="var(--accent)" />
-          </div>
-          <p className="text-xs tracking-[0.35em] uppercase mb-4 reveal" style={{ color: 'var(--taupe)' }}>Вартість</p>
-          <h2 className="text-4xl md:text-5xl font-medium mb-8 leading-tight reveal" style={{ fontFamily: 'var(--font-heading)', color: 'var(--cream)' }}>
-            Ціна формується<br />
-            <em className="italic" style={{ color: 'var(--accent)' }}>індивідуально</em>
+        <div className="max-w-5xl mx-auto relative z-10">
+          <p className="text-xs tracking-[0.35em] uppercase text-center mb-4 reveal" style={{ color: 'var(--taupe)' }}>Вартість</p>
+          <h2 className="text-4xl md:text-5xl font-medium text-center mb-16 leading-tight reveal" style={{ fontFamily: 'var(--font-heading)', color: 'var(--cream)' }}>
+            Обери свій<br />
+            <em className="italic" style={{ color: 'var(--accent)' }}>формат</em>
           </h2>
-          <div className="w-8 h-px bg-[var(--accent)] mx-auto mb-8"/>
-          <p className="text-lg leading-relaxed mb-10 reveal" style={{ color: 'var(--taupe)', maxWidth: '500px', margin: '0 auto 2.5rem' }}>
-            Після заповнення брифу ми зв'яжемось і запропонуємо оптимальний формат та вартість саме для твого запиту.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center reveal">
-            <a href="https://t.me/olenabohuta" target="_blank" rel="noopener noreferrer" className="inline-block px-10 py-4 text-xs tracking-widest uppercase no-underline hover:opacity-80 transition-opacity" style={{ background: 'var(--accent)', color: 'white' }}>
-              Написати у Telegram
-            </a>
-            <a href="https://www.instagram.com/olenka.bohuta" target="_blank" rel="noopener noreferrer" className="inline-block px-10 py-4 text-xs tracking-widest uppercase no-underline hover:opacity-80 transition-opacity" style={{ border: '1px solid rgba(196,180,154,0.3)', color: 'var(--taupe)' }}>
-              Instagram
-            </a>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-[2px]">
+            {PRICING.map((plan, i) => (
+              <div key={plan.title} className="relative p-10 flex flex-col reveal" style={{
+                background: plan.featured ? 'var(--accent)' : 'rgba(255,255,255,0.04)',
+                border: plan.featured ? 'none' : '1px solid rgba(196,180,154,0.12)',
+                transitionDelay: `${i * 0.1}s`,
+              }}>
+                {plan.savings && (
+                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 text-xs tracking-widest uppercase px-4 py-1 whitespace-nowrap" style={{ background: 'var(--cream)', color: 'var(--accent)' }}>
+                    Економія {plan.savings}%
+                  </span>
+                )}
+                <p className="text-xs tracking-[0.35em] uppercase mb-3" style={{ color: plan.featured ? 'rgba(255,255,255,0.7)' : 'var(--taupe)' }}>{plan.duration}</p>
+                <h3 className="text-2xl font-medium mb-6" style={{ fontFamily: 'var(--font-heading)', color: plan.featured ? 'white' : 'var(--cream)' }}>{plan.title}</h3>
+                <div className="mb-1 flex items-end gap-3">
+                  <span style={{ fontFamily: 'var(--font-heading)', fontSize: '3rem', fontWeight: 500, color: plan.featured ? 'white' : 'var(--cream)', lineHeight: 1 }}>
+                    <span style={{ fontSize: '1.1rem', verticalAlign: 'super' }}>$</span>{plan.price}
+                  </span>
+                  {plan.oldPrice && (
+                    <span className="text-lg mb-1" style={{ color: 'rgba(196,180,154,0.5)', textDecoration: 'line-through' }}>${plan.oldPrice}</span>
+                  )}
+                </div>
+                <p className="text-xs mb-8" style={{ color: plan.featured ? 'rgba(255,255,255,0.6)' : 'rgba(196,180,154,0.5)' }}>USD</p>
+                <ul className="list-none space-y-3 mb-10 flex-1">
+                  {plan.features.map((f) => (
+                    <li key={f} className="text-sm flex items-center gap-2" style={{ color: plan.featured ? 'rgba(255,255,255,0.85)' : 'rgba(196,180,154,0.7)' }}>
+                      <Cross size={11} color={plan.featured ? 'white' : 'var(--accent)'} />
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+                <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer" className="block text-center py-3.5 text-xs tracking-widest uppercase no-underline hover:opacity-80 transition-opacity" style={{
+                  background: plan.featured ? 'white' : 'transparent',
+                  color: plan.featured ? 'var(--accent)' : 'var(--cream)',
+                  border: plan.featured ? 'none' : '1px solid rgba(196,180,154,0.4)',
+                }}>
+                  Записатись
+                </a>
+              </div>
+            ))}
           </div>
+          <p className="text-center text-sm mt-8 reveal" style={{ color: 'rgba(196,180,154,0.5)' }}>
+            Або напиши напряму —{' '}
+            <a href="https://t.me/olenabohuta" target="_blank" rel="noopener noreferrer" className="no-underline border-b" style={{ color: 'var(--accent)', borderColor: 'var(--accent)' }}>Telegram</a>
+          </p>
         </div>
       </section>
 
@@ -280,11 +342,16 @@ export default function Konsultatsii() {
           <em className="italic">особистої роботи?</em>
         </h2>
         <p className="text-lg mb-10 leading-relaxed reveal" style={{ color: 'rgba(255,255,255,0.8)', maxWidth: '500px', margin: '0 auto 2.5rem' }}>
-          Напиши нам у Telegram — розкажи про свій запит і ми підберемо оптимальний формат консультації.
+          Заповни анкету — і ми підберемо оптимальний формат та час.
         </p>
-        <a href="https://t.me/olenabohuta" target="_blank" rel="noopener noreferrer" className="inline-block px-12 py-4 text-xs tracking-widest uppercase no-underline hover:opacity-80 transition-opacity reveal" style={{ background: 'white', color: 'var(--accent)' }}>
-          Написати у Telegram
-        </a>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center reveal">
+          <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer" className="inline-block px-12 py-4 text-xs tracking-widest uppercase no-underline hover:opacity-80 transition-opacity" style={{ background: 'white', color: 'var(--accent)' }}>
+            Заповнити анкету
+          </a>
+          <a href="https://t.me/olenabohuta" target="_blank" rel="noopener noreferrer" className="inline-block px-12 py-4 text-xs tracking-widest uppercase no-underline hover:opacity-80 transition-opacity" style={{ border: '1px solid rgba(255,255,255,0.4)', color: 'white' }}>
+            Telegram
+          </a>
+        </div>
       </section>
 
       <Footer />
