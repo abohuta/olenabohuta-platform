@@ -11,14 +11,15 @@ const ACCENT = "#adb6cf";
 const PAYMENT_URL = "https://secure.wayforpay.com/payment/shlyakh";
 
 const MODULES = [
+  { num: "00", title: "Вступ та зміна мислення", desc: "Визначаємо де ти зараз, формуємо основу для змін і перебудовуємо мислення під нові результати." },
   { num: "01", title: "Сила Волі", desc: "Як здобути нові звички та утримувати їх навіть у найскладніші дні." },
   { num: "02", title: "Мотивація", desc: "Що справді рухає тебе вперед — і як знайти глибинну мотивацію через цінності." },
   { num: "03", title: "Дисципліна Тиші", desc: "Чому тиша — це дисципліна для християн і як вона трансформує мислення." },
   { num: "04", title: "Нейропластичність та звички", desc: "Як мозок формує нові шляхи і які звички приведуть до першого заробітку в Instagram." },
-  { num: "05", title: "Есенціалізм Христа", desc: "Шлях Христа як модель есенціалізму — більше результату через фокус на справді важливому." },
+  { num: "05", title: "Шлях Есенціалізму Христа", desc: "Шлях Христа як модель есенціалізму — більше результату через фокус на справді важливому." },
   { num: "06", title: "GTD та дисципліна планування", desc: "Система Getting Things Done і дисципліна планування — продуктивність без вигорання." },
   { num: "07", title: "Дисципліна Життя", desc: "Баланс між спортом, їжею, сім'єю та особистим — без самопожертви і виснаження." },
-  { num: "08", title: "Межі та вміння говорити Ні", desc: "Як розставляти здорові межі у своїй діяльності та чому «хороша дівчинка» — це пастка." },
+  { num: "08", title: "Вміння говорити Ні та межі", desc: "Як розставляти здорові межі у своїй діяльності та чому «хороша дівчинка» — це пастка." },
   { num: "09", title: "Instagram та комунікації", desc: "Вести Instagram без напруги, планувати контент і знайти баланс РОБОТА–INSTAGRAM–ХРИСТОС." },
 ];
 
@@ -83,7 +84,7 @@ export default function Shlyakh() {
           </p>
           <div className="flex items-center gap-4 mb-10 reveal">
             <span className="font-medium" style={{ fontFamily: 'var(--font-heading)', fontSize: '2.2rem', color: 'var(--cream)', lineHeight: 1 }}>550 грн</span>
-            <span className="text-xs tracking-[0.2em] uppercase px-3 py-1.5" style={{ background: 'rgba(173,182,207,0.1)', color: ACCENT, border: '1px solid rgba(173,182,207,0.25)' }}>9 модулів</span>
+            <span className="text-xs tracking-[0.2em] uppercase px-3 py-1.5" style={{ background: 'rgba(173,182,207,0.1)', color: ACCENT, border: '1px solid rgba(173,182,207,0.25)' }}>10 модулів</span>
           </div>
           <div className="flex flex-col sm:flex-row gap-3 reveal">
             <a href={PAYMENT_URL} target="_blank" rel="noopener noreferrer" className="inline-block px-10 py-4 text-xs tracking-widest uppercase no-underline text-center hover:opacity-80 transition-opacity" style={{ background: ACCENT, color: 'var(--dark)' }}>
@@ -168,7 +169,7 @@ export default function Shlyakh() {
       <section id="modules" className="px-6 md:px-20 py-20 md:py-32 bg-[var(--warm-white)]">
         <p className="text-xs tracking-[0.35em] uppercase text-center mb-4 reveal" style={{ color: ACCENT }}>Програма</p>
         <h2 className="text-3xl md:text-5xl font-medium text-center mb-4 leading-tight reveal" style={{ fontFamily: 'var(--font-heading)', color: 'var(--dark)' }}>
-          9 модулів,<br />
+          10 модулів,<br />
           <em className="italic" style={{ color: ACCENT }}>які змінять підхід</em>
         </h2>
         <p className="text-sm text-center mb-16 reveal" style={{ color: 'var(--light-text)' }}>
@@ -263,7 +264,7 @@ export default function Shlyakh() {
               <span className="text-2xl font-medium mb-2" style={{ fontFamily: 'var(--font-heading)', color: 'var(--dark)' }}>грн</span>
             </div>
             <div className="flex items-center gap-4 text-xs" style={{ color: 'var(--light-text)' }}>
-              <span>9 модулів</span>
+              <span>10 модулів</span>
               <span style={{ color: ACCENT }}>·</span>
               <span>Lifetime доступ</span>
               <span style={{ color: ACCENT }}>·</span>
