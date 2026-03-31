@@ -88,17 +88,6 @@ export default function Shlyakh() {
             Шлях
           </h1>
 
-          {/* PNG "Шлях" — тільки мобільна версія */}
-          <div className="mb-6 md:hidden reveal">
-            <NextImage
-              src="https://res.cloudinary.com/dd6aymza7/image/upload/v1774982582/IMG_7962_su95fd.png"
-              alt="Шлях"
-              width={200}
-              height={80}
-              style={{ height: 'auto', opacity: 0.8 }}
-            />
-          </div>
-
           <p className="text-base md:text-lg leading-relaxed max-w-sm mb-10 reveal" style={{ color: 'var(--taupe)' }}>
             Навчання з розвитку дисципліни та особистого зростання. Через приклад Христа і біблійних героїв — до себе справжньої.
           </p>
