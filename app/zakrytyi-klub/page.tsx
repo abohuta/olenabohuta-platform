@@ -158,11 +158,10 @@ export default function ZakrytyiKlub() {
             <h3 className="text-2xl font-medium text-[var(--cream)] mb-2">12 місяців</h3>
             <p className="text-sm text-[var(--taupe)] mb-6 leading-relaxed">Максимальний результат і найнижча ціна</p>
             <div className="mb-1">
-              <span className="text-5xl font-medium text-[var(--cream)]">$7</span>
+              <span className="text-5xl font-medium text-[var(--cream)]">$12</span>
               <span className="text-lg text-[var(--taupe)]">/міс</span>
             </div>
-            <p className="text-xs text-[var(--taupe)] mb-2">$84 за рік</p>
-            <p className="text-xs text-[var(--accent)] mb-8">Економія $24 порівняно з сезонною оплатою</p>
+            <p className="text-xs text-[var(--taupe)] mb-8">$144 за рік</p>
             <ul className="list-none space-y-3 mb-8">
               {["Всі матеріали клубу", "Підтримка ментора", "Розбори стратегій", "Ком'юніті у Telegram", "Зустрічі з експертами", "Пріоритетний доступ до нових матеріалів"].map((f) => (
                 <li key={f} className="flex items-center gap-3 text-sm text-[rgba(253,251,248,0.7)]">
@@ -182,11 +181,10 @@ export default function ZakrytyiKlub() {
             <h3 className="text-2xl font-medium text-[var(--dark)] mb-2">3 місяці</h3>
             <p className="text-sm text-[var(--light-text)] mb-6 leading-relaxed">Ідеально щоб спробувати і відчути спільноту</p>
             <div className="mb-1">
-              <span className="text-5xl font-medium text-[var(--dark)]">$9</span>
+              <span className="text-5xl font-medium text-[var(--dark)]">$15</span>
               <span className="text-lg text-[var(--light-text)]">/міс</span>
             </div>
-            <p className="text-xs text-[var(--light-text)] mb-2">$27 за 3 місяці</p>
-            <p className="text-xs text-[var(--accent)] mb-8">Економія $27 порівняно з місячною оплатою</p>
+            <p className="text-xs text-[var(--light-text)] mb-8">$45 за 3 місяці</p>
             <ul className="list-none space-y-3 mb-8">
               {["Всі матеріали клубу", "Підтримка ментора", "Розбори стратегій", "Ком'юніті у Telegram", "Зустрічі з експертами"].map((f) => (
                 <li key={f} className="flex items-center gap-3 text-sm text-[var(--light-text)]">
