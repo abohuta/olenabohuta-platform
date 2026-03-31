@@ -118,7 +118,7 @@ export default function Shlyakh() {
               width={320}
               height={130}
               className="opacity-90"
-              style={{ filter: 'drop-shadow(0 4px 32px rgba(0,0,0,0.7)) drop-shadow(0 0 16px rgba(173,182,207,0.15))' }}
+              style={{ filter: 'drop-shadow(0 4px 32px rgba(0,0,0,0.7)) drop-shadow(0 0 16px rgba(173,182,207,0.15))', height: 'auto' }}
             />
           </div>
         </div>
