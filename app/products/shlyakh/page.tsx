@@ -103,7 +103,7 @@ export default function Shlyakh() {
             alt="Олена Богута — курс Шлях"
             fill
             priority
-            className="object-cover object-top"
+            className="object-cover object-bottom"
             sizes="50vw"
           />
           {/* Градієнт зліва — блендується з темним лівим стовпцем */}
