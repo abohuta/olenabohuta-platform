@@ -52,7 +52,7 @@ const FOR_WHOM = [
 ];
 
 const REVIEWS = [
-  "https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto,w_600/v1774985651/%D0%B2%D1%96%D0%B4%D0%B3%D1%83%D0%BA1%D1%88%D0%BB%D1%8F%D1%85_dbwrfm.jpg",
+  "https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto,w_600/v1774986884/%D0%B2%D1%96%D0%B4%D0%B3%D1%83%D0%BA1%D1%88%D0%BB%D1%8F%D1%851_xsaq9q.jpg",
   "https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto,w_600/v1774985651/%D0%B2%D1%96%D0%B4%D0%B3%D1%83%D0%BA2%D1%88%D0%BB%D1%8F%D1%85_kbmgtk.jpg",
 ];
 
@@ -301,7 +301,7 @@ export default function Shlyakh() {
                   el.style.boxShadow = '0 4px 24px rgba(42,31,20,0.08)';
                 }}
               >
-                <img src={src} alt={`Відгук учасниці курсу Шлях ${i + 1}`} className="w-full h-auto" loading="lazy" />
+                <img src={src} alt={`Відгук учасниці курсу Шлях ${i + 1}`} className="block mx-auto max-w-full h-auto" loading="lazy" />
               </div>
             ))}
           </div>
