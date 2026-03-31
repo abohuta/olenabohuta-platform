@@ -224,45 +224,55 @@ export default function Konsultatsii() {
             Обери свій<br />
             <em className="italic" style={{ color: 'var(--accent)' }}>формат</em>
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 items-start">
             {PRICING.map((plan, i) => (
-              <div key={plan.title} className="relative p-10 flex flex-col reveal" style={{
+              <div key={plan.title} className="relative flex flex-col reveal" style={{
+                padding: plan.savings ? '2.75rem 2.5rem 2.5rem' : '2.5rem',
                 background: plan.featured ? 'var(--accent)' : 'rgba(255,255,255,0.04)',
-                border: plan.featured ? 'none' : '1px solid rgba(196,180,154,0.12)',
+                border: plan.savings
+                  ? '1px solid rgba(184,147,106,0.7)'
+                  : plan.featured ? 'none' : '1px solid rgba(196,180,154,0.12)',
                 transitionDelay: `${i * 0.15}s`,
                 transition: 'opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s ease',
-                boxShadow: plan.featured
-                  ? '0 8px 40px rgba(184,147,106,0.35)'
-                  : '0 4px 24px rgba(0,0,0,0.25)',
+                boxShadow: plan.savings
+                  ? '0 8px 40px rgba(184,147,106,0.22), inset 0 0 0 1px rgba(184,147,106,0.15)'
+                  : plan.featured
+                    ? '0 8px 40px rgba(184,147,106,0.35)'
+                    : '0 4px 24px rgba(0,0,0,0.25)',
+                marginTop: plan.savings ? '-12px' : '0',
               }}
               onMouseEnter={(e) => {
                 const el = e.currentTarget as HTMLElement;
                 el.style.transform = 'translateY(-8px)';
-                el.style.boxShadow = plan.featured
-                  ? '0 24px 60px rgba(184,147,106,0.5)'
-                  : '0 24px 60px rgba(0,0,0,0.45)';
+                el.style.boxShadow = plan.savings
+                  ? '0 28px 70px rgba(184,147,106,0.4), inset 0 0 0 1px rgba(184,147,106,0.3)'
+                  : plan.featured
+                    ? '0 24px 60px rgba(184,147,106,0.5)'
+                    : '0 24px 60px rgba(0,0,0,0.45)';
               }}
               onMouseLeave={(e) => {
                 const el = e.currentTarget as HTMLElement;
                 el.style.transform = '';
-                el.style.boxShadow = plan.featured
-                  ? '0 8px 40px rgba(184,147,106,0.35)'
-                  : '0 4px 24px rgba(0,0,0,0.25)';
+                el.style.boxShadow = plan.savings
+                  ? '0 8px 40px rgba(184,147,106,0.22), inset 0 0 0 1px rgba(184,147,106,0.15)'
+                  : plan.featured
+                    ? '0 8px 40px rgba(184,147,106,0.35)'
+                    : '0 4px 24px rgba(0,0,0,0.25)';
               }}
               >
                 {plan.savings && (
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 text-xs tracking-widest uppercase px-4 py-1 whitespace-nowrap" style={{ background: 'var(--cream)', color: 'var(--accent)' }}>
-                    Економія {plan.savings}%
+                  <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 text-xs tracking-widest uppercase px-5 py-1.5 whitespace-nowrap" style={{ background: 'var(--accent)', color: 'var(--cream)', letterSpacing: '0.18em' }}>
+                    ✦ Найвигідніше · -{plan.savings}%
                   </span>
                 )}
-                <p className="text-xs tracking-[0.35em] uppercase mb-3" style={{ color: plan.featured ? 'rgba(255,255,255,0.7)' : 'var(--taupe)' }}>{plan.duration}</p>
-                <h3 className="text-2xl font-medium mb-6" style={{ fontFamily: 'var(--font-heading)', color: plan.featured ? 'white' : 'var(--cream)' }}>{plan.title}</h3>
+                <p className="text-xs tracking-[0.35em] uppercase mb-3" style={{ color: plan.featured ? 'rgba(255,255,255,0.7)' : plan.savings ? 'var(--accent)' : 'var(--taupe)' }}>{plan.duration}</p>
+                <h3 className="font-medium mb-6" style={{ fontFamily: 'var(--font-heading)', fontSize: plan.savings ? '1.75rem' : '1.5rem', color: plan.featured ? 'white' : 'var(--cream)' }}>{plan.title}</h3>
                 <div className="mb-1 flex items-end gap-3">
-                  <span style={{ fontFamily: 'var(--font-heading)', fontSize: '3rem', fontWeight: 500, color: plan.featured ? 'white' : 'var(--cream)', lineHeight: 1 }}>
+                  <span style={{ fontFamily: 'var(--font-heading)', fontSize: plan.savings ? '3.5rem' : '3rem', fontWeight: 500, color: plan.featured ? 'white' : 'var(--cream)', lineHeight: 1 }}>
                     <span style={{ fontSize: '1.1rem', verticalAlign: 'super' }}>$</span>{plan.price}
                   </span>
                   {plan.oldPrice && (
-                    <span className="text-lg mb-1" style={{ color: 'rgba(196,180,154,0.5)', textDecoration: 'line-through' }}>${plan.oldPrice}</span>
+                    <span className="text-lg mb-1" style={{ color: 'rgba(196,180,154,0.45)', textDecoration: 'line-through' }}>${plan.oldPrice}</span>
                   )}
                 </div>
                 <p className="text-xs mb-8" style={{ color: plan.featured ? 'rgba(255,255,255,0.6)' : 'rgba(196,180,154,0.5)' }}>USD</p>
