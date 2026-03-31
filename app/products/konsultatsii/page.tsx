@@ -224,13 +224,32 @@ export default function Konsultatsii() {
             Обери свій<br />
             <em className="italic" style={{ color: 'var(--accent)' }}>формат</em>
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-[2px]">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
             {PRICING.map((plan, i) => (
               <div key={plan.title} className="relative p-10 flex flex-col reveal" style={{
                 background: plan.featured ? 'var(--accent)' : 'rgba(255,255,255,0.04)',
                 border: plan.featured ? 'none' : '1px solid rgba(196,180,154,0.12)',
-                transitionDelay: `${i * 0.1}s`,
-              }}>
+                transitionDelay: `${i * 0.15}s`,
+                transition: 'opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s ease',
+                boxShadow: plan.featured
+                  ? '0 8px 40px rgba(184,147,106,0.35)'
+                  : '0 4px 24px rgba(0,0,0,0.25)',
+              }}
+              onMouseEnter={(e) => {
+                const el = e.currentTarget as HTMLElement;
+                el.style.transform = 'translateY(-8px)';
+                el.style.boxShadow = plan.featured
+                  ? '0 24px 60px rgba(184,147,106,0.5)'
+                  : '0 24px 60px rgba(0,0,0,0.45)';
+              }}
+              onMouseLeave={(e) => {
+                const el = e.currentTarget as HTMLElement;
+                el.style.transform = '';
+                el.style.boxShadow = plan.featured
+                  ? '0 8px 40px rgba(184,147,106,0.35)'
+                  : '0 4px 24px rgba(0,0,0,0.25)';
+              }}
+              >
                 {plan.savings && (
                   <span className="absolute -top-3 left-1/2 -translate-x-1/2 text-xs tracking-widest uppercase px-4 py-1 whitespace-nowrap" style={{ background: 'var(--cream)', color: 'var(--accent)' }}>
                     Економія {plan.savings}%
