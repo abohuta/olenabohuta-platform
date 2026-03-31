@@ -202,6 +202,27 @@ export default function Konsultatsii() {
         </div>
       </section>
 
+      {/* ТЕМИ */}
+      <section id="topics" className="px-6 md:px-20 py-20 md:py-32 bg-[var(--warm-white)]">
+        <p className="text-xs tracking-[0.35em] uppercase text-center mb-4 reveal" style={{ color: 'var(--accent)' }}>Теми</p>
+        <h2 className="text-4xl md:text-5xl font-medium text-center mb-16 leading-tight reveal" style={{ fontFamily: 'var(--font-heading)', color: 'var(--dark)' }}>
+          З чим я можу<br />
+          <em className="italic" style={{ color: 'var(--accent)' }}>допомогти</em>
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-[2px] max-w-4xl mx-auto">
+          {TOPICS.map((topic, i) => (
+            <div key={topic.num} className="p-8 relative reveal" style={{ background: 'var(--cream)', transitionDelay: `${i * 0.07}s`, transition: 'all 0.4s cubic-bezier(0.16,1,0.3,1)' }}
+              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--sand)'; (e.currentTarget as HTMLElement).style.transform = 'translateY(-3px)'; }}
+              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--cream)'; (e.currentTarget as HTMLElement).style.transform = ''; }}
+            >
+              <span className="absolute top-4 right-6 font-medium" style={{ fontFamily: 'var(--font-heading)', fontSize: '3rem', color: 'var(--accent)', opacity: 0.42, lineHeight: 1 }}>{topic.num}</span>
+              <h3 className="text-lg font-medium mb-3" style={{ fontFamily: 'var(--font-heading)', color: 'var(--dark)' }}>{topic.title}</h3>
+              <p className="text-sm leading-relaxed text-justify" style={{ color: 'var(--light-text)' }}>{topic.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* ЦІНА */}
       <section className="px-6 md:px-20 py-20 md:py-32 bg-[var(--dark)] relative overflow-hidden">
         <div className="absolute top-6 left-6 w-8 h-8 border-l border-t border-[rgba(184,147,106,0.2)] hidden md:block"/>
@@ -216,9 +237,9 @@ export default function Konsultatsii() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 items-start">
             {PRICING.map((plan, i) => (
-              <div key={plan.title} className={`relative flex flex-col reveal${plan.savings ? ' md:-mt-3' : ''}`} style={{
+              <div key={plan.title} className={`relative flex flex-col reveal${plan.savings ? ' order-3 md:order-2 md:-mt-3' : i === 2 ? ' order-2 md:order-3' : ''}`} style={{
                 padding: plan.savings ? '2.75rem 2.5rem 2.5rem' : '2.5rem',
-                background: plan.featured ? 'var(--accent)' : 'rgba(255,255,255,0.04)',
+                background: plan.savings ? 'rgba(184,147,106,0.08)' : plan.featured ? 'var(--accent)' : 'rgba(255,255,255,0.04)',
                 border: plan.savings
                   ? '1px solid rgba(184,147,106,0.7)'
                   : plan.featured ? 'none' : '1px solid rgba(196,180,154,0.12)',
@@ -292,27 +313,6 @@ export default function Konsultatsii() {
             Або напиши напряму —{' '}
             <a href="https://t.me/olenabohuta" target="_blank" rel="noopener noreferrer" className="no-underline border-b" style={{ color: 'var(--accent)', borderColor: 'var(--accent)' }}>Telegram</a>
           </p>
-        </div>
-      </section>
-
-      {/* ТЕМИ */}
-      <section id="topics" className="px-6 md:px-20 py-20 md:py-32 bg-[var(--warm-white)]">
-        <p className="text-xs tracking-[0.35em] uppercase text-center mb-4 reveal" style={{ color: 'var(--accent)' }}>Теми</p>
-        <h2 className="text-4xl md:text-5xl font-medium text-center mb-16 leading-tight reveal" style={{ fontFamily: 'var(--font-heading)', color: 'var(--dark)' }}>
-          З чим я можу<br />
-          <em className="italic" style={{ color: 'var(--accent)' }}>допомогти</em>
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-[2px] max-w-4xl mx-auto">
-          {TOPICS.map((topic, i) => (
-            <div key={topic.num} className="p-8 relative reveal" style={{ background: 'var(--cream)', transitionDelay: `${i * 0.07}s`, transition: 'all 0.4s cubic-bezier(0.16,1,0.3,1)' }}
-              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--sand)'; (e.currentTarget as HTMLElement).style.transform = 'translateY(-3px)'; }}
-              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--cream)'; (e.currentTarget as HTMLElement).style.transform = ''; }}
-            >
-              <span className="absolute top-4 right-6 font-medium" style={{ fontFamily: 'var(--font-heading)', fontSize: '3rem', color: 'var(--accent)', opacity: 0.42, lineHeight: 1 }}>{topic.num}</span>
-              <h3 className="text-lg font-medium mb-3" style={{ fontFamily: 'var(--font-heading)', color: 'var(--dark)' }}>{topic.title}</h3>
-              <p className="text-sm leading-relaxed text-justify" style={{ color: 'var(--light-text)' }}>{topic.desc}</p>
-            </div>
-          ))}
         </div>
       </section>
 
