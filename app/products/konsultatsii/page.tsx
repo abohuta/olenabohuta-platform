@@ -226,7 +226,7 @@ export default function Konsultatsii() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 items-start">
             {PRICING.map((plan, i) => (
-              <div key={plan.title} className="relative flex flex-col reveal" style={{
+              <div key={plan.title} className={`relative flex flex-col reveal${plan.savings ? ' md:-mt-3' : ''}`} style={{
                 padding: plan.savings ? '2.75rem 2.5rem 2.5rem' : '2.5rem',
                 background: plan.featured ? 'var(--accent)' : 'rgba(255,255,255,0.04)',
                 border: plan.savings
@@ -239,7 +239,6 @@ export default function Konsultatsii() {
                   : plan.featured
                     ? '0 8px 40px rgba(184,147,106,0.35)'
                     : '0 4px 24px rgba(0,0,0,0.25)',
-                marginTop: plan.savings ? '-12px' : '0',
               }}
               onMouseEnter={(e) => {
                 const el = e.currentTarget as HTMLElement;
@@ -261,7 +260,7 @@ export default function Konsultatsii() {
               }}
               >
                 {plan.savings && (
-                  <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 text-xs tracking-widest uppercase px-5 py-1.5 whitespace-nowrap" style={{ background: 'var(--accent)', color: 'var(--cream)', letterSpacing: '0.18em' }}>
+                  <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 text-xs tracking-widest uppercase px-5 py-1.5 whitespace-nowrap" style={{ background: 'var(--dark)', color: 'var(--accent)', letterSpacing: '0.18em', border: '1px solid rgba(184,147,106,0.5)' }}>
                     ✦ Найвигідніше · -{plan.savings}%
                   </span>
                 )}
