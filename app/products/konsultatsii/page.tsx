@@ -61,12 +61,6 @@ const TOPICS = [
 
 const BOOKING_URL = "https://docs.google.com/forms/d/e/1FAIpQLSdueHegCm2zqt8JqdFqR1PhQLSciV21ARAxy0YhkyuA0_azTw/viewform?usp=header";
 
-const FORMATS = [
-  { title: "Разова консультація", duration: "60–90 хв", desc: "Одна зустріч у Zoom або Telegram. Ідеально для конкретного запиту — розбір, аудит, стратегія.", icon: "◇" },
-  { title: "Міні-консультація", duration: "30 хв", desc: "Швидка відповідь на конкретне питання. Підходить якщо потрібна порада без глибокого занурення.", icon: "◈" },
-  { title: "Пакет сесій", duration: "3–5 зустрічей", desc: "Серія консультацій з домашніми завданнями між сесіями. Для системних змін і запуску продукту.", icon: "◉" },
-];
-
 const PRICING = [
   {
     title: "Міні-консультація",
@@ -74,7 +68,20 @@ const PRICING = [
     price: "45",
     oldPrice: null,
     savings: null,
+    icon: "◈",
+    desc: "Швидка відповідь на конкретне питання. Підходить якщо потрібна порада без глибокого занурення.",
     features: ["Відповідь на одне конкретне питання", "Zoom або Telegram", "Короткі рекомендації"],
+    featured: false,
+  },
+  {
+    title: "Пакет сесій",
+    duration: "3–5 зустрічей",
+    price: "200",
+    oldPrice: "270",
+    savings: "26",
+    icon: "◉",
+    desc: "Серія консультацій з домашніми завданнями між сесіями. Для системних змін і запуску продукту.",
+    features: ["Серія зустрічей", "Домашні завдання між сесіями", "Запис кожної сесії", "Підтримка у чаті", "Особистий супровід"],
     featured: false,
   },
   {
@@ -83,16 +90,9 @@ const PRICING = [
     price: "70–90",
     oldPrice: null,
     savings: null,
+    icon: "◇",
+    desc: "Одна зустріч у Zoom або Telegram. Ідеально для конкретного запиту — розбір, аудит, стратегія.",
     features: ["Глибокий розбір запиту", "Zoom або Telegram", "Зворотний зв'язок після зустрічі", "Запис консультації"],
-    featured: true,
-  },
-  {
-    title: "Пакет сесій",
-    duration: "3–5 зустрічей",
-    price: "200",
-    oldPrice: "270",
-    savings: "26",
-    features: ["Серія зустрічей", "Домашні завдання між сесіями", "Запис кожної сесії", "Підтримка у чаті", "Особистий супровід"],
     featured: false,
   },
 ];
@@ -153,12 +153,24 @@ export default function Konsultatsii() {
             Особиста робота з Оленою над твоїм брендом, стратегією та контентом. Індивідуальний підхід до кожного запиту.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 reveal">
-            <a href="https://t.me/olenabohuta" target="_blank" className="inline-block px-10 py-4 text-xs tracking-widest uppercase no-underline text-center hover:opacity-80 transition-opacity" style={{ background: 'var(--accent)', color: 'white' }}>
+            <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer" className="inline-block px-10 py-4 text-xs tracking-widest uppercase no-underline text-center hover:opacity-80 transition-opacity" style={{ background: 'var(--accent)', color: 'white' }}>
               Записатись
             </a>
             <a href="#topics" className="inline-block px-10 py-4 text-xs tracking-widest uppercase no-underline text-center hover:opacity-80 transition-opacity" style={{ border: '1px solid rgba(196,180,154,0.4)', color: 'var(--taupe)' }}>
               Теми консультацій
             </a>
+          </div>
+
+          {/* Статистика — мобільна версія */}
+          <div className="grid grid-cols-4 gap-4 mt-10 md:hidden reveal">
+            {[
+              { num: 400, suffix: '+', label: 'Клієнтів' },
+              { num: 8, suffix: '', label: 'Років' },
+              { num: 10, suffix: 'K+', label: 'Підписн.' },
+              { num: 10, suffix: '+', label: 'Курсів' },
+            ].map((stat) => (
+              <StatCard key={stat.label} num={stat.num} suffix={stat.suffix} label={stat.label} />
+            ))}
           </div>
         </div>
 
@@ -190,28 +202,6 @@ export default function Konsultatsii() {
         </div>
       </section>
 
-      {/* ФОРМАТИ */}
-      <section className="px-6 md:px-20 py-20 md:py-32 bg-[var(--cream)]">
-        <p className="text-xs tracking-[0.35em] uppercase text-center mb-4 reveal" style={{ color: 'var(--accent)' }}>Формати</p>
-        <h2 className="text-4xl md:text-5xl font-medium text-center mb-16 leading-tight reveal" style={{ fontFamily: 'var(--font-heading)', color: 'var(--dark)' }}>
-          Обери зручний<br />
-          <em className="italic" style={{ color: 'var(--accent)' }}>формат</em>
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-[2px] max-w-5xl mx-auto">
-          {FORMATS.map((f, i) => (
-            <div key={f.title} className="p-10 reveal" style={{ background: 'var(--warm-white)', transitionDelay: `${i * 0.1}s`, transition: 'all 0.4s cubic-bezier(0.16,1,0.3,1)', boxShadow: '0 4px 20px rgba(42,31,20,0.06)' }}
-              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.transform = 'translateY(-6px)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 20px 50px rgba(42,31,20,0.12)'; }}
-              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.transform = ''; (e.currentTarget as HTMLElement).style.boxShadow = '0 4px 20px rgba(42,31,20,0.06)'; }}
-            >
-              <span className="text-2xl block mb-4" style={{ color: 'var(--accent)' }}>{f.icon}</span>
-              <p className="text-xs tracking-[0.3em] uppercase mb-2" style={{ color: 'var(--accent)' }}>{f.duration}</p>
-              <h3 className="text-xl font-medium mb-4" style={{ fontFamily: 'var(--font-heading)', color: 'var(--dark)' }}>{f.title}</h3>
-              <p className="text-sm leading-relaxed text-justify" style={{ color: 'var(--light-text)' }}>{f.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
       {/* ЦІНА */}
       <section className="px-6 md:px-20 py-20 md:py-32 bg-[var(--dark)] relative overflow-hidden">
         <div className="absolute top-6 left-6 w-8 h-8 border-l border-t border-[rgba(184,147,106,0.2)] hidden md:block"/>
@@ -219,7 +209,7 @@ export default function Konsultatsii() {
         <div className="absolute bottom-6 left-6 w-8 h-8 border-l border-b border-[rgba(184,147,106,0.2)] hidden md:block"/>
         <div className="absolute bottom-6 right-6 w-8 h-8 border-r border-b border-[rgba(184,147,106,0.2)] hidden md:block"/>
         <div className="max-w-5xl mx-auto relative z-10">
-          <p className="text-xs tracking-[0.35em] uppercase text-center mb-4 reveal" style={{ color: 'var(--taupe)' }}>Вартість</p>
+          <p className="text-xs tracking-[0.35em] uppercase text-center mb-4 reveal" style={{ color: 'var(--taupe)' }}>Формати · Вартість</p>
           <h2 className="text-4xl md:text-5xl font-medium text-center mb-16 leading-tight reveal" style={{ fontFamily: 'var(--font-heading)', color: 'var(--cream)' }}>
             Обери свій<br />
             <em className="italic" style={{ color: 'var(--accent)' }}>формат</em>
@@ -264,8 +254,13 @@ export default function Konsultatsii() {
                     ✦ Найвигідніше · -{plan.savings}%
                   </span>
                 )}
-                <p className="text-xs tracking-[0.35em] uppercase mb-3" style={{ color: plan.featured ? 'rgba(255,255,255,0.7)' : plan.savings ? 'var(--accent)' : 'var(--taupe)' }}>{plan.duration}</p>
-                <h3 className="font-medium mb-6" style={{ fontFamily: 'var(--font-heading)', fontSize: plan.savings ? '1.75rem' : '1.5rem', color: plan.featured ? 'white' : 'var(--cream)' }}>{plan.title}</h3>
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="text-xl" style={{ color: plan.savings ? 'var(--accent)' : 'rgba(196,180,154,0.5)' }}>{plan.icon}</span>
+                  <p className="text-xs tracking-[0.35em] uppercase" style={{ color: plan.featured ? 'rgba(255,255,255,0.7)' : plan.savings ? 'var(--accent)' : 'var(--taupe)' }}>{plan.duration}</p>
+                </div>
+                <h3 className="font-medium mb-3" style={{ fontFamily: 'var(--font-heading)', fontSize: plan.savings ? '1.75rem' : '1.5rem', color: plan.featured ? 'white' : 'var(--cream)' }}>{plan.title}</h3>
+                <p className="text-sm leading-relaxed mb-6 text-justify" style={{ color: plan.featured ? 'rgba(255,255,255,0.7)' : 'rgba(196,180,154,0.55)' }}>{plan.desc}</p>
+                <div className="w-full h-px mb-6" style={{ background: plan.savings ? 'rgba(184,147,106,0.25)' : 'rgba(196,180,154,0.1)' }} />
                 <div className="mb-1 flex items-end gap-3">
                   <span style={{ fontFamily: 'var(--font-heading)', fontSize: plan.savings ? '3.5rem' : '3rem', fontWeight: 500, color: plan.featured ? 'white' : 'var(--cream)', lineHeight: 1 }}>
                     <span style={{ fontSize: '1.1rem', verticalAlign: 'super' }}>$</span>{plan.price}
@@ -366,11 +361,11 @@ export default function Konsultatsii() {
       <section className="px-6 md:px-20 py-20 md:py-32 bg-[var(--accent)] text-center">
         <p className="text-xs tracking-[0.35em] uppercase mb-4 reveal" style={{ color: 'rgba(255,255,255,0.7)' }}>Починаємо</p>
         <h2 className="text-4xl md:text-6xl font-medium mb-8 leading-tight reveal" style={{ fontFamily: 'var(--font-heading)', color: 'white' }}>
-          Готовий(а) до<br />
-          <em className="italic">особистої роботи?</em>
+          Запишись на<br />
+          <em className="italic">консультацію</em>
         </h2>
         <p className="text-lg mb-10 leading-relaxed reveal" style={{ color: 'rgba(255,255,255,0.8)', maxWidth: '500px', margin: '0 auto 2.5rem' }}>
-          Заповни анкету — і ми підберемо оптимальний формат та час.
+          Заповни анкету — і ми підберемо оптимальний формат та час для роботи разом.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center reveal">
           <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer" className="inline-block px-12 py-4 text-xs tracking-widest uppercase no-underline hover:opacity-80 transition-opacity" style={{ background: 'white', color: 'var(--accent)' }}>
