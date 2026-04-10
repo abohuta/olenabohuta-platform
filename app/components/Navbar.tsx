@@ -14,7 +14,7 @@ export default function Navbar() {
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 px-6 md:px-16 flex justify-between items-center backdrop-blur-md border-b border-[rgba(196,180,154,0.2)] transition-all duration-500 ${scrolled ? 'py-3 bg-[rgba(253,251,248,0.98)] shadow-sm' : 'py-5 bg-[rgba(253,251,248,0.85)]'}`}>
-      <Link href="/" className="no-underline group" aria-label="Олена Богута — на головну">
+      <Link href="/" className="no-underline group" aria-label="Олена Богута — на головну" style={{ color: 'var(--dark)' }}>
         <svg width="260" height="32" viewBox="0 0 220 28" fill="none" xmlns="http://www.w3.org/2000/svg">
           <text
             x="110"

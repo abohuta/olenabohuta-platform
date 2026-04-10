@@ -23,9 +23,14 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Невірний email' }, { status: 400 })
     }
 
-    const groupId = source === 'leadmagnet'
-      ? process.env.MAILERLITE_LEADMAGNET_GROUP_ID
-      : process.env.MAILERLITE_GROUP_ID
+    const generalGroupId = process.env.MAILERLITE_GROUP_ID!
+    const groups: string[] = [generalGroupId]
+
+    if (source === 'leadmagnet') {
+      groups.push(process.env.MAILERLITE_LEADMAGNET_GROUP_ID!)
+    } else if (source === 'era-mozhlyvostei') {
+      groups.push(process.env.MAILERLITE_ERA_GROUP_ID!)
+    }
 
     const response = await fetch('https://connect.mailerlite.com/api/subscribers', {
       method: 'POST',
@@ -35,7 +40,7 @@ export async function POST(req: NextRequest) {
       },
       body: JSON.stringify({
         email,
-        groups: [groupId],
+        groups,
       }),
     })
 
