@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 
-export default function EmailSubscribeForm({ dark = false }: { dark?: boolean }) {
+export default function EmailSubscribeForm({ dark = false, source = 'main', onSuccess }: { dark?: boolean; source?: string; onSuccess?: () => void }) {
   const [email, setEmail] = useState("");
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -16,11 +16,12 @@ export default function EmailSubscribeForm({ dark = false }: { dark?: boolean })
       const res = await fetch('/api/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, source }),
       });
 
       if (res.ok) {
         setSent(true);
+        onSuccess?.();
       } else {
         const data = await res.json();
         setError(data.error || 'Помилка. Спробуй ще раз.');

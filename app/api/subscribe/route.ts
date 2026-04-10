@@ -16,12 +16,16 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Забагато запитів. Спробуй пізніше.' }, { status: 429 })
     }
 
-    const { email } = await req.json()
+    const { email, source } = await req.json()
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!email || typeof email !== 'string' || !emailRegex.test(email) || email.length > 254) {
       return NextResponse.json({ error: 'Невірний email' }, { status: 400 })
     }
+
+    const groupId = source === 'leadmagnet'
+      ? process.env.MAILERLITE_LEADMAGNET_GROUP_ID
+      : process.env.MAILERLITE_GROUP_ID
 
     const response = await fetch('https://connect.mailerlite.com/api/subscribers', {
       method: 'POST',
@@ -31,7 +35,7 @@ export async function POST(req: NextRequest) {
       },
       body: JSON.stringify({
         email,
-        groups: [process.env.MAILERLITE_GROUP_ID],
+        groups: [groupId],
       }),
     })
 
