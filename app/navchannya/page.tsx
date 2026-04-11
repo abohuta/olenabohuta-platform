@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import Link from "next/link";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -162,15 +162,15 @@ export default function Navchannya() {
   const [activeFilter, setActiveFilter] = useState<FilterKey>("all");
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
-  const filteredItems =
-    activeFilter === "all"
-      ? ITEMS
-      : ITEMS.filter((item) => item.stages.includes(activeFilter));
+  const filteredItems = useMemo(
+    () => activeFilter === "all" ? ITEMS : ITEMS.filter((item) => item.stages.includes(activeFilter)),
+    [activeFilter]
+  );
 
-  const getCount = (key: FilterKey) =>
-    key === "all"
-      ? ITEMS.length
-      : ITEMS.filter((i) => i.stages.includes(key)).length;
+  const getCount = useMemo(
+    () => (key: FilterKey) => key === "all" ? ITEMS.length : ITEMS.filter((i) => i.stages.includes(key)).length,
+    []
+  );
 
   const activeLabel = FILTERS.find((f) => f.key === activeFilter)?.label ?? "Всі";
 
@@ -184,7 +184,7 @@ export default function Navchannya() {
         <div
           className="absolute inset-0 z-0"
           style={{
-            backgroundImage: `url(https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto/v1775908998/olenka_couse_light_uwmjnw.webp)`,
+            backgroundImage: `url(https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto,w_1400/v1775908998/olenka_couse_light_uwmjnw.webp)`,
             backgroundSize: "cover",
             backgroundPosition: "center top",
             filter: "blur(3px) brightness(0.35)",
@@ -233,7 +233,7 @@ export default function Navchannya() {
           >
             {HERO_STATS.map((stat, i) => (
               <div
-                key={i}
+                key={stat.num}
                 className={`reveal reveal-delay-${i + 1} flex flex-col justify-center p-8`}
                 style={{
                   borderBottom: i < 2 ? "1px solid rgba(196,180,154,0.08)" : undefined,
@@ -262,7 +262,7 @@ export default function Navchannya() {
         <div className="marquee-track">
           {[...MARQUEE_ITEMS, ...MARQUEE_ITEMS].map((item, i) => (
             <span
-              key={i}
+              key={`${item}-${i}`}
               className="text-xs tracking-[0.3em] uppercase flex-shrink-0 inline-flex items-center"
               style={{ color: LIGHT_TEXT, marginRight: "3rem" }}
             >
