@@ -1,290 +1,667 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import ProductCard from "../components/ProductCard";
 import FaqSection from "../components/FaqSection";
-import CtaButton from "../components/CtaButton";
+import { useReveal } from "../hooks/useReveal";
 
-const products = [
+const ACCENT = "#B8936A";
+const DARK = "#2A1F14";
+const CREAM = "#F9F5EF";
+const WARM_WHITE = "#FDFBF8";
+const LIGHT_TEXT = "#5E4838";
+
+type FilterKey = "all" | "free" | "beginner" | "mid" | "advanced";
+
+interface Item {
+  id: string;
+  type: "free" | "paid";
+  tag: string;
+  title: string;
+  desc: string;
+  price: string;
+  social: string;
+  href: string;
+  active: boolean;
+  color: string;
+  stages: FilterKey[];
+}
+
+// Додавай сюди нові продукти — вони автоматично з'являться в каталозі та фільтрах
+const ITEMS: Item[] = [
   {
-    id: 1,
-    title: "Кемп Архітектор Бренду",
-    desc: "Навчання для християн які хочуть розвивати особистий бренд, вести блог та продавати послуги з цінностями й сенсом.",
-    tag: "Кемп",
-    level: "Середній",
-    topic: "Бренд",
-    price: "від $550",
-    href: "/products/kemp",
+    id: "typy",
+    type: "free",
+    tag: "Урок",
+    title: "Які типи блогів будуть зростати в Instagram",
+    desc: "Відео-урок: знайди свій тип блогу — і не копіюй чужу модель. Підготовка до Кемпу.",
+    price: "Безкоштовно",
+    social: "Відео",
+    href: "/products/typy-khrystyianskykh-blohiv",
+    active: true,
+    color: ACCENT,
+    stages: ["free", "mid"],
   },
   {
-    id: 2,
-    title: "Шлях",
-    desc: "Марафон дисципліни за біблійними принципами тиші. Практичний курс для тих, хто хоче змінити своє життя.",
+    id: "era",
+    type: "free",
+    tag: "Майстер-клас",
+    title: "Ера можливостей: як заробляти в Instagram",
+    desc: "Мислення, холодна воронка і техніка — як зробити $2 000, працюючи менше.",
+    price: "Безкоштовно",
+    social: "Відео",
+    href: "/products/era-mozhlyvostei",
+    active: true,
+    color: "#748fa4",
+    stages: ["free", "advanced"],
+  },
+  {
+    id: "shlyakh",
+    type: "paid",
     tag: "Марафон",
-    level: "Початківець",
-    topic: "Духовність",
-    price: "Скоро",
+    title: "Шлях",
+    desc: "Марафон дисципліни за біблійними принципами тиші. Практичний курс для тих, хто хоче змінити своє життя — звички, мислення, фокус.",
+    price: "550 грн",
+    social: "9 модулів · дисципліна",
     href: "/products/shlyakh",
+    active: true,
+    color: "#adb6cf",
+    stages: ["beginner"],
   },
   {
-    id: 3,
-    title: "Початок",
-    desc: "Тренінг для християн, що прагнуть запустити блог з нуля та вийти на першу аудиторію.",
+    id: "pochatok",
+    type: "paid",
     tag: "Тренінг",
-    level: "Початківець",
-    topic: "Блог",
+    title: "Початок",
+    desc: "Тренінг для тих, хто хоче запустити особистий блог з нуля — від ідеї до першої аудиторії.",
     price: "Скоро",
+    social: "Для початківців",
     href: "/products/pochatok",
+    active: false,
+    color: ACCENT,
+    stages: ["beginner"],
   },
   {
-    id: 4,
-    title: "Тиша",
-    desc: "Навчання по зупусках та автоворонках для тих, хто хоче системно продавати через контент.",
+    id: "kemp",
+    type: "paid",
+    tag: "Кемп",
+    title: "Кемп Архітектор Бренду",
+    desc: "Навчання для тих, хто хоче вибудувати особистий бренд, вести блог і продавати послуги з цінностями й сенсом.",
+    price: "від $550",
+    social: "200+ учасниць",
+    href: "/products/kemp",
+    active: true,
+    color: "#59020B",
+    stages: ["mid"],
+  },
+  {
+    id: "tysha",
+    type: "paid",
     tag: "Курс",
-    level: "Просунутий",
-    topic: "Продажі",
-    price: "Скоро",
+    title: "Тиша",
+    desc: "8-тижневий курс по запусках та автоворонках. Система, яка дозволяє продавати системно — через контент, а не щоденний хаос.",
+    price: "від $550",
+    social: "Флагманська програма",
     href: "/products/tysha",
-  },
-  {
-    id: 5,
-    title: "Консультації",
-    desc: "Особиста робота з Оленою над твоїм брендом, стратегією та контентом.",
-    tag: "Сесія",
-    level: "Допомога",
-    topic: "Бренд",
-    price: "За запитом",
-    href: "/products/konsultatsii",
+    active: true,
+    color: "#748fa4",
+    stages: ["advanced"],
   },
 ];
 
-const levels = ["Всі", "Початківець", "Середній", "Просунутий", "Допомога"];
-const topics = ["Всі", "Бренд", "Блог", "Продажі", "Духовність"];
+const FILTERS: { key: FilterKey; label: string }[] = [
+  { key: "all", label: "Всі" },
+  { key: "free", label: "Безкоштовно" },
+  { key: "beginner", label: "Без досвіду" },
+  { key: "mid", label: "Середній рівень" },
+  { key: "advanced", label: "Просунутий рівень" },
+];
+
+const MARQUEE_ITEMS = [
+  "200+ учасниць",
+  "$7 000+ результати учениць",
+  "5 програм",
+  "Для Christian-блогерів",
+  "Онлайн · у своєму темпі",
+  "Особиста підтримка автора",
+];
+
+const HERO_STATS = [
+  { num: "200+", label: "учасниць програм" },
+  { num: "$7K+", label: "результати учениць" },
+  { num: "5", label: "програм навчання" },
+  { num: "3+", label: "роки онлайн-навчання" },
+];
 
 const faq = [
   {
-    q: "Чи підходить навчання якщо я повний новачок?",
-    a: "Так! Курси 'Початок' та 'Шлях' створені спеціально для тих, хто тільки починає. Ми йдемо крок за кроком від самого початку.",
+    q: "З чого почати, якщо я повний новачок?",
+    a: "Почни з безкоштовного уроку — він допоможе зрозуміти свій тип блогу. Далі: марафон «Шлях» або тренінг «Початок» — залежно від того, де ти зараз.",
   },
   {
-    q: "Як відбувається навчання?",
-    a: "Навчання проходить онлайн — відеоуроки, матеріали, живі зустрічі та підтримка куратора або автора залежно від тарифу.",
+    q: "Чим відрізняється Кемп від Тиші?",
+    a: "Кемп — про побудову бренду з нуля: позиціонування, аудиторія, контент, перші продажі. Тиша — про запуски і воронки для тих, хто вже має бренд і хоче системно монетизувати.",
   },
   {
     q: "Чи є розстрочка або часткова оплата?",
-    a: "Так, для деяких програм доступна часткова оплата. Напишіть нам у Telegram і ми підберемо зручний варіант.",
+    a: "Так, для деяких програм доступна часткова оплата. Напишіть у Telegram і ми підберемо зручний варіант.",
   },
   {
-    q: "Скільки часу займає навчання на тиждень?",
-    a: "В середньому 3-5 годин на тиждень. Всі матеріали залишаються у тебе назавжди, тому темп можна регулювати самостійно.",
+    q: "Як відбувається навчання?",
+    a: "Онлайн — відеоуроки, матеріали, живі зустрічі та підтримка куратора або автора залежно від тарифу. Матеріали залишаються назавжди.",
   },
   {
-    q: "Чи отримаю я сертифікат після завершення?",
-    a: "Так, після завершення курсу видається сертифікат про проходження навчання.",
+    q: "Як зрозуміти яка програма підходить мені?",
+    a: "Напиши Олені в Telegram — вона особисто відповість і підбере програму під твою ситуацію.",
   },
 ];
 
 export default function Navchannya() {
-  const [activeLevel, setActiveLevel] = React.useState("Всі");
-  const [activeTopic, setActiveTopic] = React.useState("Всі");
+  useReveal();
+  const [activeFilter, setActiveFilter] = useState<FilterKey>("all");
+  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
-  const filtered = products.filter((p) => {
-    const levelMatch = activeLevel === "Всі" || p.level === activeLevel;
-    const topicMatch = activeTopic === "Всі" || p.topic === activeTopic;
-    return levelMatch && topicMatch;
-  });
+  const filteredItems =
+    activeFilter === "all"
+      ? ITEMS
+      : ITEMS.filter((item) => item.stages.includes(activeFilter));
+
+  const getCount = (key: FilterKey) =>
+    key === "all"
+      ? ITEMS.length
+      : ITEMS.filter((i) => i.stages.includes(key)).length;
+
+  const activeLabel = FILTERS.find((f) => f.key === activeFilter)?.label ?? "Всі";
 
   return (
     <main className="w-full overflow-x-hidden">
-
-      {/* НАВІГАЦІЯ */}
       <Navbar />
 
-      {/* HERO */}
-      <section className="bg-[var(--dark)] pt-[70px]">
-        <div className="px-6 md:px-20 grid grid-cols-1 md:grid-cols-2 gap-0 min-h-[90vh] items-stretch">
+      {/* ── HERO ── */}
+      <section className="bg-[var(--dark)] pt-[70px] relative overflow-hidden">
+        {/* Background photo */}
+        <div
+          className="absolute inset-0 z-0"
+          style={{
+            backgroundImage: `url(https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto/v1775908998/olenka_couse_light_uwmjnw.webp)`,
+            backgroundSize: "cover",
+            backgroundPosition: "center top",
+            filter: "blur(3px) brightness(0.35)",
+            transform: "scale(1.05)",
+          }}
+        />
+        {/* Gradient overlay — stronger on left so text stays readable */}
+        <div
+          className="absolute inset-0 z-0"
+          style={{
+            background: "linear-gradient(90deg, rgba(42,31,20,0.85) 0%, rgba(42,31,20,0.5) 60%, rgba(42,31,20,0.3) 100%)",
+          }}
+        />
+        <div className="px-6 md:px-20 grid grid-cols-1 md:grid-cols-2 gap-0 items-stretch relative z-10">
 
-          {/* Текст */}
-          <div className="flex flex-col justify-center py-20 md:py-32 md:pr-16">
-            <p className="text-xs tracking-[0.35em] uppercase text-[var(--accent)] mb-6">Навчання</p>
-            <h1 className="text-5xl md:text-7xl font-light text-[var(--cream)] leading-tight mb-6">
-              Навчання для тих,<br />
-              <em className="italic text-[var(--accent)]">хто будує з вірою</em>
-            </h1>
-            <p className="text-lg md:text-xl text-[var(--taupe)] max-w-xl leading-relaxed mb-10 text-justify">
-              Практичні програми для християн які хочуть розвивати особистий бренд, запускати блог та монетизувати експертність.
+          {/* Left */}
+          <div className="flex flex-col justify-center py-16 md:py-20 md:pr-16">
+            <p className="reveal text-xs tracking-[0.35em] uppercase mb-6" style={{ color: ACCENT }}>
+              Навчання
             </p>
-            <div>
-              <Link href="#catalog" className="inline-block px-10 py-4 bg-[var(--accent)] text-white no-underline text-xs tracking-widest uppercase hover:bg-[var(--brown)] transition-colors">
-                Переглянути навчання
+            <h1
+              className="reveal reveal-delay-1 text-5xl md:text-6xl font-light text-[var(--cream)] leading-tight mb-6"
+              style={{ fontFamily: "var(--font-heading)" }}
+            >
+              Твоя історія<br />
+              <em className="italic" style={{ color: ACCENT }}>тільки починається</em>
+            </h1>
+            <p className="reveal reveal-delay-2 text-lg text-[var(--taupe)] max-w-xl leading-relaxed mb-10">
+              Практичні програми для Christian-блогерів — від першого посту до системної монетизації.
+            </p>
+            <div className="reveal reveal-delay-3">
+              <Link
+                href="#catalog"
+                className="inline-block px-10 py-4 text-xs tracking-widest uppercase hover:opacity-80 transition-opacity"
+                style={{ background: ACCENT, color: "#fff" }}
+              >
+                Обрати програму →
               </Link>
             </div>
           </div>
 
-          {/* Превʼю продуктів */}
-          <div className="hidden md:flex flex-col justify-center border-l border-[rgba(196,180,154,0.1)] py-20">
-            <p className="text-xs tracking-[0.35em] uppercase text-[var(--taupe)] opacity-50 px-10 mb-6">Програми</p>
-            <div className="flex flex-col">
-              {products.map((p) => (
-                <Link
-                  key={p.id}
-                  href={p.href}
-                  className={`group flex items-center justify-between px-10 py-5 no-underline border-t border-[rgba(196,180,154,0.08)] transition-colors
-                    ${p.id === 1
-                      ? "border-l-2 border-l-[var(--accent)] bg-[rgba(184,147,106,0.08)] hover:bg-[rgba(184,147,106,0.14)]"
-                      : "hover:bg-[rgba(255,255,255,0.04)]"
-                    }`}
+          {/* Right: stats grid — desktop only */}
+          <div
+            className="hidden md:grid grid-cols-2 border-l border-[rgba(196,180,154,0.08)]"
+            style={{ gridTemplateRows: "1fr 1fr", paddingTop: "96px", paddingBottom: "48px" }}
+          >
+            {HERO_STATS.map((stat, i) => (
+              <div
+                key={i}
+                className={`reveal reveal-delay-${i + 1} flex flex-col justify-center p-8`}
+                style={{
+                  borderBottom: i < 2 ? "1px solid rgba(196,180,154,0.08)" : undefined,
+                  borderRight: i % 2 === 0 ? "1px solid rgba(196,180,154,0.08)" : undefined,
+                }}
+              >
+                <p
+                  className="text-4xl md:text-5xl font-light mb-1 leading-none"
+                  style={{ color: ACCENT, fontFamily: "var(--font-heading)" }}
                 >
-                  <div>
-                    <p className="text-xs tracking-[0.25em] uppercase text-[var(--accent)] opacity-70 mb-1">{p.tag}</p>
-                    <h3 className="text-base font-medium text-[var(--cream)] group-hover:text-[var(--accent)] transition-colors">{p.title}</h3>
-                  </div>
-                  <div className="text-right flex-shrink-0 ml-4">
-                    <p className="text-sm text-[var(--taupe)]">{p.price}</p>
-                    <span className="block text-xs text-[var(--accent)] translate-x-0 group-hover:translate-x-1 transition-transform">→</span>
-                  </div>
-                </Link>
-              ))}
-            </div>
+                  {stat.num}
+                </p>
+                <p className="text-sm text-[var(--taupe)]">{stat.label}</p>
+              </div>
+            ))}
           </div>
 
         </div>
       </section>
 
-      {/* ЩО ОТРИМАЄШ */}
-      <section className="px-6 md:px-20 py-20 md:py-32 bg-[var(--cream)]">
-        <p className="text-xs tracking-[0.35em] uppercase text-[var(--accent-text)] text-center mb-4">Результати</p>
-        <h2 className="text-4xl md:text-5xl font-light text-center text-[var(--dark)] mb-16 leading-tight">
-          Що ти отримаєш від навчання
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-[2px] max-w-5xl mx-auto">
-          {[
-            { num: "01", title: "Чітку стратегію", desc: "Персональний план розвитку бренду з конкретними кроками і дедлайнами" },
-            { num: "02", title: "Живу спільноту", desc: "Доступ до ком'юніті однодумців-християн які підтримують і надихають" },
-            { num: "03", title: "Практичні навички", desc: "Інструменти для створення контенту, воронок продажів та монетизації" },
-            { num: "04", title: "Особистий бренд", desc: "Упакований профіль який відображає твої цінності і залучає потрібну аудиторію" },
-            { num: "05", title: "Перші продажі", desc: "Системний підхід до продажів через контент без відчуття нав'язування" },
-            { num: "06", title: "Підтримку ментора", desc: "Зворотний зв'язок від Олени або куратора на кожному етапі навчання" },
-          ].map((item) => (
-            <div key={item.num} className="bg-[var(--warm-white)] p-8 hover:-translate-y-1 transition-transform">
-              <p className="text-4xl font-light text-[var(--taupe)] opacity-40 mb-4">{item.num}</p>
-              <h3 className="text-xl font-normal text-[var(--dark)] mb-3">{item.title}</h3>
-              <p className="text-sm leading-relaxed text-[var(--light-text)] text-justify">{item.desc}</p>
-            </div>
+      {/* ── MARQUEE STRIP ── */}
+      <div
+        className="overflow-hidden py-4 border-y border-[rgba(184,147,106,0.2)]"
+        style={{ background: CREAM }}
+      >
+        <div className="marquee-track">
+          {[...MARQUEE_ITEMS, ...MARQUEE_ITEMS].map((item, i) => (
+            <span
+              key={i}
+              className="text-xs tracking-[0.3em] uppercase flex-shrink-0 inline-flex items-center"
+              style={{ color: LIGHT_TEXT, marginRight: "3rem" }}
+            >
+              {item}
+              <span className="ml-3" style={{ color: ACCENT }}>×</span>
+            </span>
           ))}
         </div>
-        <div className="text-center mt-12">
-          <CtaButton text="Записатися на консультацію" href="https://t.me/olenabohuta" newTab={true} variant="secondary" />
-        </div>
-      </section>
+      </div>
 
-      {/* КАТАЛОГ */}
-      <section id="catalog" className="px-6 md:px-20 py-20 md:py-32 bg-[var(--warm-white)]">
-        <p className="text-xs tracking-[0.35em] uppercase text-[var(--accent-text)] text-center mb-4">Каталог</p>
-        <h2 className="text-4xl md:text-5xl font-light text-center text-[var(--dark)] mb-12 leading-tight">
-          Всі програми навчання
-        </h2>
+      {/* ── CATALOG + FILTERS ── */}
+      <section id="catalog" className="py-20 md:py-28" style={{ background: WARM_WHITE }}>
+        <div className="px-6 md:px-20 max-w-6xl mx-auto">
 
-        {/* ФІЛЬТРИ */}
-        <div className="max-w-5xl mx-auto mb-10 flex flex-col gap-4">
-          <div className="flex flex-wrap gap-2 items-center">
-            <span className="text-xs tracking-widest uppercase text-[var(--light-text)] mr-2">Рівень:</span>
-            {levels.map((level) => (
-              <button
-                key={level}
-                onClick={() => setActiveLevel(level)}
-                className={`px-4 py-2 text-xs tracking-widest uppercase transition-colors border ${
-                  activeLevel === level
-                    ? "bg-[var(--dark)] text-[var(--cream)] border-[var(--dark)]"
-                    : "bg-transparent text-[var(--light-text)] border-[var(--sand)] hover:border-[var(--dark)]"
-                }`}
-              >
-                {level}
-              </button>
-            ))}
-          </div>
-          <div className="flex flex-wrap gap-2 items-center">
-            <span className="text-xs tracking-widest uppercase text-[var(--light-text)] mr-2">Тема:</span>
-            {topics.map((topic) => (
-              <button
-                key={topic}
-                onClick={() => setActiveTopic(topic)}
-                className={`px-4 py-2 text-xs tracking-widest uppercase transition-colors border ${
-                  activeTopic === topic
-                    ? "bg-[var(--accent)] text-white border-[var(--accent)]"
-                    : "bg-transparent text-[var(--light-text)] border-[var(--sand)] hover:border-[var(--accent)]"
-                }`}
-              >
-                {topic}
-              </button>
-            ))}
-          </div>
-        </div>
+          <p className="reveal text-xs tracking-[0.35em] uppercase mb-3" style={{ color: ACCENT }}>
+            Програми
+          </p>
+          <h2
+            className="reveal text-3xl md:text-4xl font-light mb-12 leading-tight"
+            style={{ color: DARK, fontFamily: "var(--font-heading)" }}
+          >
+            Знайди свою програму
+          </h2>
 
-        {/* КАРТКИ */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-[2px] max-w-5xl mx-auto">
-          {filtered.length > 0 ? filtered.map((product) => (
-            <ProductCard
-              key={product.id}
-              title={product.title}
-              desc={product.desc}
-              tag={product.tag}
-              level={product.level}
-              price={product.price}
-              href={product.href}
-            />
-          )) : (
-            <div className="col-span-3 text-center py-16">
-              <p className="text-lg text-[var(--light-text)]">За цими фільтрами нічого не знайдено.</p>
+          <div className="flex flex-col md:flex-row gap-0 md:gap-16 items-start">
+
+            {/* ── SIDEBAR (desktop) ── */}
+            <aside className="w-full md:w-48 flex-shrink-0 md:sticky" style={{ top: "96px" }}>
+
+              <div className="hidden md:block">
+                <p
+                  className="text-xs tracking-widest uppercase mb-4 pb-3"
+                  style={{ color: LIGHT_TEXT, opacity: 0.5, borderBottom: "1px solid rgba(42,31,20,0.1)" }}
+                >
+                  Рівень
+                </p>
+                <div className="flex flex-col">
+                  {FILTERS.map((f) => {
+                    const isActive = activeFilter === f.key;
+                    const count = getCount(f.key);
+                    return (
+                      <button
+                        key={f.key}
+                        onClick={() => setActiveFilter(f.key)}
+                        className="text-left flex items-center justify-between py-3 text-sm transition-all duration-200"
+                        style={{
+                          color: isActive ? DARK : LIGHT_TEXT,
+                          fontWeight: isActive ? 500 : 400,
+                          background: "none",
+                          border: "none",
+                          borderBottom: "1px solid rgba(42,31,20,0.07)",
+                          borderLeft: `2px solid ${isActive ? ACCENT : "transparent"}`,
+                          paddingLeft: isActive ? "10px" : "0",
+                          cursor: "pointer",
+                          transition: "all 0.25s cubic-bezier(0.16,1,0.3,1)",
+                        }}
+                      >
+                        <span>{f.label}</span>
+                        <span className="text-xs ml-3" style={{ color: LIGHT_TEXT, opacity: 0.4 }}>{count}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+                {activeFilter !== "all" && (
+                  <button
+                    onClick={() => setActiveFilter("all")}
+                    className="mt-5 text-xs tracking-widest uppercase hover:opacity-60 transition-opacity"
+                    style={{ color: ACCENT, background: "none", border: "none", cursor: "pointer", padding: 0 }}
+                  >
+                    ↺ Скинути фільтр
+                  </button>
+                )}
+              </div>
+
+              {/* ── MOBILE FILTER BUTTON ── */}
+              <div className="md:hidden mb-8">
+                <button
+                  onClick={() => setMobileFiltersOpen((v) => !v)}
+                  className="w-full flex items-center justify-between px-5 py-4 text-xs tracking-widest uppercase transition-all duration-300"
+                  style={{
+                    background: mobileFiltersOpen ? DARK : "transparent",
+                    color: mobileFiltersOpen ? CREAM : DARK,
+                    border: `1px solid ${mobileFiltersOpen ? DARK : "rgba(42,31,20,0.2)"}`,
+                    cursor: "pointer",
+                    transition: "background 0.35s cubic-bezier(0.16,1,0.3,1), color 0.35s ease, border-color 0.35s ease",
+                  }}
+                >
+                  <span>
+                    {activeFilter === "all" ? "Фільтрувати" : activeLabel}
+                  </span>
+                  <span
+                    style={{
+                      display: "inline-block",
+                      transform: mobileFiltersOpen ? "rotate(180deg)" : "rotate(0deg)",
+                      transition: "transform 0.35s cubic-bezier(0.16,1,0.3,1)",
+                      color: mobileFiltersOpen ? CREAM : ACCENT,
+                    }}
+                  >
+                    ↓
+                  </span>
+                </button>
+
+                {/* Dropdown panel */}
+                <div
+                  style={{
+                    overflow: "hidden",
+                    maxHeight: mobileFiltersOpen ? "400px" : "0",
+                    transition: "max-height 0.45s cubic-bezier(0.16,1,0.3,1)",
+                    borderTop: "none",
+                    borderRight: mobileFiltersOpen ? `1px solid rgba(42,31,20,0.1)` : "1px solid transparent",
+                    borderBottom: mobileFiltersOpen ? `1px solid rgba(42,31,20,0.1)` : "1px solid transparent",
+                    borderLeft: mobileFiltersOpen ? `1px solid rgba(42,31,20,0.1)` : "1px solid transparent",
+                  }}
+                >
+                  <div style={{ background: WARM_WHITE }}>
+                    {FILTERS.map((f) => {
+                      const isActive = activeFilter === f.key;
+                      const count = getCount(f.key);
+                      return (
+                        <button
+                          key={f.key}
+                          onClick={() => {
+                            setActiveFilter(f.key);
+                            setMobileFiltersOpen(false);
+                          }}
+                          className="w-full text-left flex items-center justify-between px-5 py-4 text-sm transition-all duration-200"
+                          style={{
+                            background: isActive ? `${ACCENT}12` : "transparent",
+                            color: isActive ? DARK : LIGHT_TEXT,
+                            fontWeight: isActive ? 500 : 400,
+                            borderBottom: "1px solid rgba(42,31,20,0.06)",
+                            borderLeft: `3px solid ${isActive ? ACCENT : "transparent"}`,
+                            paddingLeft: isActive ? "18px" : "20px",
+                            cursor: "pointer",
+                            transition: "all 0.2s ease",
+                          }}
+                        >
+                          <span>{f.label}</span>
+                          <span className="text-xs" style={{ color: LIGHT_TEXT, opacity: 0.4 }}>{count}</span>
+                        </button>
+                      );
+                    })}
+                    {activeFilter !== "all" && (
+                      <button
+                        onClick={() => {
+                          setActiveFilter("all");
+                          setMobileFiltersOpen(false);
+                        }}
+                        className="w-full text-left px-5 py-3 text-xs tracking-widest uppercase"
+                        style={{ color: ACCENT, background: "none", border: "none", cursor: "pointer" }}
+                      >
+                        ↺ Скинути фільтр
+                      </button>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+            </aside>
+
+            {/* ── ITEMS LIST ── */}
+            <div className="flex-1 min-w-0">
+              {filteredItems.length === 0 ? (
+                <p className="py-16 text-sm" style={{ color: LIGHT_TEXT }}>
+                  Нічого не знайдено
+                </p>
+              ) : (
+                <div className="flex flex-col gap-3">
+                  {filteredItems.map((item) => (
+                    <CourseRow key={item.id} item={item} />
+                  ))}
+                </div>
+              )}
             </div>
-          )}
+
+          </div>
         </div>
       </section>
 
-      {/* ПАРТНЕРИ */}
-      <section className="px-6 md:px-20 py-20 md:py-32 bg-[var(--sand)]">
-        <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div>
-            <p className="text-xs tracking-[0.35em] uppercase text-[var(--accent-text)] mb-4">Партнерство</p>
-            <h2 className="text-4xl md:text-5xl font-light text-[var(--dark)] leading-tight mb-6">
-              Запрошую<br />
-              <em className="italic text-[var(--accent)]">менторів</em><br />
-              та викладачів
-            </h2>
-            <p className="text-lg leading-relaxed text-[var(--light-text)] mb-8 text-justify">
-              Якщо ти Christian-експерт у своїй ніші і хочеш ділитися знаннями — долучайся до платформи як викладач або ментор. Разом ми будуємо найсильніше Christian-освітнє ком'юніті в Україні.
-            </p>
-            <a href="https://t.me/olenabohuta" target="_blank" rel="noopener noreferrer" className="inline-block px-10 py-4 bg-[var(--dark)] text-[var(--cream)] no-underline text-xs tracking-widest uppercase hover:bg-[var(--accent)] transition-colors">
-              Написати Олені
+      {/* ── КОНСУЛЬТАЦІЇ ── */}
+      <section className="px-6 md:px-20 py-12" style={{ background: CREAM }}>
+        <div className="max-w-6xl mx-auto">
+          <Link
+            href="/products/konsultatsii"
+            className="reveal group flex flex-col md:flex-row md:items-center justify-between gap-6 no-underline overflow-hidden"
+            style={{
+              background: CREAM,
+              border: `1px solid rgba(42,31,20,0.1)`,
+              transition: "background 0.35s cubic-bezier(0.16,1,0.3,1), transform 0.35s cubic-bezier(0.16,1,0.3,1), box-shadow 0.35s ease",
+            }}
+            onMouseEnter={(e) => {
+              const el = e.currentTarget as HTMLElement;
+              el.style.background = `${ACCENT}18`;
+              el.style.transform = "translateY(-3px)";
+              el.style.boxShadow = `0 12px 40px ${ACCENT}30`;
+            }}
+            onMouseLeave={(e) => {
+              const el = e.currentTarget as HTMLElement;
+              el.style.background = CREAM;
+              el.style.transform = "";
+              el.style.boxShadow = "";
+            }}
+          >
+            {/* Mobile: color top bar */}
+            <div className="md:hidden w-full" style={{ height: "4px", background: ACCENT }} />
+
+            {/* Desktop: accent bar */}
+            <div className="hidden md:block flex-shrink-0 self-stretch" style={{ width: "6px", background: ACCENT }} />
+
+            <div className="flex-1 p-6 md:py-7 md:pl-6">
+              <p className="text-xs tracking-widest uppercase mb-3" style={{ color: ACCENT }}>
+                Хочеш пройти швидше?
+              </p>
+              <h3
+                className="text-2xl md:text-4xl font-medium mb-2 leading-snug text-center md:text-left"
+                style={{ color: DARK, fontFamily: "var(--font-heading)" }}
+              >
+                Особиста консультація з Оленою
+              </h3>
+              <p className="text-sm leading-relaxed max-w-xl text-center md:text-left" style={{ color: LIGHT_TEXT }}>
+                Замість того щоб шукати відповідь самостійно — одна сесія дає чіткий напрямок, стратегію і план дій саме для тебе.
+              </p>
+            </div>
+
+            <div className="px-6 pb-6 pt-2 md:py-7 md:pr-7 md:pl-0 flex-shrink-0">
+              <span
+                className="text-xs tracking-widest uppercase whitespace-nowrap group-hover:tracking-[0.2em] transition-all duration-300"
+                style={{ color: ACCENT, borderBottom: `1px solid ${ACCENT}` }}
+              >
+                Детальніше →
+              </span>
+            </div>
+          </Link>
+        </div>
+      </section>
+
+      {/* ── CTA ── */}
+      <section className="px-6 md:px-20 py-20" style={{ background: DARK }}>
+        <div className="max-w-2xl mx-auto text-center">
+          <p className="reveal text-xs tracking-[0.35em] uppercase mb-4" style={{ color: ACCENT }}>
+            Ще не визначилась?
+          </p>
+          <h2
+            className="reveal text-3xl md:text-4xl font-light mb-4 leading-tight text-[var(--cream)]"
+            style={{ fontFamily: "var(--font-heading)" }}
+          >
+            Олена підбере програму особисто
+          </h2>
+          <p className="reveal text-base leading-relaxed mb-8 text-[var(--taupe)]">
+            Напиши в Telegram — і за кілька хвилин отримаєш відповідь яка програма підходить саме тобі.
+          </p>
+          <div className="reveal flex flex-wrap justify-center gap-4">
+            <a
+              href="https://t.me/olenabohuta"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block px-10 py-4 text-xs tracking-widest uppercase hover:opacity-80 transition-opacity"
+              style={{ background: ACCENT, color: "#fff" }}
+            >
+              Написати в Telegram →
             </a>
-          </div>
-          <div className="bg-[var(--warm-white)] p-10">
-            <ul className="list-none space-y-4">
-              {[
-                "Власна аудиторія платформи",
-                "Підтримка у створенні курсу",
-                "Спільний маркетинг та просування",
-                "Технічна інфраструктура готова",
-                "Ком'юніті однодумців-християн",
-              ].map((item) => (
-                <li key={item} className="flex items-start gap-3">
-                  <span className="text-[var(--accent)] mt-1">✓</span>
-                  <span className="text-base text-[var(--light-text)] leading-relaxed">{item}</span>
-                </li>
-              ))}
-            </ul>
+            <button
+              onClick={() => {
+                const el = document.getElementById("catalog");
+                if (el) el.scrollIntoView({ behavior: "smooth" });
+              }}
+              className="inline-block px-8 py-4 text-xs tracking-widest uppercase hover:opacity-70 transition-opacity"
+              style={{
+                color: "rgba(254,248,224,0.5)",
+                border: "1px solid rgba(254,248,224,0.15)",
+                background: "none",
+                cursor: "pointer",
+              }}
+            >
+              ↑ До програм
+            </button>
           </div>
         </div>
       </section>
 
-      {/* FAQ */}
-      <FaqSection items={faq} />
+      {/* ── FAQ ── */}
+      <FaqSection items={faq} title="Питання та відповіді" />
 
-      {/* ФУТЕР */}
       <Footer />
-
     </main>
+  );
+}
+
+function CourseRow({ item }: { item: Item }) {
+  const isFree = item.type === "free";
+
+  const inner = (
+    <div className="flex flex-col md:flex-row md:items-center gap-0 w-full">
+      {/* Color accent bar — desktop only */}
+      <div
+        className="hidden md:block flex-shrink-0 self-stretch"
+        style={{ width: "6px", background: item.color, opacity: item.active ? 1 : 0.4 }}
+      />
+
+      {/* Mobile: color top bar */}
+      <div
+        className="md:hidden w-full"
+        style={{ height: "4px", background: item.color, opacity: item.active ? 1 : 0.4 }}
+      />
+
+      {/* Main content */}
+      <div className="flex-1 min-w-0 p-6 md:py-7 md:pl-6">
+        <div className="flex flex-wrap items-center gap-2 mb-4 md:mb-3">
+          <span
+            className="text-xs tracking-widest uppercase px-3 py-1 font-medium"
+            style={{ background: item.color, color: "#fff" }}
+          >
+            {item.tag}
+          </span>
+          {isFree && (
+            <span
+              className="text-xs tracking-widest uppercase px-3 py-1"
+              style={{ background: "rgba(184,147,106,0.15)", color: ACCENT }}
+            >
+              Безкоштовно
+            </span>
+          )}
+          <span className="text-xs" style={{ color: LIGHT_TEXT, opacity: 0.5 }}>
+            {item.social}
+          </span>
+        </div>
+        <h3
+          className="text-2xl md:text-3xl font-light leading-snug mb-2 transition-colors duration-300 text-center md:text-left"
+          style={{
+            color: item.active ? DARK : LIGHT_TEXT,
+            fontFamily: "var(--font-heading)",
+          }}
+        >
+          {item.title}
+        </h3>
+        <p className="text-sm leading-relaxed max-w-lg text-center md:text-left" style={{ color: LIGHT_TEXT }}>
+          {item.desc}
+        </p>
+      </div>
+
+      {/* Price + CTA */}
+      <div className="flex md:flex-col items-center justify-between md:justify-center gap-3 flex-shrink-0 md:min-w-[130px] px-6 pb-6 pt-2 md:py-7 md:pr-7 md:pl-0">
+        <p
+          className="text-2xl font-light"
+          style={{ color: item.active ? DARK : LIGHT_TEXT, fontFamily: "var(--font-heading)" }}
+        >
+          {item.price}
+        </p>
+        {item.active ? (
+          <span
+            className="text-xs tracking-widest uppercase whitespace-nowrap group-hover:tracking-[0.2em] transition-all duration-300"
+            style={{ color: item.color, borderBottom: `1px solid ${item.color}` }}
+          >
+            {isFree ? "Дивитись →" : "Детальніше →"}
+          </span>
+        ) : (
+          <span className="text-xs tracking-widest uppercase opacity-40" style={{ color: DARK }}>
+            Незабаром
+          </span>
+        )}
+      </div>
+    </div>
+  );
+
+  const baseCard: React.CSSProperties = {
+    background: CREAM,
+    opacity: item.active ? 1 : 0.45,
+    overflow: "hidden",
+    border: `1px solid rgba(42,31,20,0.1)`,
+    transition: "background 0.35s cubic-bezier(0.16,1,0.3,1), transform 0.35s cubic-bezier(0.16,1,0.3,1), box-shadow 0.35s ease",
+  };
+
+  if (!item.active) {
+    return (
+      <div style={{ ...baseCard, pointerEvents: "none" }}>
+        {inner}
+      </div>
+    );
+  }
+
+  return (
+    <Link
+      href={item.href}
+      className="group block no-underline"
+      style={baseCard}
+      onMouseEnter={(e) => {
+        const el = e.currentTarget as HTMLElement;
+        el.style.background = `${item.color}20`;
+        el.style.transform = "translateY(-3px)";
+        el.style.boxShadow = `0 12px 40px ${item.color}30`;
+      }}
+      onMouseLeave={(e) => {
+        const el = e.currentTarget as HTMLElement;
+        el.style.background = CREAM;
+        el.style.transform = "";
+        el.style.boxShadow = "";
+      }}
+    >
+      {inner}
+    </Link>
   );
 }

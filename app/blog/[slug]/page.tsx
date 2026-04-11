@@ -6,6 +6,32 @@ import { PortableText } from "@portabletext/react";
 
 export const revalidate = 60;
 
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const post = await getPost(slug);
+
+  if (!post) {
+    return { title: "Статтю не знайдено — Олена Богута" };
+  }
+
+  const ogImage = post.coverImage
+    ? urlFor(post.coverImage).width(1200).height(630).url()
+    : "https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto,w_1200,h_630,c_fill,g_face/v1774359969/Olena_Bohuta_htaxhd.webp";
+
+  return {
+    title: `${post.title} — Олена Богута`,
+    description: post.excerpt || `Стаття Олени Богути: ${post.title}`,
+    openGraph: {
+      title: post.title,
+      description: post.excerpt || `Стаття Олени Богути: ${post.title}`,
+      url: `https://olenabohuta.com/blog/${slug}`,
+      type: "article",
+      publishedTime: post.publishedAt,
+      images: [{ url: ogImage, width: 1200, height: 630, alt: post.title }],
+    },
+  };
+}
+
 const ptComponents = {
   block: {
     normal: ({ children }: any) => <p className="text-base leading-relaxed mb-6 text-justify" style={{ color: 'var(--light-text)' }}>{children}</p>,

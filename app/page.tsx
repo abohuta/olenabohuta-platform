@@ -196,11 +196,11 @@ export default function Home() {
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-[2px] max-w-7xl mx-auto">
           {[
-            { title: 'Шлях', desc: 'Марафон дисципліни за біблійними принципами тиші', tag: 'Марафон', href: '/products/shlyakh' },
-            { title: 'Початок', desc: 'Тренінг для християн, що прагнуть запустити блог', tag: 'Тренінг', href: '/products/pochatok' },
-            { title: 'Кемп Архітектор Бренду', desc: 'Навчання для християн які хочуть розвивати особистий бренд', tag: 'Кемп', href: '/products/kemp' },
-            { title: 'Тиша', desc: 'Навчання по зупусках та автоворонках', tag: 'Курс', href: '/products/tysha' },
-            { title: 'Консультації', desc: 'Особиста робота над твоїм брендом та стратегією', tag: 'Сесія', href: '/products/konsultatsii' },
+            { title: 'Шлях', desc: 'Марафон дисципліни за біблійними принципами — змінюй звички, мислення і фокус', tag: 'Марафон', href: '/products/shlyakh' },
+            { title: 'Початок', desc: 'Тренінг для тих, хто хоче запустити особистий блог з нуля', tag: 'Тренінг', href: '/products/pochatok' },
+            { title: 'Кемп Архітектор Бренду', desc: 'Вибудуй особистий бренд, залучи аудиторію і продавай з цінностями', tag: 'Кемп', href: '/products/kemp' },
+            { title: 'Тиша', desc: 'Система запусків і автоворонок — продавай системно без щоденного хаосу', tag: 'Курс', href: '/products/tysha' },
+            { title: 'Консультації', desc: 'Одна сесія з Оленою — чіткий напрямок, стратегія і план дій саме для тебе', tag: 'Сесія', href: '/products/konsultatsii' },
           ].map((item) => (
             <Link href={item.href} key={item.title} className="bg-[var(--warm-white)] p-10 block no-underline reveal card-shine card-depth">
               <p className="text-xs tracking-[0.3em] uppercase text-[var(--accent)] mb-3">{item.tag}</p>
@@ -211,7 +211,7 @@ export default function Home() {
         </div>
         <div className="text-center mt-12">
           <Link href="/navchannya" className="inline-block px-10 py-4 border border-[var(--dark)] text-[var(--dark)] no-underline text-xs tracking-widest uppercase hover:bg-[var(--dark)] hover:text-[var(--cream)] transition-colors">
-            Дізнатися більше
+            Знайти свою програму →
           </Link>
         </div>
       </section>
