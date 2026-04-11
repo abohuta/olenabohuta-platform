@@ -22,8 +22,29 @@ export default async function Blog() {
       <Navbar />
 
       {/* HERO — compact */}
-      <section className="px-6 md:px-20 pt-32 pb-16 bg-[var(--dark)]">
-        <div className="max-w-3xl">
+      <section className="px-6 md:px-20 pt-32 pb-16 bg-[var(--dark)] relative overflow-hidden">
+        {/* Typographic watermark */}
+        <div
+          className="absolute inset-0 flex items-center pointer-events-none select-none"
+          aria-hidden="true"
+          style={{ paddingLeft: "clamp(1.5rem, 5vw, 5rem)" }}
+        >
+          <span
+            className="font-medium leading-none"
+            style={{
+              fontFamily: "var(--font-heading)",
+              fontSize: "clamp(120px, 22vw, 340px)",
+              opacity: 1,
+              letterSpacing: "-0.04em",
+              color: "transparent",
+              WebkitTextStroke: "1.5px rgba(196,180,154,0.12)",
+            }}
+          >
+            ДУМКИ
+          </span>
+        </div>
+
+        <div className="max-w-3xl relative z-10">
           <p className="text-xs tracking-[0.35em] uppercase text-[var(--accent)] mb-5">Блог</p>
           <h1
             className="font-medium text-[var(--cream)] leading-none mb-5"
