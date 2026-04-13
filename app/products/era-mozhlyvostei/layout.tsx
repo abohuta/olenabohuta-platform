@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Ера Можливостей — Безкоштовний майстер-клас",
     description: "Як християнам заробляти в Instagram: мислення, техніка, воронки та реальні результати учасниць.",
-    url: "https://olenabohuta.com/era-mozhlyvostei",
+    url: "https://olenabohuta.com/products/era-mozhlyvostei",
     images: [{ url: "https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto,w_1200,h_630,c_fill/v1774448751/photo_2026-03-25_15.17.06_sw70mx.jpg", width: 1200, height: 630 }],
   },
 };

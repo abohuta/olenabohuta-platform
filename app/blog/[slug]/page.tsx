@@ -29,6 +29,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       publishedTime: post.publishedAt,
       images: [{ url: ogImage, width: 1200, height: 630, alt: post.title }],
     },
+    alternates: {
+      canonical: `https://olenabohuta.com/blog/${slug}`,
+    },
   };
 }
 
@@ -81,8 +84,45 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
     );
   }
 
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": post.title,
+    "description": post.excerpt || `Стаття Олени Богути: ${post.title}`,
+    "url": `https://olenabohuta.com/blog/${slug}`,
+    "datePublished": post.publishedAt || new Date().toISOString(),
+    "dateModified": post.publishedAt || new Date().toISOString(),
+    "author": {
+      "@type": "Person",
+      "name": "Олена Богута",
+      "url": "https://olenabohuta.com"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Олена Богута",
+      "url": "https://olenabohuta.com"
+    },
+    ...(post.coverImage && {
+      "image": {
+        "@type": "ImageObject",
+        "url": urlFor(post.coverImage).width(1200).height(630).url(),
+        "width": 1200,
+        "height": 630,
+      }
+    }),
+    "inLanguage": "uk",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `https://olenabohuta.com/blog/${slug}`
+    }
+  };
+
   return (
     <main className="w-full overflow-x-hidden">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
       <Navbar />
 
       {/* HERO статті */}
