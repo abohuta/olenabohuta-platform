@@ -1,10 +1,15 @@
 import Link from "next/link";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
-import { getPost, urlFor, CATEGORIES } from "../../../lib/sanity";
+import { getPost, getPosts, urlFor, CATEGORIES } from "../../../lib/sanity";
 import { PortableText } from "@portabletext/react";
 
 export const revalidate = 60;
+
+export async function generateStaticParams() {
+  const posts = await getPosts();
+  return posts.map((post: any) => ({ slug: post.slug.current }));
+}
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
