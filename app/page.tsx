@@ -173,7 +173,7 @@ export default function Home() {
               Переглянути продукти
             </Link>
             <a href="https://docs.google.com/forms/d/1GTJ6oijlCOO7GfUMlhvGealas2Vo5GI7bh-uaAljfdQ/edit" target="_blank" rel="noopener noreferrer" className="inline-block px-10 py-4 border border-[var(--accent)] text-[var(--accent)] no-underline text-xs tracking-widest uppercase hover:bg-[var(--accent)] hover:text-white transition-colors text-center">
-              Хочу вчитися
+              Записатися на навчання
             </a>
           </div>
         </div>
@@ -291,10 +291,10 @@ export default function Home() {
         </h2>
         <div className="flex flex-col md:flex-row gap-4 justify-center reveal reveal-delay-2">
           <a href="https://t.me/olenabohuta" target="_blank" rel="noopener noreferrer" className="px-10 py-4 bg-[var(--accent)] text-white no-underline text-xs tracking-widest uppercase hover:bg-[var(--brown)] transition-colors">
-            Telegram
+            Написати в Telegram
           </a>
           <a href="https://www.instagram.com/olenka.bohuta" target="_blank" rel="noopener noreferrer" className="px-10 py-4 border border-[var(--taupe)] text-[var(--taupe)] no-underline text-xs tracking-widest uppercase hover:border-[var(--cream)] hover:text-[var(--cream)] transition-colors">
-            Instagram
+            Написати в Instagram
           </a>
         </div>
       </section>
