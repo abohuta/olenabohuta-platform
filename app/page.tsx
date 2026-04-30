@@ -160,7 +160,7 @@ export default function Home() {
             Засновниця · Наставник · Архітектор бренду
           </p>
           <h1 className="text-6xl md:text-8xl lg:text-9xl font-light text-[var(--dark)] mb-6" style={{ lineHeight: 0.75, letterSpacing: '-0.02em' }}>
-            Олена<br />
+            Олена{' '}<br />
             <em className="italic text-[var(--accent)]">Богута</em>
           </h1>
           <div className="max-w-md mb-10 flex flex-col gap-6">
