@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Закритий Клуб — Олена Богута",
   description: "Закрита спільнота Christian-підприємців і блогерів. Щомісячні зустрічі, підтримка та розвиток разом.",
+  alternates: { canonical: 'https://olenabohuta.com/zakrytyi-klub' },
   openGraph: {
     title: "Закритий Клуб — Олена Богута",
     description: "Закрита спільнота Christian-підприємців і блогерів",

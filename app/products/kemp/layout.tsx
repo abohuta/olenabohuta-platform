@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Кемп Архітектор Бренду — Олена Богута",
   description: "8-тижневий кемп для Christian-блогерів і підприємців. Побудуй особистий бренд, залучай аудиторію і продавай з цінностями.",
+  alternates: { canonical: 'https://olenabohuta.com/products/kemp' },
   openGraph: {
     title: "Кемп Архітектор Бренду",
     description: "8-тижневий кемп для Christian-блогерів і підприємців",

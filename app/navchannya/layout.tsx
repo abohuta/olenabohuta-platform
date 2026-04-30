@@ -4,6 +4,7 @@ export const metadata: Metadata = {
   title: "Навчання — Програми для Christian-блогерів · Олена Богута",
   description: "Практичні програми для християн: від першого блогу до системної монетизації в Instagram. Марафони, курси, особисті консультації.",
   keywords: ["навчання для християн", "Christian блог", "курси Instagram", "особистий бренд", "Олена Богута", "монетизація блогу"],
+  alternates: { canonical: 'https://olenabohuta.com/navchannya' },
   openGraph: {
     title: "Навчання — Програми для Christian-блогерів · Олена Богута",
     description: "Практичні програми для тих, хто хоче вести блог і заробляти в Instagram з вірою і сенсом.",

@@ -4,6 +4,7 @@ export const metadata: Metadata = {
   title: "Які типи Christian-блогів зростають в Instagram · Олена Богута",
   description: "Безкоштовний відео-урок: дізнайся свій тип блогу серед 5 моделей, які зростають в Instagram серед Christian-аудиторії. Дивись без реєстрації.",
   keywords: ["типи блогів", "Christian блог", "Instagram блог", "як вести блог", "Олена Богута", "безкоштовний урок"],
+  alternates: { canonical: 'https://olenabohuta.com/products/typy-khrystyianskykh-blohiv' },
   openGraph: {
     title: "Які типи Christian-блогів зростають в Instagram · Олена Богута",
     description: "Безкоштовний відео-урок: знайди свій тип блогу — і не копіюй чужу модель.",

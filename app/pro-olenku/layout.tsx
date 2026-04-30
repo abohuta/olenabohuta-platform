@@ -4,6 +4,7 @@ export const metadata: Metadata = {
   title: "Про автора — Олена Богута",
   description: "Олена Богута — Christian-підприємець, блогер і засновниця освітньої платформи для тих, хто хоче будувати бренд і бізнес з вірою та сенсом.",
   keywords: ["Олена Богута", "про автора", "Christian блогер", "особистий бренд", "Christian підприємець"],
+  alternates: { canonical: 'https://olenabohuta.com/pro-olenku' },
   openGraph: {
     title: "Про автора — Олена Богута",
     description: "Christian-підприємець, блогер і засновниця освітньої платформи для тих, хто хоче будувати бренд і бізнес з вірою та сенсом.",

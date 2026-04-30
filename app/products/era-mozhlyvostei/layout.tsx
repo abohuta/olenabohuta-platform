@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Ера Можливостей — Як християнам заробляти в Instagram · Олена Богута",
   description: "Безкоштовний майстер-клас: мислення, техніка та холодна воронка, яка приносить дохід без щоденного контенту. Дивись відео зараз.",
+  alternates: { canonical: 'https://olenabohuta.com/products/era-mozhlyvostei' },
   openGraph: {
     title: "Ера Можливостей — Безкоштовний майстер-клас",
     description: "Як християнам заробляти в Instagram: мислення, техніка, воронки та реальні результати учасниць.",

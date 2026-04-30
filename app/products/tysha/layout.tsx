@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "ТИША — Premium навчання для експертів · Олена Богута",
   description: "8 тижнів — від ідеї до запуску Premium-продукту. Навчання для Christian-експертів які хочуть масштабуватись.",
+  alternates: { canonical: 'https://olenabohuta.com/products/tysha' },
   openGraph: {
     title: "ТИША — Premium навчання для експертів",
     description: "8 тижнів — від ідеї до запуску Premium-продукту",

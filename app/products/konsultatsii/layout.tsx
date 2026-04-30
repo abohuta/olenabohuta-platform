@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Консультації — Олена Богута",
   description: "Особиста робота з Оленою над твоїм брендом, стратегією та контентом. Розбір бренду, контент-стратегія, запуск продукту.",
+  alternates: { canonical: 'https://olenabohuta.com/products/konsultatsii' },
   openGraph: {
     title: "Консультації — Олена Богута",
     description: "Особиста робота з Оленою над твоїм брендом і стратегією",

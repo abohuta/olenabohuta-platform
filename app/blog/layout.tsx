@@ -4,6 +4,7 @@ export const metadata: Metadata = {
   title: "Блог — Олена Богута",
   description: "Думки, натхнення і практичні поради для Christian-блогерів і підприємців. Про бренд, монетизацію, контент і віру.",
   keywords: ["блог", "Christian блогер", "особистий бренд", "Instagram", "монетизація", "Олена Богута"],
+  alternates: { canonical: 'https://olenabohuta.com/blog' },
   openGraph: {
     title: "Блог — Олена Богута",
     description: "Думки, натхнення і практичні поради для Christian-блогерів і підприємців.",

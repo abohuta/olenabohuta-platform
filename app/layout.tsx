@@ -22,10 +22,13 @@ const nunito = Nunito({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://olenabohuta.com'),
   title: "Олена Богута — особистий бренд для християн",
   description: "Платформа для християн які хочуть розвивати особистий бренд, вести блог та продавати послуги з цінностями й сенсом.",
   keywords: ["особистий бренд", "християни", "блог", "Instagram", "онлайн навчання", "Олена Богута"],
   authors: [{ name: "Олена Богута" }],
+  robots: { index: true, follow: true, googleBot: { index: true, follow: true } },
+  alternates: { canonical: 'https://olenabohuta.com' },
   openGraph: {
     title: "Олена Богута — особистий бренд для християн",
     description: "Платформа для християн які хочуть розвивати особистий бренд",
