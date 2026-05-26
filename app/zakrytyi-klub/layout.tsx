@@ -12,19 +12,38 @@ export const metadata: Metadata = {
   },
 };
 
-const breadcrumbJsonLd = {
+const klubJsonLd = {
   "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Головна", "item": "https://olenabohuta.com" },
-    { "@type": "ListItem", "position": 2, "name": "Закритий Клуб", "item": "https://olenabohuta.com/zakrytyi-klub" }
+  "@graph": [
+    {
+      "@type": "Service",
+      "@id": "https://olenabohuta.com/zakrytyi-klub#service",
+      "name": "Закритий Клуб Олени Богути",
+      "description": "Закрита спільнота Christian-підприємців і блогерів. Щомісячні зустрічі, підтримка та розвиток разом.",
+      "url": "https://olenabohuta.com/zakrytyi-klub",
+      "provider": { "@id": "https://olenabohuta.com/#person" },
+      "serviceType": "Онлайн-спільнота",
+      "inLanguage": "uk",
+      "areaServed": "UA",
+      "audience": {
+        "@type": "Audience",
+        "audienceType": "Christian-підприємці та блогери"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Головна", "item": "https://olenabohuta.com" },
+        { "@type": "ListItem", "position": 2, "name": "Закритий Клуб", "item": "https://olenabohuta.com/zakrytyi-klub" }
+      ]
+    }
   ]
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(klubJsonLd) }} />
       {children}
     </>
   );

@@ -13,19 +13,34 @@ export const metadata: Metadata = {
   },
 };
 
-const breadcrumbJsonLd = {
+const blogJsonLd = {
   "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Головна", "item": "https://olenabohuta.com" },
-    { "@type": "ListItem", "position": 2, "name": "Блог", "item": "https://olenabohuta.com/blog" }
+  "@graph": [
+    {
+      "@type": "Blog",
+      "@id": "https://olenabohuta.com/blog#blog",
+      "url": "https://olenabohuta.com/blog",
+      "name": "Блог Олени Богути",
+      "description": "Думки, натхнення і практичні поради для Christian-блогерів і підприємців.",
+      "inLanguage": "uk",
+      "author": { "@id": "https://olenabohuta.com/#person" },
+      "publisher": { "@id": "https://olenabohuta.com/#organization" },
+      "isPartOf": { "@id": "https://olenabohuta.com/#website" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Головна", "item": "https://olenabohuta.com" },
+        { "@type": "ListItem", "position": 2, "name": "Блог", "item": "https://olenabohuta.com/blog" }
+      ]
+    }
   ]
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(blogJsonLd) }} />
       {children}
     </>
   );
