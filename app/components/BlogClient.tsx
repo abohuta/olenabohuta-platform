@@ -142,6 +142,7 @@ function GridCard({ post }: { post: Post }) {
 export default function BlogClient({ posts }: { posts: Post[] }) {
   const [activeCategory, setActiveCategory] = useState<string>("all");
   const [showCount, setShowCount] = useState(POSTS_PER_PAGE);
+  const [searchQuery, setSearchQuery] = useState("");
 
   // Categories that actually exist in posts
   const availableCategories = useMemo(() => {
@@ -158,15 +159,26 @@ export default function BlogClient({ posts }: { posts: Post[] }) {
 
   // Filtered posts for grid
   const filteredPosts = useMemo(() => {
-    if (activeCategory === "all") return posts;
-    return posts.filter((p) => p.category === activeCategory);
-  }, [posts, activeCategory]);
+    let result = activeCategory === "all" ? posts : posts.filter((p) => p.category === activeCategory);
+    if (searchQuery.trim()) {
+      const q = searchQuery.toLowerCase();
+      result = result.filter(
+        (p) => p.title.toLowerCase().includes(q) || (p.excerpt || "").toLowerCase().includes(q)
+      );
+    }
+    return result;
+  }, [posts, activeCategory, searchQuery]);
 
   const visiblePosts = filteredPosts.slice(0, showCount);
   const hasMore = showCount < filteredPosts.length;
 
   const handleCategoryChange = (cat: string) => {
     setActiveCategory(cat);
+    setShowCount(POSTS_PER_PAGE);
+  };
+
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
     setShowCount(POSTS_PER_PAGE);
   };
 
@@ -201,6 +213,41 @@ export default function BlogClient({ posts }: { posts: Post[] }) {
 
       {/* ── FILTERS + GRID ──────────────────────────────────── */}
       <section className="px-6 md:px-20 pb-24 bg-[var(--warm-white)]">
+        {/* Search */}
+        <div className="mb-6 pt-2">
+          <div className="relative max-w-md">
+            <svg
+              className="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none"
+              width="14" height="14" viewBox="0 0 24 24" fill="none"
+              stroke="var(--taupe)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+            >
+              <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+            </svg>
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={handleSearch}
+              placeholder="Пошук по статтях..."
+              className="w-full pl-10 pr-4 py-3 text-sm outline-none transition-all"
+              style={{
+                background: "transparent",
+                border: "1px solid var(--sand)",
+                color: "var(--dark)",
+                borderRadius: "1px",
+              }}
+            />
+            {searchQuery && (
+              <button
+                onClick={() => setSearchQuery("")}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-xs cursor-pointer"
+                style={{ color: "var(--taupe)" }}
+              >
+                ✕
+              </button>
+            )}
+          </div>
+        </div>
+
         {/* Filter tabs */}
         <div className="mb-10">
           <div

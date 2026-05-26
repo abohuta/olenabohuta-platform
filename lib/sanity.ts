@@ -50,6 +50,21 @@ export async function getPost(slug: string) {
   `, { slug })
 }
 
+export async function getRelatedPosts(currentSlug: string, category: string) {
+  return client.fetch(`
+    *[_type == "post" && slug.current != $currentSlug && category == $category] | order(publishedAt desc) [0...3] {
+      _id,
+      title,
+      slug,
+      category,
+      excerpt,
+      coverImage,
+      publishedAt,
+      readTime
+    }
+  `, { currentSlug, category })
+}
+
 export const CATEGORIES: Record<string, string> = {
   brand: 'Особистий бренд',
   faith: 'Християнство і віра',

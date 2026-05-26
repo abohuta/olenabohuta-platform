@@ -1,7 +1,8 @@
 import Link from "next/link";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
-import { getPost, getPosts, urlFor, CATEGORIES } from "../../../lib/sanity";
+import ShareButtons from "../../components/ShareButtons";
+import { getPost, getPosts, getRelatedPosts, urlFor, CATEGORIES } from "../../../lib/sanity";
 import { PortableText } from "@portabletext/react";
 
 export const revalidate = 60;
@@ -73,6 +74,9 @@ const ptComponents = {
 export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const post = await getPost(slug);
+  const related = post?.category
+    ? await getRelatedPosts(slug, post.category).catch(() => [])
+    : [];
 
   if (!post) {
     return (
@@ -189,19 +193,84 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
       <section className="px-6 md:px-20 py-16 md:py-24 bg-[var(--warm-white)]">
         <div className="max-w-3xl mx-auto">
           {post.body && <PortableText value={post.body} components={ptComponents} />}
+
+          {/* Share */}
+          <div className="mt-12 pt-8" style={{ borderTop: '1px solid var(--sand)' }}>
+            <ShareButtons
+              url={`https://olenabohuta.com/blog/${slug}`}
+              title={post.title}
+            />
+          </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="px-6 md:px-20 py-16 bg-[var(--cream)] text-center">
-        <p className="text-xs tracking-[0.35em] uppercase text-[var(--accent-text)] mb-4">Читати далі</p>
-        <h2 className="text-3xl font-medium text-[var(--dark)] mb-6" style={{ fontFamily: 'var(--font-heading)' }}>
-          Більше статей у блозі
-        </h2>
-        <Link href="/blog" className="inline-block px-10 py-4 text-xs tracking-widest uppercase no-underline hover:opacity-80 transition-opacity" style={{ background: 'var(--dark)', color: 'var(--cream)' }}>
-          Всі статті
-        </Link>
-      </section>
+      {/* СХОЖІ СТАТТІ */}
+      {related.length > 0 && (
+        <section className="px-6 md:px-20 py-16 bg-[var(--cream)]">
+          <div className="max-w-5xl mx-auto">
+            <p className="text-xs tracking-[0.35em] uppercase mb-8" style={{ color: 'var(--accent)' }}>
+              Схожі статті
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-[2px]">
+              {related.map((rel: any) => {
+                const relImg = rel.coverImage ? urlFor(rel.coverImage).width(600).height(375).url() : null;
+                return (
+                  <Link
+                    key={rel._id}
+                    href={`/blog/${rel.slug.current}`}
+                    className="no-underline block group"
+                    style={{ background: 'var(--warm-white)' }}
+                  >
+                    <div className="relative overflow-hidden" style={{ aspectRatio: '16/10' }}>
+                      {relImg ? (
+                        <img
+                          src={relImg}
+                          alt={rel.title}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                          loading="lazy"
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center" style={{ background: 'var(--sand)' }}>
+                          <span style={{ color: 'var(--taupe)', fontSize: '1.5rem' }}>✦</span>
+                        </div>
+                      )}
+                    </div>
+                    <div className="p-5">
+                      {rel.readTime && (
+                        <span className="text-xs mb-2 block" style={{ color: 'var(--taupe)' }}>{rel.readTime} хв читання</span>
+                      )}
+                      <h3
+                        className="text-base font-medium leading-snug group-hover:text-[var(--accent)] transition-colors line-clamp-2"
+                        style={{ fontFamily: 'var(--font-heading)', color: 'var(--dark)' }}
+                      >
+                        {rel.title}
+                      </h3>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+            <div className="text-center mt-10">
+              <Link href="/blog" className="text-xs tracking-widest uppercase no-underline hover:opacity-70 transition-opacity" style={{ color: 'var(--light-text)', borderBottom: '1px solid var(--sand)', paddingBottom: '2px' }}>
+                Всі статті →
+              </Link>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* CTA — якщо схожих немає */}
+      {related.length === 0 && (
+        <section className="px-6 md:px-20 py-16 bg-[var(--cream)] text-center">
+          <p className="text-xs tracking-[0.35em] uppercase text-[var(--accent-text)] mb-4">Читати далі</p>
+          <h2 className="text-3xl font-medium text-[var(--dark)] mb-6" style={{ fontFamily: 'var(--font-heading)' }}>
+            Більше статей у блозі
+          </h2>
+          <Link href="/blog" className="inline-block px-10 py-4 text-xs tracking-widest uppercase no-underline hover:opacity-80 transition-opacity" style={{ background: 'var(--dark)', color: 'var(--cream)' }}>
+            Всі статті
+          </Link>
+        </section>
+      )}
 
       <Footer />
     </main>
