@@ -5,7 +5,7 @@ import { SanityImageSource } from '@sanity/image-url/lib/types/types'
 export const client = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET!,
-  apiVersion: '2024-01-01',
+  apiVersion: '2026-05-26',
   useCdn: true,
 })
 
@@ -19,6 +19,7 @@ export async function getPosts() {
   return client.fetch(`
     *[_type == "post"] | order(publishedAt desc) {
       _id,
+      _updatedAt,
       title,
       slug,
       category,
@@ -35,6 +36,7 @@ export async function getPost(slug: string) {
   return client.fetch(`
     *[_type == "post" && slug.current == $slug][0] {
       _id,
+      _updatedAt,
       title,
       slug,
       category,

@@ -13,6 +13,37 @@ export const metadata: Metadata = {
   },
 };
 
+const profileJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfilePage",
+      "@id": "https://olenabohuta.com/pro-olenku#profilepage",
+      "url": "https://olenabohuta.com/pro-olenku",
+      "name": "Про автора — Олена Богута",
+      "inLanguage": "uk",
+      "isPartOf": { "@id": "https://olenabohuta.com/#website" },
+      "about": { "@id": "https://olenabohuta.com/#person" },
+      "mainEntity": { "@id": "https://olenabohuta.com/#person" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Головна", "item": "https://olenabohuta.com" },
+        { "@type": "ListItem", "position": 2, "name": "Про Олену", "item": "https://olenabohuta.com/pro-olenku" }
+      ]
+    }
+  ]
+};
+
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return <>{children}</>;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(profileJsonLd) }}
+      />
+      {children}
+    </>
+  );
 }

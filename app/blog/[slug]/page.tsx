@@ -91,35 +91,55 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
   const articleJsonLd = {
     "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": post.title,
-    "description": post.excerpt || `Стаття Олени Богути: ${post.title}`,
-    "url": `https://olenabohuta.com/blog/${slug}`,
-    "datePublished": post.publishedAt || new Date().toISOString(),
-    "dateModified": post.publishedAt || new Date().toISOString(),
-    "author": {
-      "@type": "Person",
-      "name": "Олена Богута",
-      "url": "https://olenabohuta.com"
-    },
-    "publisher": {
-      "@type": "Person",
-      "name": "Олена Богута",
-      "url": "https://olenabohuta.com"
-    },
-    ...(post.coverImage && {
-      "image": {
-        "@type": "ImageObject",
-        "url": urlFor(post.coverImage).width(1200).height(630).url(),
-        "width": 1200,
-        "height": 630,
+    "@graph": [
+      {
+        "@type": "Article",
+        "@id": `https://olenabohuta.com/blog/${slug}#article`,
+        "headline": post.title,
+        "description": post.excerpt || `Стаття Олени Богути: ${post.title}`,
+        "url": `https://olenabohuta.com/blog/${slug}`,
+        "datePublished": post.publishedAt || new Date().toISOString(),
+        "dateModified": post._updatedAt || post.publishedAt || new Date().toISOString(),
+        "author": {
+          "@type": "Person",
+          "@id": "https://olenabohuta.com/#person",
+          "name": "Олена Богута",
+          "url": "https://olenabohuta.com"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "@id": "https://olenabohuta.com/#organization",
+          "name": "Олена Богута — особистий бренд",
+          "url": "https://olenabohuta.com",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://olenabohuta.com/favicon.svg"
+          }
+        },
+        ...(post.coverImage && {
+          "image": {
+            "@type": "ImageObject",
+            "url": urlFor(post.coverImage).width(1200).height(630).url(),
+            "width": 1200,
+            "height": 630,
+          }
+        }),
+        "inLanguage": "uk",
+        "isPartOf": { "@id": "https://olenabohuta.com/#website" },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": `https://olenabohuta.com/blog/${slug}`
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Головна", "item": "https://olenabohuta.com" },
+          { "@type": "ListItem", "position": 2, "name": "Блог", "item": "https://olenabohuta.com/blog" },
+          { "@type": "ListItem", "position": 3, "name": post.title, "item": `https://olenabohuta.com/blog/${slug}` }
+        ]
       }
-    }),
-    "inLanguage": "uk",
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": `https://olenabohuta.com/blog/${slug}`
-    }
+    ]
   };
 
   return (

@@ -75,22 +75,46 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "Person",
-              "name": "Олена Богута",
-              "url": "https://olenabohuta.com",
-              "image": "https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto/v1774359969/Olena_Bohuta_htaxhd.webp",
-              "sameAs": [
-                "https://www.instagram.com/olenka.bohuta",
-                "https://t.me/olenabohuta"
-              ],
-              "jobTitle": "Наставник особистого бренду",
-              "description": "Засновниця першого в Україні навчання для християн у соцмережах. Понад 400 клієнтів та учнів.",
-              "knowsAbout": ["Особистий бренд", "Instagram", "Блогінг", "Онлайн навчання", "Christian бізнес"],
-              "worksFor": {
-                "@type": "Organization",
-                "name": "Олена Богута — особистий бренд",
-                "url": "https://olenabohuta.com"
-              }
+              "@graph": [
+                {
+                  "@type": "Person",
+                  "@id": "https://olenabohuta.com/#person",
+                  "name": "Олена Богута",
+                  "url": "https://olenabohuta.com",
+                  "image": "https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto/v1774359969/Olena_Bohuta_htaxhd.webp",
+                  "sameAs": [
+                    "https://www.instagram.com/olenka.bohuta",
+                    "https://t.me/olenabohuta"
+                  ],
+                  "jobTitle": "Наставник особистого бренду",
+                  "description": "Засновниця першого в Україні навчання для християн у соцмережах. Понад 400 клієнтів та учнів.",
+                  "knowsAbout": ["Особистий бренд", "Instagram", "Блогінг", "Онлайн навчання", "Christian бізнес"],
+                  "worksFor": { "@id": "https://olenabohuta.com/#organization" }
+                },
+                {
+                  "@type": "Organization",
+                  "@id": "https://olenabohuta.com/#organization",
+                  "name": "Олена Богута — особистий бренд",
+                  "url": "https://olenabohuta.com",
+                  "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://olenabohuta.com/favicon.svg"
+                  },
+                  "sameAs": [
+                    "https://www.instagram.com/olenka.bohuta",
+                    "https://t.me/olenabohuta"
+                  ],
+                  "founder": { "@id": "https://olenabohuta.com/#person" }
+                },
+                {
+                  "@type": "WebSite",
+                  "@id": "https://olenabohuta.com/#website",
+                  "url": "https://olenabohuta.com",
+                  "name": "Олена Богута",
+                  "inLanguage": "uk",
+                  "publisher": { "@id": "https://olenabohuta.com/#organization" }
+                }
+              ]
             })
           }}
         />

@@ -25,16 +25,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             "description": "8 тижнів — від ідеї до запуску Premium-продукту. Навчання для Christian-експертів які хочуть масштабуватись.",
             "url": "https://olenabohuta.com/products/tysha",
             "image": "https://res.cloudinary.com/dd6aymza7/image/upload/q_auto,f_auto/v1774448751/photo_2026-03-25_15.17.06_sw70mx.jpg",
-            "provider": {
-              "@type": "Person",
-              "name": "Олена Богута",
-              "url": "https://olenabohuta.com"
-            },
-            "instructor": {
-              "@type": "Person",
-              "name": "Олена Богута",
-              "url": "https://olenabohuta.com"
-            },
+            "provider": { "@id": "https://olenabohuta.com/#organization" },
+            "instructor": { "@id": "https://olenabohuta.com/#person" },
             "educationalLevel": "Advanced",
             "inLanguage": "uk",
             "offers": {
@@ -50,6 +42,15 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           })
         }}
       />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Головна", "item": "https://olenabohuta.com" },
+          { "@type": "ListItem", "position": 2, "name": "Навчання", "item": "https://olenabohuta.com/navchannya" },
+          { "@type": "ListItem", "position": 3, "name": "ТИША", "item": "https://olenabohuta.com/products/tysha" }
+        ]
+      })}} />
       {children}
     </>
   );

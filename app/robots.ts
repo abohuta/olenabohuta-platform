@@ -32,15 +32,23 @@ export default function robots(): MetadataRoute.Robots {
         disallow: '/',
       },
       {
-        // AI боти — блокуємо щоб не використовували контент для навчання
+        // AI боти для цитувань — дозволяємо (з'являємось у відповідях ChatGPT/Perplexity)
         userAgent: 'GPTBot',
-        disallow: '/',
+        allow: '/',
+        disallow: ['/studio/', '/api/'],
       },
       {
         userAgent: 'ChatGPT-User',
-        disallow: '/',
+        allow: '/',
+        disallow: ['/studio/', '/api/'],
       },
       {
+        userAgent: 'PerplexityBot',
+        allow: '/',
+        disallow: ['/studio/', '/api/'],
+      },
+      {
+        // Блокуємо боти що збирають дані для навчання AI моделей
         userAgent: 'CCBot',
         disallow: '/',
       },
