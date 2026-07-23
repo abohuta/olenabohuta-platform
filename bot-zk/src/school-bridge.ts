@@ -34,7 +34,7 @@ export async function sendSchoolAccess(telegramId: number, course: any) {
   let text: string;
 
   if (course.access_type === 'url') {
-    text = `✅ *Доступ відкрито\\!*\n\n*${course.name}*\n\n👇 Твоє посилання на матеріали:\n${course.access_value}`;
+    text = `✅ *Доступ відкрито!*\n\n*${course.name}*\n\n👇 Твоє посилання на матеріали:\n${course.access_value}`;
   } else {
     const inviteRes = await fetch(`https://api.telegram.org/bot${token}/createChatInviteLink`, {
       method: 'POST',
@@ -46,12 +46,12 @@ export async function sendSchoolAccess(telegramId: number, course: any) {
       }),
     });
     const inviteData = (await inviteRes.json()) as any;
-    text = `✅ *Доступ відкрито\\!*\n\n*${course.name}*\n\n👇 Посилання в Telegram \\(1 година\\):\n${inviteData.result.invite_link}`;
+    text = `✅ *Доступ відкрито!*\n\n*${course.name}*\n\n👇 Посилання в Telegram (дійсне 1 годину):\n${inviteData.result.invite_link}`;
   }
 
   await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ chat_id: telegramId, text, parse_mode: 'MarkdownV2' }),
+    body: JSON.stringify({ chat_id: telegramId, text, parse_mode: 'Markdown' }),
   });
 }
