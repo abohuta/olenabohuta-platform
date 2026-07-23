@@ -170,8 +170,8 @@ export default function ZakrytyiKlub() {
                 </li>
               ))}
             </ul>
-            <a href="https://t.me/olenabohuta" target="_blank" rel="noopener noreferrer" className="block text-center px-6 py-3 bg-[var(--accent)] text-white no-underline text-xs tracking-widest uppercase hover:bg-[var(--brown)] transition-colors">
-              Долучитися
+            <a href="https://t.me/OlenaBohuta_ZK_bot?start=join" target="_blank" rel="noopener noreferrer" className="block text-center px-6 py-3 bg-[var(--accent)] text-white no-underline text-xs tracking-widest uppercase hover:bg-[var(--brown)] transition-colors">
+              Вступити до клубу
             </a>
           </div>
 
@@ -193,8 +193,8 @@ export default function ZakrytyiKlub() {
                 </li>
               ))}
             </ul>
-            <a href="https://t.me/olenabohuta" target="_blank" rel="noopener noreferrer" className="block text-center px-6 py-3 border border-[var(--dark)] text-[var(--dark)] no-underline text-xs tracking-widest uppercase hover:bg-[var(--dark)] hover:text-[var(--cream)] transition-colors">
-              Долучитися
+            <a href="https://t.me/OlenaBohuta_ZK_bot?start=join" target="_blank" rel="noopener noreferrer" className="block text-center px-6 py-3 border border-[var(--dark)] text-[var(--dark)] no-underline text-xs tracking-widest uppercase hover:bg-[var(--dark)] hover:text-[var(--cream)] transition-colors">
+              Вступити до клубу
             </a>
           </div>
 
