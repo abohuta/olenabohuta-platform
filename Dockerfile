@@ -15,8 +15,5 @@ COPY bot-school/src ./bot-school/src
 COPY bot-school/tsconfig.json ./bot-school/
 RUN cd bot-school && npm run build
 
-COPY start.sh ./
-RUN chmod +x start.sh
-
 EXPOSE 3001
-CMD ["./start.sh"]
+CMD ["sh", "-c", "node bot-zk/dist/index.js & NO_SERVER=true node bot-school/dist/index.js & wait"]

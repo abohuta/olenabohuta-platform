@@ -7,7 +7,7 @@ function required(name: string): string {
 }
 
 export const config = {
-  BOT_TOKEN: required('BOT_TOKEN'),
+  BOT_TOKEN: required('SCHOOL_BOT_TOKEN'),
   SUPABASE_URL: required('SUPABASE_URL'),
   SUPABASE_SERVICE_KEY: required('SUPABASE_SERVICE_KEY'),
   WAYFORPAY_MERCHANT_LOGIN: required('WAYFORPAY_MERCHANT_LOGIN'),
