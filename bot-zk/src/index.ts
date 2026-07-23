@@ -18,7 +18,19 @@ async function main() {
   startScheduler(bot);
   console.log('[Scheduler] Started');
 
-  await bot.start({ onStart: () => console.log('[Bot] Running') });
+  for (let attempt = 1; attempt <= 10; attempt++) {
+    try {
+      await bot.start({ onStart: () => console.log('[Bot] Running') });
+      break;
+    } catch (e: any) {
+      if (e?.error_code === 409) {
+        console.log(`[Bot] 409 conflict, retry ${attempt}/10 in 5s...`);
+        await new Promise(r => setTimeout(r, 5000));
+      } else {
+        throw e;
+      }
+    }
+  }
 }
 
 main().catch((err) => {

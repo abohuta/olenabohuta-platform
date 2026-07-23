@@ -24,8 +24,20 @@ async function main() {
   }
 
   bot.catch((err) => console.error('[Bot error]', err));
-  await bot.start();
-  console.log('[Bot] Running — @OlenaBohutaSchool_bot');
+
+  for (let attempt = 1; attempt <= 10; attempt++) {
+    try {
+      await bot.start({ onStart: () => console.log('[Bot] Running — @OlenaBohutaSchool_bot') });
+      break;
+    } catch (e: any) {
+      if (e?.error_code === 409) {
+        console.log(`[Bot] 409 conflict, retry ${attempt}/10 in 5s...`);
+        await new Promise(r => setTimeout(r, 5000));
+      } else {
+        throw e;
+      }
+    }
+  }
 }
 
 main().catch(console.error);
