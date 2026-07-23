@@ -1,5 +1,49 @@
 import { supabase } from './db';
 
+export interface AdminRecord {
+  telegram_id: number;
+  username: string | null;
+  can_broadcast: boolean;
+  can_courses: boolean;
+  can_stats: boolean;
+}
+
+export async function getAdmin(telegramId: bigint): Promise<AdminRecord | null> {
+  const { data } = await supabase
+    .from('school_admins')
+    .select('*')
+    .eq('telegram_id', Number(telegramId))
+    .maybeSingle();
+  return data ?? null;
+}
+
+export async function addAdmin(telegramId: bigint, username: string | null) {
+  const { data, error } = await supabase
+    .from('school_admins')
+    .upsert({ telegram_id: Number(telegramId), username }, { onConflict: 'telegram_id' })
+    .select()
+    .single();
+  if (error) throw error;
+  return data;
+}
+
+export async function setAdminPerms(telegramId: bigint, perms: { can_broadcast?: boolean; can_courses?: boolean; can_stats?: boolean }) {
+  const { error } = await supabase
+    .from('school_admins')
+    .update(perms)
+    .eq('telegram_id', Number(telegramId));
+  if (error) throw error;
+}
+
+export async function removeAdmin(telegramId: bigint) {
+  await supabase.from('school_admins').delete().eq('telegram_id', Number(telegramId));
+}
+
+export async function getAllAdmins(): Promise<AdminRecord[]> {
+  const { data } = await supabase.from('school_admins').select('*').order('created_at');
+  return data ?? [];
+}
+
 export async function upsertUser(telegramId: bigint, username: string | null, firstName: string | null, lastName: string | null) {
   const { data, error } = await supabase
     .from('school_users')
