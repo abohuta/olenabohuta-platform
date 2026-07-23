@@ -89,15 +89,21 @@ export async function getPendingPayment(orderRef: string) {
 }
 
 export async function activatePayment(orderRef: string) {
-  const payment = await getPendingPayment(orderRef);
-  if (!payment) return null;
+  // Atomic claim: UPDATE WHERE status='pending' — тільки один concurrent виклик отримає рядок
+  const { data } = await supabase
+    .from('payments')
+    .update({ status: 'paid', paid_at: new Date().toISOString() })
+    .eq('order_ref', orderRef)
+    .eq('status', 'pending')
+    .select('*, users!inner(telegram_id, first_name)')
+    .maybeSingle();
 
+  if (!data) return null;
+
+  const payment = { ...data, telegram_id: (data.users as any).telegram_id, first_name: (data.users as any).first_name };
   const sub = await createSubscription(payment.user_id, payment.plan, payment.months);
 
-  await supabase
-    .from('payments')
-    .update({ status: 'paid', paid_at: new Date().toISOString(), subscription_id: sub.id })
-    .eq('order_ref', orderRef);
+  await supabase.from('payments').update({ subscription_id: sub.id }).eq('order_ref', orderRef);
 
   return { payment, subscription: sub };
 }
