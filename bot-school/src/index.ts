@@ -16,10 +16,12 @@ async function main() {
   registerMyHandler(bot);
   registerAdminHandlers(bot);
 
-  const app = createServer(bot);
-  app.listen(config.PORT, () => {
-    console.log(`[Server] Port ${config.PORT}`);
-  });
+  if (process.env.NO_SERVER !== 'true') {
+    const app = createServer(bot);
+    app.listen(config.PORT, () => {
+      console.log(`[Server] Port ${config.PORT}`);
+    });
+  }
 
   bot.catch((err) => console.error('[Bot error]', err));
   await bot.start();

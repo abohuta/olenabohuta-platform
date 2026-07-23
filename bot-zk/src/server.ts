@@ -4,6 +4,7 @@ import { verifyWebhookSignature, buildConfirmResponse } from './wayforpay';
 import { captureOrder } from './paypal';
 import { getPendingPayment, activatePayment } from './subscription';
 import { sendAccessLinks } from './access';
+import { activateSchoolPayment, sendSchoolAccess } from './school-bridge';
 
 export function createServer(bot: Bot) {
   const app = express();
@@ -22,10 +23,19 @@ export function createServer(bot: Bot) {
     }
 
     if (body.transactionStatus === 'Approved') {
-      const result = await activatePayment(body.orderReference);
-      if (result) {
-        await sendAccessLinks(BigInt(result.payment.telegram_id));
-        console.log(`[WayForPay] Activated: ${body.orderReference}`);
+      const orderRef = body.orderReference;
+      if (orderRef.startsWith('SCH-')) {
+        const result = await activateSchoolPayment(orderRef);
+        if (result) {
+          await sendSchoolAccess(result.telegramId, result.course);
+          console.log(`[WayForPay] School activated: ${orderRef}`);
+        }
+      } else {
+        const result = await activatePayment(orderRef);
+        if (result) {
+          await sendAccessLinks(BigInt(result.payment.telegram_id));
+          console.log(`[WayForPay] ZK activated: ${orderRef}`);
+        }
       }
     }
 
@@ -42,13 +52,15 @@ export function createServer(bot: Bot) {
     }
 
     try {
-      // Check if already processed (idempotency)
       const { status, orderRef } = await captureOrder(paypalOrderId);
 
       if (status === 'COMPLETED') {
-        const result = await activatePayment(orderRef);
-        if (result) {
-          await sendAccessLinks(BigInt(result.payment.telegram_id));
+        if (orderRef.startsWith('SCH-')) {
+          const result = await activateSchoolPayment(orderRef);
+          if (result) await sendSchoolAccess(result.telegramId, result.course);
+        } else {
+          const result = await activatePayment(orderRef);
+          if (result) await sendAccessLinks(BigInt(result.payment.telegram_id));
         }
         res.send(successPage('✅ Оплата успішна! Поверніться до Telegram — посилання вже чекають на вас.'));
       } else {
