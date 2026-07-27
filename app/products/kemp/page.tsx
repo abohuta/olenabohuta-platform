@@ -9,7 +9,7 @@ import Cross from "../../components/Cross";
 const ACCENT = "#59020B";
 const CREAM = "#FEF8E0";
 const DARK = "#2A1F14";
-const FORM_URL = "https://docs.google.com/forms/d/1GTJ6oijlCOO7GfUMlhvGealas2Vo5GI7bh-uaAljfdQ/edit";
+const FORM_URL = "https://docs.google.com/forms/d/1GTJ6oijlCOO7GfUMlhvGealas2Vo5GI7bh-uaAljfdQ/viewform";
 
 // ── Static data ────────────────────────────────────────────
 const FAQ_ITEMS = [
@@ -209,7 +209,7 @@ function Quiz() {
       title: "Кемп — саме для тебе! ✨",
       desc: "Ти готовий до серйозної роботи над особистим брендом. Кемп «Архітектор Бренду» дасть тобі систему, стратегію і результат.",
       cta: "Заповнити анкету",
-      href: "https://docs.google.com/forms/d/1GTJ6oijlCOO7GfUMlhvGealas2Vo5GI7bh-uaAljfdQ/edit",
+      href: "https://docs.google.com/forms/d/1GTJ6oijlCOO7GfUMlhvGealas2Vo5GI7bh-uaAljfdQ/viewform",
     },
     tysha: {
       title: "Ти готовий до ТИШІ! 🔥",
